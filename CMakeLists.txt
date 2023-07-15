@@ -15,11 +15,14 @@ add_compile_options(-Wall -Wextra -fsanitize=address -fsanitize=undefined -std=c
 
 find_package(OpenGL REQUIRED)
 add_executable(testas 
-  gr_interface.h
+  ./GrInterface/gr_interface.h
+  ./GrInterface/gr_interface.cpp
+
+  ./GrInterface/glad/glad.h
+  ./GrInterface/glad/glad.c
+  ./GrInterface/glad/khrplatform.h
+
   main.cpp
-  ./glad/glad.h
-  ./glad/glad.c
-  ./glad/khrplatform.h
 )
 
 target_link_libraries(testas 
