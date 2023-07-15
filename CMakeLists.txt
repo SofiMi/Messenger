@@ -22,6 +22,9 @@ add_executable(testas
   ./GrInterface/glad/glad.c
   ./GrInterface/glad/khrplatform.h
 
+  ./WorkDB/data_base.h
+  ./WorkDB/data_base.cpp
+
   main.cpp
 )
 
@@ -29,3 +32,5 @@ target_link_libraries(testas
   glfw
   OpenGL::GL
 )
+
+target_link_libraries(testas -lpqxx -lpq)

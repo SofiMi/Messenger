@@ -1,29 +1,20 @@
 #include "gr_interface.h"
+#include "../WorkDB/data_base.h"
 #include <math.h>
+#include <algorithm>
 
 GrInterface::GrInterface() {  
   Init();
   MakeShader();
-  std::vector<GLfloat> vertices =
-  { //               COORDINATES                  /     COLORS           //
-   -1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f,
-   -1.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f,
-   0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f,
-   0.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f,
-  };
-
-  // Indices for vertices order
-  std::vector<GLuint> indices =
-  {
-    0, 1, 3,
-    0, 2, 3
-  };
-  ChangeVertex(&(vertices[0]), &(indices[0]), 4, 2);
+  if (vertices_.size()) {
+    ChangeVertex(&(vertices_[0]), &(indices_[0]), vertices_.size() / 6, indices_.size() / 3);
+  }
 }
 
 void GrInterface::PollEvents() {
-  GLuint uniID = glGetUniformLocation(shader_program_, "scale");
+  //GLuint uniID = glGetUniformLocation(shader_program_, "scale");
   while (!glfwWindowShouldClose(window_)){
+    UpdateWindowData();
     glClear(GL_COLOR_BUFFER_BIT);
     glUseProgram(shader_program_);
     //glUniform1f(uniID, 0.5f);
@@ -52,12 +43,16 @@ void GrInterface::Init() {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR,3);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-  if(!(window_ = glfwCreateWindow(hight_window_, weigh_window_, "Messanger", NULL, NULL))) {
+  if(!(window_ = glfwCreateWindow(height_window_, width_window_, "Messanger", NULL, NULL))) {
     glfwTerminate();
     throw std::logic_error("Windows create fail");
   }
 
-  glfwSetWindowSizeCallback(window_, [](GLFWwindow* pWindow, int width, int height) {glViewport(0, 0, width, height);});
+  glfwSetWindowSizeCallback(window_, [](GLFWwindow* pWindow, int width, int height) 
+                                      {
+                                        glViewport(0, 0, width, height);
+                                      }
+                            );
 
   /* Make the window's context current */
   glfwMakeContextCurrent(window_);
@@ -65,6 +60,8 @@ void GrInterface::Init() {
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
     throw std::logic_error("Failed to initialize GLAD");
   }
+
+  DrawChat();
 }
 
 void GrInterface::MakeShader() {
@@ -130,3 +127,56 @@ void GrInterface::ChangeVertex(GLfloat* vertices, GLuint* indices, size_t count_
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
+
+void GrInterface::AddRectangle(std::vector<Point>&& rect, const std::vector<GLfloat>& color) {
+  /*
+  Вершины прямогульника должны быть указаны в следующем порядке:
+      12
+      03
+  */
+
+  for (size_t i = vertices_.size(); i < vertices_.size() + 3; ++i) {
+    indices_.push_back(i);
+  }
+
+  indices_.push_back(vertices_.size());
+  indices_.push_back(vertices_.size() + 2);
+  indices_.push_back(vertices_.size() + 3);
+
+  for (int i = 0; i < 4; ++i) {
+    vertices_.push_back(rect[i].x);
+    vertices_.push_back(rect[i].y);
+    vertices_.push_back(0.0f);
+    vertices_.push_back(color[0]);
+    vertices_.push_back(color[1]);
+    vertices_.push_back(color[2]);
+  }
+}
+
+
+void GrInterface::UpdateChatCoord() {
+  
+}
+
+void GrInterface::DrawChat() {
+  for (int i = 0; i < chats_.size(); ++i) {
+    if (i % 2 == 0) {
+      AddRectangle({{-1.0f, chat[i].down}, {-1.0f, chat[i].top}, {-0.3f, chat[i].top}, {-0.3f, chat[i].down}}, red);
+    } else {
+      AddRectangle({{-1.0f, chat[i].down}, {-1.0f, chat[i].top}, {-0.3f, chat[i].top}, {-0.3f, chat[i].down}}, green);
+    }
+  }
+}
+
+void GrInterface::UpdateWindowData() {
+  glfwGetWindowSize(window_, &width_window_, &height_window_);
+}
+
+const std::vector<GLfloat> GrInterface::red = {1, 0, 0};
+const std::vector<GLfloat> GrInterface::green = {0, 1, 0};
+const std::vector<GLfloat> GrInterface::blue = {0, 0, 1};
+
+const GrInterface::Point GrInterface::top_l = {-1, 1};
+const GrInterface::Point GrInterface::top_r = {1, 1};
+const GrInterface::Point GrInterface::down_l = {-1, -1};
+const GrInterface::Point GrInterface::down_r = {1, -1};
