@@ -1,0 +1,1 @@
+/usr/bin/g++  -std=c++20 CMakeFiles/Client.dir/client.cpp.o -o Client 
