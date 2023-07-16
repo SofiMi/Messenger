@@ -14,16 +14,22 @@ add_link_options(-Wall -Wextra -fsanitize=address -fsanitize=undefined -std=c++2
 add_compile_options(-Wall -Wextra -fsanitize=address -fsanitize=undefined -std=c++20)
 
 find_package(OpenGL REQUIRED)
+
 add_executable(testas 
   ./GrInterface/gr_interface.h
   ./GrInterface/gr_interface.cpp
+  ./GrInterface/text_render.h
+  ./GrInterface/text_render.cpp
 
   ./GrInterface/glad/glad.h
   ./GrInterface/glad/glad.c
   ./GrInterface/glad/khrplatform.h
 
-  ./WorkDB/data_base.h
-  ./WorkDB/data_base.cpp
+  #./WorkDB/data_base.h
+  #./WorkDB/data_base.cpp
+
+  ./Client/client.h
+  ./Client/client.cpp
 
   main.cpp
 )

@@ -6,23 +6,31 @@
 #include <iostream>
 #include <vector>
 
+#include "../Client/client.h"
+
+template <typename T>
 struct Point {
-  GLfloat x;
-  GLfloat y;
-  Point(GLfloat x, GLfloat y): x(x), y(y) {}
+  T x = 0.0f;
+  T y = 0.0f;
+  Point() = default;
+  Point(T x, T y): x(x), y(y) {}
 };
 
 struct ChatCoord {
   int id_chat;
   GLfloat top;
   GLfloat down;
-}
+};
 
 class GrInterface {
  private:
+  Client* client_;
   std::vector<ChatCoord> chats_;
+
   int height_window_ = 640;
   int width_window_ = 480;
+  int scale = 1;
+  Point<double> cursor;
 
   std::vector<GLfloat> vertices_;
   std::vector<GLuint> indices_;
@@ -36,22 +44,29 @@ class GrInterface {
   void Init();
   void MakeShader();
   void ChangeVertex(GLfloat* vertices, GLuint* indices, size_t count_v, size_t count_tr);
-  void AddRectangle(std::vector<Point>&& rect, const std::vector<GLfloat>& color);
-  void DrawChat(const std::vector<int>& chat_id);
-  void UpdateWindowData();
+  void AddRectangle(std::vector<Point<GLfloat>>&& rect, const std::vector<GLfloat>& color);
+  void DrawChat();
 
+  void UpdateChatCoord();
+  bool UpdateWindowData();
+  bool UpdateCursor();
+
+ public:
+  GrInterface(Client* client);
+  ~GrInterface();
+  void PollEvents();
+
+ private:
   const static std::vector<GLfloat> red;
   const static std::vector<GLfloat> green;
   const static std::vector<GLfloat> blue;
-  const static Point top_l;
-  const static Point top_r;
-  const static Point down_l;
-  const static Point down_r;
+  const static std::vector<GLfloat> dim_gray;
+  const static std::vector<GLfloat> gray;
+};
 
-  int user_id_ = 1;
-  int max_count_chat_ = 6;
+class TextRender {
+ private:
  public:
-  GrInterface();
-  ~GrInterface();
-  void PollEvents();
+  TextRender();
+  ~TextRender();
 };

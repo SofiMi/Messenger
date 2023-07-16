@@ -83,6 +83,7 @@
     "semaphore": "cpp",
     "charconv": "cpp",
     "regex": "cpp",
-    "span": "cpp"
+    "span": "cpp",
+    "*.ipp": "cpp"
   }
 }
