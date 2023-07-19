@@ -80,6 +80,13 @@
     "typeinfo": "cpp",
     "variant": "cpp",
     "semaphore": "cpp",
-    "*.ipp": "cpp"
+    "*.ipp": "cpp",
+    "strstream": "cpp",
+    "charconv": "cpp",
+    "regex": "cpp",
+    "fstream": "cpp",
+    "span": "cpp",
+    "cfenv": "cpp",
+    "valarray": "cpp"
   }
 }

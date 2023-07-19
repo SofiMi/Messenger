@@ -63,7 +63,7 @@ CMAKE_BINARY_DIR = /home/sofia/Algo/Messenger/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/Messanger.dir/all
+all: CMakeFiles/Client.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -71,34 +71,34 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/Messanger.dir/clean
+clean: CMakeFiles/Client.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/Messanger.dir
+# Target rules for target CMakeFiles/Client.dir
 
 # All Build rule for target.
-CMakeFiles/Messanger.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Messanger.dir/build.make CMakeFiles/Messanger.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Messanger.dir/build.make CMakeFiles/Messanger.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sofia/Algo/Messenger/build/CMakeFiles --progress-num=1,2 "Built target Messanger"
-.PHONY : CMakeFiles/Messanger.dir/all
+CMakeFiles/Client.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sofia/Algo/Messenger/build/CMakeFiles --progress-num=1,2 "Built target Client"
+.PHONY : CMakeFiles/Client.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/Messanger.dir/rule: cmake_check_build_system
+CMakeFiles/Client.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/sofia/Algo/Messenger/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Messanger.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Client.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/sofia/Algo/Messenger/build/CMakeFiles 0
-.PHONY : CMakeFiles/Messanger.dir/rule
+.PHONY : CMakeFiles/Client.dir/rule
 
 # Convenience name for target.
-Messanger: CMakeFiles/Messanger.dir/rule
-.PHONY : Messanger
+Client: CMakeFiles/Client.dir/rule
+.PHONY : Client
 
 # clean rule for target.
-CMakeFiles/Messanger.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Messanger.dir/build.make CMakeFiles/Messanger.dir/clean
-.PHONY : CMakeFiles/Messanger.dir/clean
+CMakeFiles/Client.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Client.dir/build.make CMakeFiles/Client.dir/clean
+.PHONY : CMakeFiles/Client.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

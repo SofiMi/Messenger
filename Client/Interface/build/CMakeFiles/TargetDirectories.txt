@@ -1,0 +1,4 @@
+/home/sofia/Algo/Messenger/Interface/build/CMakeFiles/untitled.dir
+/home/sofia/Algo/Messenger/Interface/build/CMakeFiles/edit_cache.dir
+/home/sofia/Algo/Messenger/Interface/build/CMakeFiles/rebuild_cache.dir
+/home/sofia/Algo/Messenger/Interface/build/CMakeFiles/untitled_autogen.dir
