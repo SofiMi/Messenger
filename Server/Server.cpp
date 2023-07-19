@@ -1,7 +1,7 @@
 #include "net_server.h"
 #include "../include.h"
 
-int SERVER_PORT = 60000;
+int SERVER_PORT = 67110;
 bool SERVER_WORK = true;
 
   class Server : public net::server_interface<msg_type> {
@@ -13,7 +13,7 @@ bool SERVER_WORK = true;
     {
       net::message<msg_type> msg;
       msg.header.id = msg_type::ServerAccept;
-      client->send(msg);
+      //client->send(msg);
       return true;
     }
 
@@ -28,10 +28,31 @@ bool SERVER_WORK = true;
                               net::message<msg_type> &msg)
     {
       switch (msg.header.id) {
-      case msg_type::ServerPing: {
-        std::wcout << "[" << msg.header.name.data() << "]: Ping the server\n";
+      case msg_type::CheckLogin: {
+        std::wcout << "CheckLogin " << msg.data.data() << std::endl;
+        std::wstring st =  L"5";
+        std::wstring st1 = msg.data.data();
+        if (st1 == st) {
+          msg.header.id = msg_type::LoginValid;
+          msg.header.userid = 5;
+        } else {
+          msg.header.id = msg_type::LoginInvalid;
+        }
+        client->send(msg);
+        break;
+      }
 
-        // Simply bounce message back to client
+      case msg_type::CheckPassword: {
+        std::wcout << "CheckPassword " << msg.data.data() << std::endl;
+        std::wstring st = L"5";
+        std::wstring st1 = msg.data.data();
+        if (st1 == st) {
+          std::cout << "YES\n";
+          msg.header.id = msg_type::PasswordValid;
+        } else {
+          std::cout << "NO\n";
+          msg.header.id = msg_type::PasswordInvalid;
+        }
         client->send(msg);
         break;
       }

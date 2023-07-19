@@ -8,68 +8,35 @@
 #include <string>
 #include <QMessageBox>
 
-class Client {
- static int count_;
- public:
-    std::vector<std::string> GetFriend(int count, bool& is_other_friend_exists) {
-        is_other_friend_exists = true;
-        std::vector<std::string> res = {{"Sofia"}, {"Alex"}};
-        /*std::string str = "София";
-        for (int i = 0; i < count; i++) {
-            str += i + '0';
-            res.push_back(str);
-        }*/
-        return res;
-   }
-
-    std::vector<std::string> GetMessage(int count, bool& other_messages_exists) {
-        std::vector<std::string> res = {
-            {"123456789"},
-            {"Всем привет. Через две недели выступаю вот здесь: https://cppzerocostconf.yandex.ru/cxxzerocostconf_2023 "
-             "с докладом про векторизацию. Сначала разберём всю боль обычной векторизации, повекторизуем руками некоторые вещи."
-             " Потом я представлю масштабируемую векторизацию, это новая концепция которая сейчас набирает обороты в ARM и RISCV. "
-             "Посмотрим как она решает проблемы. А потом поговорим о том как она создаёт проблемы"
-             "Можно рассматривать это как продолжение записанного мной "
-             "прошлым летом допсеминара про SIMD, см. https://t.me/cpp_lects_rus/27"
-             "Вход на площадку свободный, но по регистрации. Которую можно пройти уже сейчас."
-             "Меня пока в программе нет, но я появлюсь, доклад согласовали."},
-            {"Да. Я вас понял. Все будет сделано в лучшем порядке."}
-        };
-        return res;
-   }
-};
-
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(QWidget *parent, std::shared_ptr<Client>& client)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , client_(client)
 {
     ui->setupUi(this);
-
-    // окно фиксированного размера
-    //setMinimumSize(750, 600);
-    //setMaximumSize(750, 600);
 
     bool other_friends_exist;
     bool other_msg_exist;
 
-    // добавление друзей на экран
     QVBoxLayout* lay = new QVBoxLayout(this);
     std::vector<std::string> FriendName = client->GetFriend(max_friend_in_page_, other_friends_exist);
     for (int i = 0; i < FriendName.size(); ++i) {
         QPushButton* button = new QPushButton(QString::fromStdString(FriendName[i]));
+        // TO DO: formating button with long name !!!
         lay->insertWidget(count_friend_in_window++, button);
     }
     if (other_friends_exist) {
         QPushButton* button = new QPushButton("Другие друзья");
         lay->insertWidget(count_friend_in_window++, button);
     }
-    ui->friend_scroll_area_context->setLayout(lay);
+    ui->friendScrollAreaContext->setLayout(lay);
 
     // добавление истории чата на экран
     QVBoxLayout* mess = new QVBoxLayout(this);
     std::vector<std::string> message = client->GetMessage(max_count_line, other_msg_exist);
     for (int i = 0; i < message.size(); ++i) {
-        QLabel* button2 = new QLabel(QString::fromStdString(GetHTMLText(message[i]).c_str()));
+        QLabel* button2 = new QLabel(QString::fromStdString(message[i]));
+        button2->setWordWrap(true);
         /*if (i % 3 == 0) {
             mess->addWidget(button2, count_msg_in_window++, 1);
             mess->addWidget(button2, count_msg_in_window, 0);
@@ -80,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent)
         //button2->setStyleSheet("QLabel { background-color : #343B29; color : white; }");
         mess->insertWidget(count_msg_in_window++, button2);
     }
-    ui->message_scroll_area_context->setLayout(mess);
+    ui->messageScrollAreaContext->setLayout(mess);
 
 }
 
@@ -136,4 +103,11 @@ std::string MainWindow::GetHTMLText(const std::string& str) {
         }
     }
     return html;
+}
+
+void MainWindow::resizeEvent(QResizeEvent* event) {
+   QMainWindow::resizeEvent(event);
+
+   size_t width = this->size().width();
+   size_t height = this->size().height();
 }

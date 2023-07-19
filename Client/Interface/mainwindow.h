@@ -2,8 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
-class Client;
+#include "../Client.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -14,15 +13,16 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget *parent, std::shared_ptr<Client>& client);
     ~MainWindow();
 
 private slots:
     void on_friend_scroll_area_customContextMenuRequested(const QPoint &pos);
 
 private:
-    Ui::MainWindow *ui;
-    Client* client;
+    void resizeEvent(QResizeEvent*);
+    Ui::MainWindow* ui;
+    std::shared_ptr<Client> client_;
 
     const int max_friend_in_page_ = 14;
     const int max_count_line = 20;

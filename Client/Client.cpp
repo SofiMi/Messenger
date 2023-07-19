@@ -42,7 +42,7 @@ void Client::CheckLogin(const std::wstring& login) {
 void Client::CheckPassword(const std::wstring& password) {
   net::message<msg_type> msg;
   msg.header.id = msg_type::CheckPassword;
-  msg.header.userid = userid;
+  msg.header.userid = userid_;
 
   for (size_t i = 0; i < password.size(); ++i) {
     msg.data[i] = password[i];
@@ -50,8 +50,22 @@ void Client::CheckPassword(const std::wstring& password) {
   send(msg);
 }
 
-void Client::StopServer() {
-  net::message<msg_type> msg;
-  msg.header.id = msg_type::StopServer;
-  send(msg);
+void Client::SetUserid(int userid) {
+  userid_ = userid;
+}
+
+std::vector<std::string> Client::GetFriend(size_t count, bool& other_fr) {
+  other_fr = true;
+  return {{"Sofi"}, {"Tony"}};
+}
+
+std::vector<std::string> Client::GetMessage(size_t count, bool& other_fr) {
+  other_fr = true;
+  return { {"задумайся, зачем компании берут стажеров. ты работал n месяцев, узнал домен проекта, "
+            "закрывал задачи, знаком с командой — зачем компании тебя куда-то отпускать?"},
+           {"ну я поэтому говорю про компанию в целом, даже если в команде нет мест зачем тебя выпускать в рынок обратно"},
+           {"Эт понятно, просто интересно, когда компании нанимают"
+           "весьма большое количество стажеров, неужели у них столько вакантных мест?"
+            "Либо устраивают между стажерами схватку"}, 
+            };
 }
