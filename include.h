@@ -20,5 +20,7 @@ enum class msg_type : uint32_t {
   GetUpdateById,
   NewMessageToThisChat,
   NewMessageToOtherChat,
-  GetImg
+  GetImg,
+  SendImgMore,
+  SendImgFinish
 };

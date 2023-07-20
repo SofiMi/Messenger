@@ -1,4 +1,6 @@
 #include "Client.h"
+#include "../include.h"
+#include "fstream"
 
 void Client::send_msg(std::wstring &__data) {
   net::message<msg_type> msg;
@@ -47,13 +49,38 @@ void Client::CheckUpdateByIdChat(size_t id) {
   send(message);
 }
 
-std::vector<std::string> Client::GetFriend(size_t count) {
+std::vector<std::tuple<int, std::string, std::vector<std::array<wchar_t, 256>>>> Client::GetFriend(size_t count) {
+  std::vector<std::tuple<int, std::string, std::vector<std::array<wchar_t, 256>>>> result;
+
   net::message<msg_type> message;
   message.header.id = msg_type::GetImg;
   message.header.userid = userid_;
   send(message);
-  return {{"Sofi"}, {"Tony"}
-  };
+
+  std::this_thread::sleep_for(std::chrono::milliseconds(5)); // wait server
+  bool more_message = true;
+
+  std::vector<std::array<wchar_t, 256>> img;
+  std::ofstream out(std::string("clientImageSofi.jpeg"), std::ios::binary);
+
+  while (more_message && is_connected() && !get_in_comming().empty()) {
+    auto msg = get_in_comming().pop_front().msg;
+
+    switch (msg.header.id) {
+      case msg_type::SendImgMore: {
+        //img.push_back(msg.data);
+        out.write((char*)msg.data.data(), 256);
+        break;
+      }
+      case msg_type::SendImgFinish: {
+        more_message = false;
+        break;
+      }
+    }
+  }
+  result.push_back(std::tuple<int, std::string, std::vector<std::array<wchar_t, 256>>>(1, "Sofi", img));
+  //out.close();
+  return result;
 }
 
 std::vector<std::string> Client::GetMessage(size_t count) {

@@ -3,14 +3,14 @@
 #include <fstream>
 
 
-int SERVER_PORT = 67110;
+int SERVER_PORT = 30000;
 bool SERVER_WORK = true;
 
 class Server : public net::server_interface<msg_type> {
 public:
   Server(uint16_t port) : net::server_interface<msg_type>(port) {}
 
-  void SendImg(const std::string& name);
+  void SendImg(std::shared_ptr<net::connection<msg_type>> client);
 
 protected:
   virtual bool
@@ -89,6 +89,8 @@ protected:
 
     case msg_type::GetUpdateById: {
       int chat_id = 0;
+      //__msg.header.id = msg_type::ServerMessage;
+      //__msg.header.name = msg.header.name;
       std::copy(&msg.data[0], &msg.data[0] + sizeof(size_t),
                 reinterpret_cast<char *>(&chat_id));
       std::cout << "User_id = " << msg.header.userid
@@ -104,8 +106,7 @@ protected:
     }
 
     case msg_type::GetImg : {
-      std::string name = "ex.jpeg"; 
-      SendImg(name);
+      SendImg(client);
     }
     }
   }
@@ -124,22 +125,33 @@ int main() {
 }
 
 
-void Server::SendImg(const std::string& name) {
+void Server::SendImg(std::shared_ptr<net::connection<msg_type>> client) {
+  std::string name = "images.jpeg";
   std::ifstream in(name, std::ios::binary);
-  //std::ofstream out(std::string("new2.jpeg"), std::ios::binary);
+  std::ofstream out(std::string("clientImageSofi.jpeg"), std::ios::binary);
 
-  //net::message<msg_type> __msg;
-  //__msg.header.id = msg_type::ServerMessage;
+  if (!in.good()) {
+    throw;
+  }
 
   in.seekg(0, std::ios::end);
   size_t myFileSize = in.tellg();
   in.seekg(0, std::ios::beg);
-  std::array<wchar_t, 256> v;
 
   std::cout << "Count msg: " << myFileSize / 256 << std::endl;
 
   while (in.tellg() < myFileSize) {
-    in.read((char*)v.data(), 256);
-    //out.write((char*)v.data(), 256);
+    net::message<msg_type> __msg;
+    __msg.header.id = msg_type::SendImgMore;
+    in.read((char*)__msg.data.data(), 256);
+    out.write((char*)__msg.data.data(), 256);
+    client->send(__msg);
+    std::cout << "send" << std::endl;
   }
+  std::cout << "END" << std::endl;
+  net::message<msg_type> __msg;
+  __msg.header.id = msg_type::SendImgFinish;
+  client->send(__msg);
+  in.close();
+  out.close();
 }

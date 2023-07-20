@@ -1140,4 +1140,8 @@ CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o: \
  /home/sofia/Algo/Messenger/Client/../NetWork/net_connection.h \
  /home/sofia/Algo/Messenger/Client/../NetWork/net_queue.h \
  /home/sofia/Algo/Messenger/Client/../NetWork/net_message.h \
- /home/sofia/Algo/Messenger/Client/../include.h
+ /home/sofia/Algo/Messenger/Client/../include.h \
+ /usr/include/c++/11/fstream /usr/include/c++/11/bits/codecvt.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+ /usr/include/c++/11/bits/fstream.tcc

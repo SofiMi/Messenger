@@ -47,7 +47,7 @@ void MainWindow::timerEvent(QTimerEvent* event) {
      (startTimer в конструкторе).
   */
   // запрос новых сообщений в данном чате
-  client_->CheckUpdateByIdChat(chat_id_);
+  // client_->CheckUpdateByIdChat(chat_id_);
 
   // запрос старых сообщений / других друзей
   auto scrollBarMess = ui->messageScrollArea->verticalScrollBar();
@@ -106,13 +106,13 @@ void MainWindow::AddNewMessage(const QString& qstr) {
 
 void MainWindow::AddOtherFriends() {
   /* Добавление в friendScrollArea других друзей. */
-  std::vector<std::string> friend_name = client_->GetFriend(15);
+  std::vector<std::tuple<int, std::string, std::vector<std::array<wchar_t, 256>>>> friend_name = client_->GetFriend(15);
   QVBoxLayout* friend_box_layout =
       dynamic_cast<QVBoxLayout *>(ui->friendScrollAreaContext->layout());
 
   for (int i = 0; i < friend_name.size(); ++i) {
     QPushButton* button =
-        new QPushButton(QString::fromStdString(friend_name[i]));
+        new QPushButton(QString::fromStdString(std::get<std::string>(friend_name[i])));
     QObject::connect(button, &QPushButton::clicked,
      [this]() {
       while (auto* item = ui->messageScrollAreaContext->layout()->takeAt(0)) {
