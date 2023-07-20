@@ -16,5 +16,9 @@ enum class msg_type : uint32_t {
   LoginInvalid,
   PasswordValid,
   PasswordInvalid,
-  StopServer
+  StopServer,
+  GetUpdateById,
+  NewMessageToThisChat,
+  NewMessageToOtherChat,
+  GetImg
 };

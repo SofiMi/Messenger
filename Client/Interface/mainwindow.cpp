@@ -1,113 +1,140 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-#include <QPushButton>
-#include <QVBoxLayout>
-#include <QScrollBar>
+#include <QDebug>
 #include <QLabel>
-#include <vector>
-#include <string>
 #include <QMessageBox>
+#include <QPushButton>
+#include <QScrollBar>
+#include <QTimer>
+#include <QVBoxLayout>
+#include <string>
+#include <vector>
 
-MainWindow::MainWindow(QWidget *parent, std::shared_ptr<Client>& client)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-    , client_(client)
-{
-    ui->setupUi(this);
+// TO DO:
+// 1. Scroll Bar
+// https://stackoverflow.com/questions/65087088/how-to-move-to-end-of-scrollbar-after-adding-qwidget-into-the-qscrollarea
 
-    bool other_friends_exist;
-    bool other_msg_exist;
+// 2.
+// Удалить виджет
+// http://www.prog.org.ru/topic_20401_0.html
 
-    QVBoxLayout* lay = new QVBoxLayout(this);
-    std::vector<std::string> FriendName = client->GetFriend(max_friend_in_page_, other_friends_exist);
-    for (int i = 0; i < FriendName.size(); ++i) {
-        QPushButton* button = new QPushButton(QString::fromStdString(FriendName[i]));
-        // TO DO: formating button with long name !!!
-        lay->insertWidget(count_friend_in_window++, button);
-    }
-    if (other_friends_exist) {
-        QPushButton* button = new QPushButton("Другие друзья");
-        lay->insertWidget(count_friend_in_window++, button);
-    }
-    ui->friendScrollAreaContext->setLayout(lay);
+// 3
+// Оставаться в том же положении
+// https://stackoverflow.com/questions/17388650/c-qt-qgraphicsview-remembering-the-position-of-scrollbars-after-reload
 
-    // добавление истории чата на экран
-    QVBoxLayout* mess = new QVBoxLayout(this);
-    std::vector<std::string> message = client->GetMessage(max_count_line, other_msg_exist);
-    for (int i = 0; i < message.size(); ++i) {
-        QLabel* button2 = new QLabel(QString::fromStdString(message[i]));
-        button2->setWordWrap(true);
-        /*if (i % 3 == 0) {
-            mess->addWidget(button2, count_msg_in_window++, 1);
-            mess->addWidget(button2, count_msg_in_window, 0);
-        } else {
-            mess->addWidget(button2, count_msg_in_window++, 0);
-            mess->addWidget(button2, count_msg_in_window, 1);
-        }*/
-        //button2->setStyleSheet("QLabel { background-color : #343B29; color : white; }");
-        mess->insertWidget(count_msg_in_window++, button2);
-    }
-    ui->messageScrollAreaContext->setLayout(mess);
+// 4
+// Передача изображений
+// https://ru.stackoverflow.com/questions/963605/%D0%9A%D0%B0%D0%BA-%D0%BA%D0%BE%D0%BD%D0%B2%D0%B5%D1%80%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D1%82%D1%8C-%D0%BC%D0%B0%D1%81%D1%81%D0%B8%D0%B2-char-%D0%B2-%D0%B8%D0%B7%D0%BE%D0%B1%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5-%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B0-jpeg-%D1%81-%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%D1%8E-libjpeg-%D0%B2-%D0%A1
 
+static int i = 0;
+
+void updateCompass() { std::cout << (i++) << std::endl; }
+
+MainWindow::MainWindow(QWidget *parent, std::shared_ptr<Client> &client)
+    : QMainWindow(parent), ui(new Ui::MainWindow), client_(client) {
+  ui->setupUi(this);
+
+  QVBoxLayout *lay = new QVBoxLayout(this);
+  ui->friendScrollAreaContext->setLayout(lay);
+  AddOtherFriends();
+
+  QVBoxLayout *messages_box_layout = new QVBoxLayout(this);
+  ui->messageScrollAreaContext->setLayout(messages_box_layout);
+
+  timerId = startTimer(1000);
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
-
-void MainWindow::on_friend_scroll_area_customContextMenuRequested(const QPoint &pos)
-{
-    if (pos.y() < 50) {
-        QMessageBox::information(this, "Yes", "yes");
-    }
-}
-
-std::string MainWindow::GetHTMLText(const std::string& str) {
-    std::string html;
-    html.resize(str.size() * 2);
-    size_t pos = 0, h_pos = 0, next_pos, index_row = 0;
-    for (; pos < str.size(); ) {
-        next_pos = str.find(" ", pos);
-
-        if (next_pos == std::string::npos) {
-            for (; pos < str.size(); pos++, h_pos++) {
-                html[h_pos] = str[pos];
-            }
-        } else {
-            if (next_pos - pos < max_symbol_in_row - index_row) {
-                for (; pos < next_pos + 1; pos++, h_pos++, index_row++) {
-                    html[h_pos] = str[pos];
-                }
-            } else {
-                html[h_pos++] = '<';
-                html[h_pos++] = 'b';
-                html[h_pos++] = 'r';
-                html[h_pos++] = '>';
-                index_row = 0;
-                while (next_pos - pos >= max_symbol_in_row) {
-                  for (int i = 0; i < max_symbol_in_row; i++, h_pos++, pos++) {
-                    html[h_pos] = str[pos];
-                  }
-                  html[h_pos++] = '<';
-                  html[h_pos++] = 'b';
-                  html[h_pos++] = 'r';
-                  html[h_pos++] = '>';
-                }
-                if (next_pos - pos < max_symbol_in_row) {
-                  for (; pos < next_pos + 1; pos++, h_pos++, index_row++) {
-                    html[h_pos] = str[pos];
-                  }
-                }
-            }
-        }
-    }
-    return html;
-}
+MainWindow::~MainWindow() { delete ui; }
 
 void MainWindow::resizeEvent(QResizeEvent* event) {
-   QMainWindow::resizeEvent(event);
+  /* Обновление размера экрана */
+  QMainWindow::resizeEvent(event);
+  size_t width = this->size().width();
+  size_t height = this->size().height();
+}
 
-   size_t width = this->size().width();
-   size_t height = this->size().height();
+void MainWindow::timerEvent(QTimerEvent* event) {
+  /* Обновление событий на экране, 
+     связанные с серверной частью.
+     Происходит каждую секунду 
+     (startTimer в конструкторе).
+  */
+  // запрос новых сообщений в данном чате
+  client_->CheckUpdateByIdChat(chat_id_);
+
+  // запрос старых сообщений / других друзей
+  auto scrollBarMess = ui->messageScrollArea->verticalScrollBar();
+  auto scrollBarFr = ui->friendScrollArea->verticalScrollBar();
+
+  if (static_cast<double>(scrollBarMess->value()) /
+          static_cast<double>(scrollBarMess->maximum()) <
+      0.2) {
+    AddOldMessages();
+  }
+
+  if (static_cast<double>(scrollBarFr->value()) /
+          static_cast<double>(scrollBarFr->maximum()) >
+      0.8) {
+    AddOtherFriends();
+  }
+
+  // обработка новых сигналов от сервера
+  if (client_->is_connected() && !client_->get_in_comming().empty()) {
+    auto message = client_->get_in_comming().pop_front().msg;
+
+    switch (message.header.id) {
+    case msg_type::NewMessageToThisChat: {
+      QString qstr = QString::fromWCharArray(message.data.data());
+      AddNewMessage(qstr);
+      break;
+    }
+    case msg_type::NewMessageToOtherChat: {
+      break;
+    }
+    }
+  }
+}
+
+void MainWindow::AddOldMessages() {
+  /* Добавление в messageScrollArea старых сообщений. */
+  std::vector<std::string> messages = client_->GetMessage(15);
+  QVBoxLayout* messages_box_layout =
+      dynamic_cast<QVBoxLayout *>(ui->messageScrollAreaContext->layout());
+
+  for (int i = messages.size() - 1; i > -1; --i) {
+    QLabel* message = new QLabel(QString::fromStdString(messages[i]));
+    message->setWordWrap(true);
+    messages_box_layout->insertWidget(0, message);
+  }
+}
+
+void MainWindow::AddNewMessage(const QString& qstr) {
+  /* Добавление в messageScrollArea новое сообщение. */
+  QVBoxLayout* messages_box_layout =
+      dynamic_cast<QVBoxLayout *>(ui->messageScrollAreaContext->layout());
+  QLabel* message = new QLabel(qstr);
+  message->setWordWrap(true);
+  messages_box_layout->addWidget(message);
+}
+
+void MainWindow::AddOtherFriends() {
+  /* Добавление в friendScrollArea других друзей. */
+  std::vector<std::string> friend_name = client_->GetFriend(15);
+  QVBoxLayout* friend_box_layout =
+      dynamic_cast<QVBoxLayout *>(ui->friendScrollAreaContext->layout());
+
+  for (int i = 0; i < friend_name.size(); ++i) {
+    QPushButton* button =
+        new QPushButton(QString::fromStdString(friend_name[i]));
+    QObject::connect(button, &QPushButton::clicked, 
+     [this]() {
+      while (auto* item = ui->messageScrollAreaContext->layout()->takeAt(0)) {
+        delete item->widget();
+        delete item;
+      }
+      AddOldMessages();
+    });
+    // TO DO: formating button with long name !!!
+    friend_box_layout->addWidget(button);
+  }
 }

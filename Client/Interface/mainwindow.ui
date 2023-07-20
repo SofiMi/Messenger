@@ -144,7 +144,7 @@
         </property>
        </widget>
       </item>
-      <item alignment="Qt::AlignBottom">
+      <item>
        <widget class="QScrollArea" name="messageScrollArea">
         <property name="minimumSize">
          <size>
@@ -161,7 +161,7 @@
            <x>0</x>
            <y>0</y>
            <width>498</width>
-           <height>68</height>
+           <height>497</height>
           </rect>
          </property>
         </widget>

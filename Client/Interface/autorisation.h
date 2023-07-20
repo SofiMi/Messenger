@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include "mainwindow.h"
-#include "../Client.h"
+//#include "../Client.h"
 #include "../../include.h"
 
 namespace Ui {
@@ -24,7 +24,7 @@ private slots:
 private:
     Ui::Autorisation *ui;
     MainWindow* main_window;
-    std::shared_ptr<Client> client_;
+    //std::shared_ptr<Client> client_;
 };
 
 #endif // AUTORISATION_H

@@ -7,4 +7,5 @@ int main(int argc, char *argv[]) {
   Autorisation w;
   w.show();
   return a.exec();
+  //return 0;
 }

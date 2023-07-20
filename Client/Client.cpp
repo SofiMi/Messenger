@@ -1,17 +1,5 @@
 #include "Client.h"
 
-void Client::join_server() {
-  std::cout << "Input Your Name: ";
-  std::wcin.get(user_name.data(), user_name.size());
-  std::wcin.clear();
-  std::wcin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-  net::message<msg_type> msg;
-  msg.header.id = msg_type::JoinServer;
-  msg.header.name = user_name;
-  send(msg);
-}
-
 void Client::send_msg(std::wstring &__data) {
   net::message<msg_type> msg;
   msg.header.id = msg_type::PassString;
@@ -30,42 +18,44 @@ void Client::send_msg(std::wstring &__data) {
 }
 
 void Client::CheckLogin(const std::wstring& login) {
-  net::message<msg_type> msg;
-  msg.header.id = msg_type::CheckLogin;
-
-  for (size_t i = 0; i < login.size(); ++i) {
-    msg.data[i] = login[i];
-  }
-  send(msg);
+  /* Проверка логина */
+  net::message<msg_type> message;
+  message.header.id = msg_type::CheckLogin;
+  std::copy(&login[0], &login[0] + login.size(), &message.data[0]);
+  send(message);
 }
 
 void Client::CheckPassword(const std::wstring& password) {
-  net::message<msg_type> msg;
-  msg.header.id = msg_type::CheckPassword;
-  msg.header.userid = userid_;
-
-  for (size_t i = 0; i < password.size(); ++i) {
-    msg.data[i] = password[i];
-  }
-  send(msg);
+  /* Проверка пароля */
+  net::message<msg_type> message;
+  message.header.id = msg_type::CheckPassword;
+  message.header.userid = userid_;
+  std::copy(&password[0], &password[0] + password.size(), &message.data[0]);
+  send(message);
 }
 
-void Client::SetUserid(int userid) {
+void Client::SetUserid(uint32_t userid) {
   userid_ = userid;
 }
 
-std::vector<std::string> Client::GetFriend(size_t count, bool& other_fr) {
-  other_fr = true;
-  return {{"Sofi"}, {"Tony"}};
+void Client::CheckUpdateByIdChat(size_t id) {
+  /* Проверка обновлений в чате.*/
+  net::message<msg_type> message;
+  message.header.id = msg_type::GetUpdateById;
+  message.header.userid = userid_;
+  std::copy(reinterpret_cast<const wchar_t*>(&id), reinterpret_cast<const wchar_t*>(&id) + sizeof(size_t), &message.data[0]);
+  send(message);
 }
 
-std::vector<std::string> Client::GetMessage(size_t count, bool& other_fr) {
-  other_fr = true;
-  return { {"задумайся, зачем компании берут стажеров. ты работал n месяцев, узнал домен проекта, "
-            "закрывал задачи, знаком с командой — зачем компании тебя куда-то отпускать?"},
-           {"ну я поэтому говорю про компанию в целом, даже если в команде нет мест зачем тебя выпускать в рынок обратно"},
-           {"Эт понятно, просто интересно, когда компании нанимают"
-           "весьма большое количество стажеров, неужели у них столько вакантных мест?"
-            "Либо устраивают между стажерами схватку"}, 
-            };
+std::vector<std::string> Client::GetFriend(size_t count) {
+  net::message<msg_type> message;
+  message.header.id = msg_type::GetImg;
+  message.header.userid = userid_;
+  send(message);
+  return {{"Sofi"}, {"Tony"}
+  };
+}
+
+std::vector<std::string> Client::GetMessage(size_t count) {
+  return {};
 }
