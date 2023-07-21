@@ -69,10 +69,24 @@ include CMakeFiles/Server.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Server.dir/flags.make
 
+CMakeFiles/Server.dir/home/sofia/Algo/Messenger/DBWork/data_base.cpp.o: CMakeFiles/Server.dir/flags.make
+CMakeFiles/Server.dir/home/sofia/Algo/Messenger/DBWork/data_base.cpp.o: /home/sofia/Algo/Messenger/DBWork/data_base.cpp
+CMakeFiles/Server.dir/home/sofia/Algo/Messenger/DBWork/data_base.cpp.o: CMakeFiles/Server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sofia/Algo/Messenger/Server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Server.dir/home/sofia/Algo/Messenger/DBWork/data_base.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Server.dir/home/sofia/Algo/Messenger/DBWork/data_base.cpp.o -MF CMakeFiles/Server.dir/home/sofia/Algo/Messenger/DBWork/data_base.cpp.o.d -o CMakeFiles/Server.dir/home/sofia/Algo/Messenger/DBWork/data_base.cpp.o -c /home/sofia/Algo/Messenger/DBWork/data_base.cpp
+
+CMakeFiles/Server.dir/home/sofia/Algo/Messenger/DBWork/data_base.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/home/sofia/Algo/Messenger/DBWork/data_base.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sofia/Algo/Messenger/DBWork/data_base.cpp > CMakeFiles/Server.dir/home/sofia/Algo/Messenger/DBWork/data_base.cpp.i
+
+CMakeFiles/Server.dir/home/sofia/Algo/Messenger/DBWork/data_base.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/home/sofia/Algo/Messenger/DBWork/data_base.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sofia/Algo/Messenger/DBWork/data_base.cpp -o CMakeFiles/Server.dir/home/sofia/Algo/Messenger/DBWork/data_base.cpp.s
+
 CMakeFiles/Server.dir/Server.cpp.o: CMakeFiles/Server.dir/flags.make
 CMakeFiles/Server.dir/Server.cpp.o: ../Server.cpp
 CMakeFiles/Server.dir/Server.cpp.o: CMakeFiles/Server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sofia/Algo/Messenger/Server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Server.dir/Server.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sofia/Algo/Messenger/Server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Server.dir/Server.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Server.dir/Server.cpp.o -MF CMakeFiles/Server.dir/Server.cpp.o.d -o CMakeFiles/Server.dir/Server.cpp.o -c /home/sofia/Algo/Messenger/Server/Server.cpp
 
 CMakeFiles/Server.dir/Server.cpp.i: cmake_force
@@ -83,17 +97,37 @@ CMakeFiles/Server.dir/Server.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/Server.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sofia/Algo/Messenger/Server/Server.cpp -o CMakeFiles/Server.dir/Server.cpp.s
 
+CMakeFiles/Server.dir/main.cpp.o: CMakeFiles/Server.dir/flags.make
+CMakeFiles/Server.dir/main.cpp.o: ../main.cpp
+CMakeFiles/Server.dir/main.cpp.o: CMakeFiles/Server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sofia/Algo/Messenger/Server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Server.dir/main.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Server.dir/main.cpp.o -MF CMakeFiles/Server.dir/main.cpp.o.d -o CMakeFiles/Server.dir/main.cpp.o -c /home/sofia/Algo/Messenger/Server/main.cpp
+
+CMakeFiles/Server.dir/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Server.dir/main.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sofia/Algo/Messenger/Server/main.cpp > CMakeFiles/Server.dir/main.cpp.i
+
+CMakeFiles/Server.dir/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Server.dir/main.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sofia/Algo/Messenger/Server/main.cpp -o CMakeFiles/Server.dir/main.cpp.s
+
 # Object files for target Server
 Server_OBJECTS = \
-"CMakeFiles/Server.dir/Server.cpp.o"
+"CMakeFiles/Server.dir/home/sofia/Algo/Messenger/DBWork/data_base.cpp.o" \
+"CMakeFiles/Server.dir/Server.cpp.o" \
+"CMakeFiles/Server.dir/main.cpp.o"
 
 # External object files for target Server
 Server_EXTERNAL_OBJECTS =
 
+Server: CMakeFiles/Server.dir/home/sofia/Algo/Messenger/DBWork/data_base.cpp.o
 Server: CMakeFiles/Server.dir/Server.cpp.o
+Server: CMakeFiles/Server.dir/main.cpp.o
 Server: CMakeFiles/Server.dir/build.make
+Server: /usr/lib/x86_64-linux-gnu/libpqxx.so
+Server: /usr/lib/x86_64-linux-gnu/libpq.so
 Server: CMakeFiles/Server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sofia/Algo/Messenger/Server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sofia/Algo/Messenger/Server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable Server"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Server.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

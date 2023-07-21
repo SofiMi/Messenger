@@ -26,3 +26,9 @@ CREATE TABLE server.message (
   index_in_char integer NOT NULL,
   text character varying(1000) NOT NULL
 );
+
+
+CREATE TABLE server.chatname (
+  chatid integer NOT NULL,
+  chatname character varying(100) NOT NULL
+);

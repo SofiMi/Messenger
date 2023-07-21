@@ -218,6 +218,12 @@ Client_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 Client_SOURCE_DIR:STATIC=/home/sofia/Algo/Messenger/Server
 
+//Path to a library.
+PQXX_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libpqxx.so
+
+//Path to a library.
+PQ_LIB:FILEPATH=/usr/lib/x86_64-linux-gnu/libpq.so
+
 
 ########################
 # INTERNAL cache entries

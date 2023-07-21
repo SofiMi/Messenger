@@ -71,7 +71,7 @@ void MainWindow::timerEvent(QTimerEvent* event) {
 
     switch (message.header.id) {
     case msg_type::NewMessageToThisChat: {
-      QString qstr = QString::fromWCharArray(message.data.data());
+      QString qstr = message.data.data();
       AddNewMessage(qstr);
       break;
     }
@@ -106,13 +106,12 @@ void MainWindow::AddNewMessage(const QString& qstr) {
 
 void MainWindow::AddOtherFriends() {
   /* Добавление в friendScrollArea других друзей. */
-  std::vector<std::tuple<int, std::string, std::vector<std::array<wchar_t, 256>>>> friend_name = client_->GetFriend(15);
+  auto friend_name = client_->GetChats();
   QVBoxLayout* friend_box_layout =
       dynamic_cast<QVBoxLayout *>(ui->friendScrollAreaContext->layout());
 
   for (int i = 0; i < friend_name.size(); ++i) {
-    QPushButton* button =
-        new QPushButton(QString::fromStdString(std::get<std::string>(friend_name[i])));
+    QPushButton* button = new QPushButton(QString::fromStdString(friend_name[i].second));
     QObject::connect(button, &QPushButton::clicked,
      [this]() {
       while (auto* item = ui->messageScrollAreaContext->layout()->takeAt(0)) {

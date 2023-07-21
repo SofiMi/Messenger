@@ -18,5 +18,18 @@ add_executable(Server
   ../NetWork/net_queue.h
   ../NetWork/net_connection.h
   ../NetWork/net.h
+
+  ../DBWork/data_base.cpp
+  ../DBWork/data_base.h
+
+  Server.h
   Server.cpp
+  main.cpp
 )
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lpqxx -lpq")
+set(PQXX /usr/local/include/pqxx)
+
+find_library(PQXX_LIB pqxx)
+find_library(PQ_LIB pq)
+TARGET_LINK_LIBRARIES(Server  ${PQXX_LIB} ${PQ_LIB})

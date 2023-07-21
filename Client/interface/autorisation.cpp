@@ -11,7 +11,7 @@ autorisation::autorisation(QWidget *parent)
   setMaximumSize(400, 300);
 
   client_ = std::make_shared<Client>();
-  client_->connect("127.0.0.1", 30000);
+  client_->connect("127.0.0.1", 56000);
 
   if (!client_->is_connected()) {
     std::cout << "No connection\n" << std::endl;
@@ -23,20 +23,25 @@ autorisation::~autorisation() { delete ui; }
 
 void autorisation::on_pushButton_clicked() {
     QString login = ui->login->text();
-      QString password = ui->password->text();
+    QString password = ui->password->text();
 
-      std::wstring login_w = login.toStdWString();
-      std::wstring password_w = password.toStdWString();
+    std::string login_w = login.toStdString();
+    std::string password_w = password.toStdString();
 
-      client_->CheckLogin(login_w);
-      std::this_thread::sleep_for(std::chrono::milliseconds(5)); // wait server
+    client_->CheckLogin(login_w);
+    std::this_thread::sleep_for(std::chrono::milliseconds(5)); // wait server
 
-      if (client_->is_connected() && !client_->get_in_comming().empty()) {
-        auto msg = client_->get_in_comming().pop_front().msg;
+    if (client_->is_connected() && !client_->get_in_comming().empty()) {
+      auto msg = client_->get_in_comming().pop_front().msg;
 
-        switch (msg.header.id) {
+      switch (msg.header.id) {
+        case msg_type::ServerAccept: {
+          std::cout << "ServerAccept" << std::endl;
+        }
         case msg_type::LoginValid: {
-          client_->SetUserid(msg.header.userid);
+          int userid;
+          std::copy(reinterpret_cast<int*>(&msg.data[0]), reinterpret_cast<int*>(&msg.data[0] + sizeof(int)), &userid);
+          client_->SetUserid(userid);
           client_->CheckPassword(password_w);
 
           std::this_thread::sleep_for(std::chrono::milliseconds(5)); // wait server
@@ -58,7 +63,7 @@ void autorisation::on_pushButton_clicked() {
             }
 
             default: {
-              QMessageBox::about(this, "ServerErrord", "ServerErrord");
+              QMessageBox::about(this, "ServerErrord in Password", "ServerErrord in Password");
             }
             }
           }
@@ -69,10 +74,20 @@ void autorisation::on_pushButton_clicked() {
           QMessageBox::about(this, "LoginInvalid", "LoginInvalid");
           break;
         }
+        case msg_type::PasswordValid: {
+          QMessageBox::about(this, "ServerErrord: PV", "ServerErrord : PV");
+          break;
+        }
+        case msg_type::PasswordInvalid: {
+          QMessageBox::about(this, "ERROR:PasswordInvalid", "ERROR:PasswordInvalid");
+          break;
+        }
         default: {
           QMessageBox::about(this, "ServerErrord", "ServerErrord");
         }
-        }
       }
+    } else {
+      std::cout << "empty" << std::endl;
+    }
 }
 

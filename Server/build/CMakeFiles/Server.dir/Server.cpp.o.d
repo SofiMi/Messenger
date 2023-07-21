@@ -1,7 +1,7 @@
 CMakeFiles/Server.dir/Server.cpp.o: \
  /home/sofia/Algo/Messenger/Server/Server.cpp /usr/include/stdc-predef.h \
- /home/sofia/Algo/Messenger/Server/../include.h \
- /usr/include/c++/11/cstdint \
+ /usr/include/c++/11/fstream /usr/include/c++/11/istream \
+ /usr/include/c++/11/ios /usr/include/c++/11/iosfwd \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -13,24 +13,37 @@ CMakeFiles/Server.dir/Server.cpp.o: \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/cpu_defines.h \
  /usr/include/c++/11/pstl/pstl_config.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
+ /usr/include/c++/11/bits/stringfwd.h \
+ /usr/include/c++/11/bits/memoryfwd.h /usr/include/c++/11/bits/postypes.h \
+ /usr/include/c++/11/cwchar /usr/include/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/time64.h \
+ /usr/include/x86_64-linux-gnu/bits/floatn.h \
+ /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
- /home/sofia/Algo/Messenger/Server/net_server.h \
- /home/sofia/Algo/Messenger/Server/../NetWork/net_common.h \
- /usr/include/c++/11/memory /usr/include/c++/11/bits/stl_algobase.h \
- /usr/include/c++/11/bits/functexcept.h \
+ /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
+ /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
+ /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
+ /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
+ /usr/include/c++/11/exception /usr/include/c++/11/bits/exception.h \
+ /usr/include/c++/11/bits/exception_ptr.h \
  /usr/include/c++/11/bits/exception_defines.h \
+ /usr/include/c++/11/bits/cxxabi_init_exception.h \
+ /usr/include/c++/11/typeinfo /usr/include/c++/11/bits/hash_bytes.h \
+ /usr/include/c++/11/new /usr/include/c++/11/bits/move.h \
+ /usr/include/c++/11/type_traits \
+ /usr/include/c++/11/bits/nested_exception.h \
+ /usr/include/c++/11/bits/char_traits.h \
+ /usr/include/c++/11/bits/stl_algobase.h \
+ /usr/include/c++/11/bits/functexcept.h \
  /usr/include/c++/11/bits/cpp_type_traits.h \
  /usr/include/c++/11/ext/type_traits.h \
  /usr/include/c++/11/ext/numeric_traits.h \
- /usr/include/c++/11/bits/stl_pair.h /usr/include/c++/11/bits/move.h \
- /usr/include/c++/11/type_traits /usr/include/c++/11/compare \
+ /usr/include/c++/11/bits/stl_pair.h /usr/include/c++/11/compare \
  /usr/include/c++/11/concepts \
  /usr/include/c++/11/bits/stl_iterator_base_types.h \
  /usr/include/c++/11/bits/iterator_concepts.h \
@@ -39,48 +52,15 @@ CMakeFiles/Server.dir/Server.cpp.o: \
  /usr/include/c++/11/bits/stl_iterator_base_funcs.h \
  /usr/include/c++/11/bits/concept_check.h \
  /usr/include/c++/11/debug/assertions.h \
- /usr/include/c++/11/bits/stl_iterator.h /usr/include/c++/11/new \
- /usr/include/c++/11/bits/exception.h /usr/include/c++/11/debug/debug.h \
- /usr/include/c++/11/bits/predefined_ops.h \
- /usr/include/c++/11/bits/allocator.h \
- /usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h \
- /usr/include/c++/11/ext/new_allocator.h \
- /usr/include/c++/11/bits/memoryfwd.h \
- /usr/include/c++/11/bits/stl_construct.h \
- /usr/include/c++/11/bits/stl_uninitialized.h \
- /usr/include/c++/11/ext/alloc_traits.h \
- /usr/include/c++/11/bits/alloc_traits.h \
- /usr/include/c++/11/bits/stl_tempbuf.h \
- /usr/include/c++/11/bits/stl_raw_storage_iter.h \
- /usr/include/c++/11/bits/align.h /usr/include/c++/11/bit \
- /usr/include/c++/11/bits/uses_allocator.h \
- /usr/include/c++/11/bits/unique_ptr.h /usr/include/c++/11/utility \
- /usr/include/c++/11/bits/stl_relops.h \
- /usr/include/c++/11/initializer_list /usr/include/c++/11/tuple \
- /usr/include/c++/11/array /usr/include/c++/11/bits/range_access.h \
- /usr/include/c++/11/bits/invoke.h \
- /usr/include/c++/11/bits/stl_function.h \
- /usr/include/c++/11/backward/binders.h \
- /usr/include/c++/11/bits/functional_hash.h \
- /usr/include/c++/11/bits/hash_bytes.h /usr/include/c++/11/ostream \
- /usr/include/c++/11/ios /usr/include/c++/11/iosfwd \
- /usr/include/c++/11/bits/stringfwd.h /usr/include/c++/11/bits/postypes.h \
- /usr/include/c++/11/cwchar /usr/include/wchar.h \
- /usr/include/x86_64-linux-gnu/bits/floatn.h \
- /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
- /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
- /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/c++/11/exception /usr/include/c++/11/bits/exception_ptr.h \
- /usr/include/c++/11/bits/cxxabi_init_exception.h \
- /usr/include/c++/11/typeinfo /usr/include/c++/11/bits/nested_exception.h \
- /usr/include/c++/11/bits/char_traits.h \
+ /usr/include/c++/11/bits/stl_iterator.h \
+ /usr/include/c++/11/debug/debug.h \
+ /usr/include/c++/11/bits/predefined_ops.h /usr/include/c++/11/cstdint \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/types.h \
+ /usr/include/x86_64-linux-gnu/bits/typesizes.h \
+ /usr/include/x86_64-linux-gnu/bits/time64.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/include/c++/11/bits/localefwd.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++locale.h \
  /usr/include/c++/11/clocale /usr/include/locale.h \
@@ -117,8 +97,13 @@ CMakeFiles/Server.dir/Server.cpp.o: \
  /usr/include/x86_64-linux-gnu/c++/11/bits/atomic_word.h \
  /usr/include/x86_64-linux-gnu/sys/single_threaded.h \
  /usr/include/c++/11/bits/locale_classes.h /usr/include/c++/11/string \
+ /usr/include/c++/11/bits/allocator.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h \
+ /usr/include/c++/11/ext/new_allocator.h \
  /usr/include/c++/11/bits/ostream_insert.h \
  /usr/include/c++/11/bits/cxxabi_forced.h \
+ /usr/include/c++/11/bits/stl_function.h \
+ /usr/include/c++/11/backward/binders.h \
  /usr/include/c++/11/bits/stl_algo.h /usr/include/c++/11/cstdlib \
  /usr/include/stdlib.h /usr/include/x86_64-linux-gnu/bits/waitflags.h \
  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
@@ -131,9 +116,15 @@ CMakeFiles/Server.dir/Server.cpp.o: \
  /usr/include/alloca.h /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
  /usr/include/c++/11/bits/std_abs.h \
  /usr/include/c++/11/bits/algorithmfwd.h \
- /usr/include/c++/11/bits/stl_heap.h \
+ /usr/include/c++/11/initializer_list /usr/include/c++/11/bits/stl_heap.h \
+ /usr/include/c++/11/bits/stl_tempbuf.h \
+ /usr/include/c++/11/bits/stl_construct.h \
  /usr/include/c++/11/bits/uniform_int_dist.h \
- /usr/include/c++/11/bits/basic_string.h /usr/include/c++/11/string_view \
+ /usr/include/c++/11/bits/range_access.h \
+ /usr/include/c++/11/bits/basic_string.h \
+ /usr/include/c++/11/ext/alloc_traits.h \
+ /usr/include/c++/11/bits/alloc_traits.h /usr/include/c++/11/string_view \
+ /usr/include/c++/11/bits/functional_hash.h \
  /usr/include/c++/11/bits/ranges_base.h \
  /usr/include/c++/11/bits/max_size_type.h /usr/include/c++/11/numbers \
  /usr/include/c++/11/bits/string_view.tcc \
@@ -162,8 +153,23 @@ CMakeFiles/Server.dir/Server.cpp.o: \
  /usr/include/c++/11/bits/streambuf_iterator.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/ctype_inline.h \
  /usr/include/c++/11/bits/locale_facets.tcc \
- /usr/include/c++/11/bits/basic_ios.tcc \
+ /usr/include/c++/11/bits/basic_ios.tcc /usr/include/c++/11/ostream \
  /usr/include/c++/11/bits/ostream.tcc \
+ /usr/include/c++/11/bits/istream.tcc /usr/include/c++/11/bits/codecvt.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+ /usr/include/c++/11/bits/fstream.tcc \
+ /home/sofia/Algo/Messenger/Server/Server.h \
+ /home/sofia/Algo/Messenger/Server/../include.h \
+ /home/sofia/Algo/Messenger/Server/net_server.h \
+ /home/sofia/Algo/Messenger/Server/../NetWork/net_common.h \
+ /usr/include/c++/11/memory /usr/include/c++/11/bits/stl_uninitialized.h \
+ /usr/include/c++/11/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/11/bits/align.h /usr/include/c++/11/bit \
+ /usr/include/c++/11/bits/uses_allocator.h \
+ /usr/include/c++/11/bits/unique_ptr.h /usr/include/c++/11/utility \
+ /usr/include/c++/11/bits/stl_relops.h /usr/include/c++/11/tuple \
+ /usr/include/c++/11/array /usr/include/c++/11/bits/invoke.h \
  /usr/include/c++/11/bits/shared_ptr.h \
  /usr/include/c++/11/bits/shared_ptr_base.h \
  /usr/include/c++/11/bits/allocated_ptr.h \
@@ -212,8 +218,7 @@ CMakeFiles/Server.dir/Server.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/semaphore.h /usr/include/c++/11/mutex \
  /usr/include/c++/11/bits/unique_lock.h /usr/include/c++/11/deque \
  /usr/include/c++/11/bits/stl_deque.h /usr/include/c++/11/bits/deque.tcc \
- /usr/include/c++/11/iostream /usr/include/c++/11/istream \
- /usr/include/c++/11/bits/istream.tcc /usr/include/boost/asio.hpp \
+ /usr/include/c++/11/iostream /usr/include/boost/asio.hpp \
  /usr/include/boost/asio/associated_allocator.hpp \
  /usr/include/boost/asio/detail/config.hpp /usr/include/boost/config.hpp \
  /usr/include/boost/config/user.hpp \
@@ -1141,7 +1146,45 @@ CMakeFiles/Server.dir/Server.cpp.o: \
  /home/sofia/Algo/Messenger/Server/../NetWork/net_connection.h \
  /home/sofia/Algo/Messenger/Server/../NetWork/net_queue.h \
  /home/sofia/Algo/Messenger/Server/../NetWork/net_message.h \
- /usr/include/c++/11/fstream /usr/include/c++/11/bits/codecvt.h \
- /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
- /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
- /usr/include/c++/11/bits/fstream.tcc
+ /home/sofia/Algo/Messenger/Server/../DBWork/data_base.h \
+ /usr/include/pqxx/pqxx /usr/include/pqxx/array \
+ /usr/include/pqxx/array.hxx /usr/include/pqxx/compiler-public.hxx \
+ /usr/include/pqxx/config-public-compiler.h /usr/include/c++/11/ciso646 \
+ /usr/include/pqxx/compiler-internal-pre.hxx \
+ /usr/include/pqxx/internal/encoding_group.hxx \
+ /usr/include/pqxx/internal/encodings.hxx \
+ /usr/include/pqxx/compiler-internal-post.hxx \
+ /usr/include/pqxx/binarystring /usr/include/pqxx/binarystring.hxx \
+ /usr/include/pqxx/result.hxx /usr/include/pqxx/except.hxx \
+ /usr/include/pqxx/util.hxx /usr/include/pqxx/strconv.hxx \
+ /usr/include/pqxx/internal/libpq-forward.hxx /usr/include/pqxx/types.hxx \
+ /usr/include/pqxx/connection /usr/include/pqxx/connection.hxx \
+ /usr/include/pqxx/connectionpolicy.hxx \
+ /usr/include/pqxx/basic_connection.hxx \
+ /usr/include/pqxx/connection_base.hxx /usr/include/c++/11/bitset \
+ /usr/include/c++/11/list /usr/include/c++/11/bits/stl_list.h \
+ /usr/include/c++/11/bits/list.tcc /usr/include/pqxx/errorhandler.hxx \
+ /usr/include/pqxx/prepared_statement.hxx \
+ /usr/include/pqxx/internal/statement_parameters.hxx \
+ /usr/include/pqxx/strconv /usr/include/pqxx/util \
+ /usr/include/pqxx/internal/type_utils.hxx /usr/include/pqxx/version.hxx \
+ /usr/include/pqxx/internal/ignore-deprecated-pre.hxx \
+ /usr/include/pqxx/internal/ignore-deprecated-post.hxx \
+ /usr/include/pqxx/cursor /usr/include/pqxx/cursor.hxx \
+ /usr/include/pqxx/transaction_base.hxx /usr/include/pqxx/isolation.hxx \
+ /usr/include/pqxx/row.hxx /usr/include/pqxx/field.hxx \
+ /usr/include/pqxx/internal/sql_cursor.hxx /usr/include/pqxx/errorhandler \
+ /usr/include/pqxx/except /usr/include/pqxx/largeobject \
+ /usr/include/pqxx/largeobject.hxx /usr/include/pqxx/dbtransaction.hxx \
+ /usr/include/pqxx/nontransaction /usr/include/pqxx/nontransaction.hxx \
+ /usr/include/pqxx/notification /usr/include/pqxx/notification.hxx \
+ /usr/include/pqxx/pipeline /usr/include/pqxx/pipeline.hxx \
+ /usr/include/pqxx/prepared_statement /usr/include/pqxx/result \
+ /usr/include/pqxx/result_iterator.hxx \
+ /usr/include/pqxx/robusttransaction \
+ /usr/include/pqxx/robusttransaction.hxx /usr/include/pqxx/stream_from \
+ /usr/include/pqxx/stream_from.hxx /usr/include/pqxx/stream_base.hxx \
+ /usr/include/pqxx/stream_to /usr/include/pqxx/stream_to.hxx \
+ /usr/include/pqxx/subtransaction /usr/include/pqxx/subtransaction.hxx \
+ /usr/include/pqxx/transaction /usr/include/pqxx/transaction.hxx \
+ /usr/include/pqxx/transactor /usr/include/pqxx/transactor.hxx

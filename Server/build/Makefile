@@ -153,6 +153,54 @@ Server.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/Server.cpp.s
 .PHONY : Server.cpp.s
 
+home/sofia/Algo/Messenger/DBWork/data_base.o: home/sofia/Algo/Messenger/DBWork/data_base.cpp.o
+.PHONY : home/sofia/Algo/Messenger/DBWork/data_base.o
+
+# target to build an object file
+home/sofia/Algo/Messenger/DBWork/data_base.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/home/sofia/Algo/Messenger/DBWork/data_base.cpp.o
+.PHONY : home/sofia/Algo/Messenger/DBWork/data_base.cpp.o
+
+home/sofia/Algo/Messenger/DBWork/data_base.i: home/sofia/Algo/Messenger/DBWork/data_base.cpp.i
+.PHONY : home/sofia/Algo/Messenger/DBWork/data_base.i
+
+# target to preprocess a source file
+home/sofia/Algo/Messenger/DBWork/data_base.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/home/sofia/Algo/Messenger/DBWork/data_base.cpp.i
+.PHONY : home/sofia/Algo/Messenger/DBWork/data_base.cpp.i
+
+home/sofia/Algo/Messenger/DBWork/data_base.s: home/sofia/Algo/Messenger/DBWork/data_base.cpp.s
+.PHONY : home/sofia/Algo/Messenger/DBWork/data_base.s
+
+# target to generate assembly for a file
+home/sofia/Algo/Messenger/DBWork/data_base.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/home/sofia/Algo/Messenger/DBWork/data_base.cpp.s
+.PHONY : home/sofia/Algo/Messenger/DBWork/data_base.cpp.s
+
+main.o: main.cpp.o
+.PHONY : main.o
+
+# target to build an object file
+main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Server.dir/build.make CMakeFiles/Server.dir/main.cpp.s
+.PHONY : main.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -165,6 +213,12 @@ help:
 	@echo "... Server.o"
 	@echo "... Server.i"
 	@echo "... Server.s"
+	@echo "... home/sofia/Algo/Messenger/DBWork/data_base.o"
+	@echo "... home/sofia/Algo/Messenger/DBWork/data_base.i"
+	@echo "... home/sofia/Algo/Messenger/DBWork/data_base.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 

@@ -6,17 +6,18 @@
 
 class Client : public net::client_interface<msg_type> {
  private:
-  std::array<wchar_t, 256> user_name{};
+  std::array<char, 256> user_name{};
   uint32_t userid_;
+  int count_chats_ = 0;
  public:
-  void CheckLogin(const std::wstring& login);
-  void CheckPassword(const std::wstring& password);
+  void CheckLogin(const std::string& login);
+  void CheckPassword(const std::string& password);
 
   void CheckUpdateByIdChat(size_t id);
-  void send_msg(std::wstring& __data);
+  void send_msg(std::string& __data);
   void SetUserid(uint32_t userid);
-  std::vector<std::tuple<int, std::string, std::vector<std::array<wchar_t, 256>>>> GetFriend(size_t count);
+  std::vector<std::pair<int, std::string>> GetChats();
   std::vector<std::string> GetMessage(size_t count);
 
-  std::wstring GetName() const { return user_name.data(); }
+  std::string GetName() const { return user_name.data(); }
 };

@@ -2,7 +2,7 @@
 #include "../include.h"
 #include "fstream"
 
-void Client::send_msg(std::wstring &__data) {
+void Client::send_msg(std::string &__data) {
   net::message<msg_type> msg;
   msg.header.id = msg_type::PassString;
   msg.header.name = user_name;
@@ -19,7 +19,7 @@ void Client::send_msg(std::wstring &__data) {
   send(msg);
 }
 
-void Client::CheckLogin(const std::wstring& login) {
+void Client::CheckLogin(const std::string& login) {
   /* Проверка логина */
   net::message<msg_type> message;
   message.header.id = msg_type::CheckLogin;
@@ -27,12 +27,12 @@ void Client::CheckLogin(const std::wstring& login) {
   send(message);
 }
 
-void Client::CheckPassword(const std::wstring& password) {
+void Client::CheckPassword(const std::string& password) {
   /* Проверка пароля */
   net::message<msg_type> message;
   message.header.id = msg_type::CheckPassword;
-  message.header.userid = userid_;
-  std::copy(&password[0], &password[0] + password.size(), &message.data[0]);
+  std::copy(reinterpret_cast<const char*>(&userid_), reinterpret_cast<const char*>(&userid_) + 4, &message.data[0]);
+  std::copy(&password[0], &password[0] + password.size(), &message.data[0] + 4);
   send(message);
 }
 
@@ -49,27 +49,38 @@ void Client::CheckUpdateByIdChat(size_t id) {
   send(message);
 }
 
-std::vector<std::tuple<int, std::string, std::vector<std::array<wchar_t, 256>>>> Client::GetFriend(size_t count) {
-  std::vector<std::tuple<int, std::string, std::vector<std::array<wchar_t, 256>>>> result;
-
+std::vector<std::pair<int, std::string>> Client::GetChats() {
+  // msg output:
+  // data: [int id, int count]
   net::message<msg_type> message;
-  message.header.id = msg_type::GetImg;
-  message.header.userid = userid_;
+  message.header.id = msg_type::GetChat;
+  std::copy(reinterpret_cast<char*>(&userid_), reinterpret_cast<char*>(&userid_) + 4, &message.data[0]);
+  std::copy(reinterpret_cast<char*>(&count_chats_), reinterpret_cast<char*>(&count_chats_) + 4, &message.data[4]);
   send(message);
+  count_chats_ += 20;
 
   std::this_thread::sleep_for(std::chrono::milliseconds(5)); // wait server
   bool more_message = true;
-
-  std::vector<std::array<wchar_t, 256>> img;
-  std::ofstream out(std::string("clientImageSofi.jpeg"), std::ios::binary);
+  std::vector<std::pair<int, std::string>> chats;
 
   while (more_message && is_connected() && !get_in_comming().empty()) {
-    auto msg = get_in_comming().pop_front().msg;
-
-    switch (msg.header.id) {
+    auto input_message = get_in_comming().pop_front().msg;
+    int id, size;
+    switch (input_message.header.id) {
       case msg_type::SendImgMore: {
-        //img.push_back(msg.data);
-        out.write((char*)msg.data.data(), 256);
+        for (int i = 0; i < 256; ) {
+          if (input_message.data[i++] == 0) {
+            break;
+          }
+          // input_msg: 
+          // data [char = 1, int id_chat, int size, std::string name_chat(name_chat.size() = size), char = 1 ..., char = 0]
+          std::copy(&input_message.data[i], &input_message.data[i + 4], reinterpret_cast<char*>(&id));
+          std::copy(&input_message.data[i + 4], &input_message.data[i + 8], reinterpret_cast<char*>(&size));
+          std::string str(size, 'a');
+          std::copy(&input_message.data[i + 8], &input_message.data[i + size + 8], &str[0]);
+          i += 8 + size;
+          chats.push_back({id, str});
+        }
         break;
       }
       case msg_type::SendImgFinish: {
@@ -78,9 +89,7 @@ std::vector<std::tuple<int, std::string, std::vector<std::array<wchar_t, 256>>>>
       }
     }
   }
-  result.push_back(std::tuple<int, std::string, std::vector<std::array<wchar_t, 256>>>(1, "Sofi", img));
-  //out.close();
-  return result;
+  return chats;
 }
 
 std::vector<std::string> Client::GetMessage(size_t count) {
