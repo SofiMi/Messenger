@@ -14,5 +14,6 @@ class WorkDB {
   bool Update(int userid, const std::string& new_data, const std::string& what_update);
   bool SetNewUser(const std::string& login, const std::string& password, const std::string& name);
   pqxx::result GetChat(int id, int count_before);
+  pqxx::result GetMessages(int chatid, int count_before);
   ~WorkDB();
 };

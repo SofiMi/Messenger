@@ -19,4 +19,5 @@ private:
   void CheckPassword(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message);
   void CheckLogin(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message);
   void GetChat(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message);
+  void GetMessages(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message);
 };

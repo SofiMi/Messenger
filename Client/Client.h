@@ -8,7 +8,10 @@ class Client : public net::client_interface<msg_type> {
  private:
   std::array<char, 256> user_name{};
   uint32_t userid_;
+  int chatid_ = 1;
   int count_chats_ = 0;
+  int message_index_ = 20;
+  int size_msg_last_ = 0;
  public:
   void CheckLogin(const std::string& login);
   void CheckPassword(const std::string& password);

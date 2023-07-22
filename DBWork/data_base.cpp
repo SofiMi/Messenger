@@ -95,3 +95,15 @@ pqxx::result WorkDB::GetChat(int id, int count_before) {
   pqxx::nontransaction N(*connection);
   return N.exec((char*)req.c_str());
 }
+
+pqxx::result WorkDB::GetMessages(int chatid, int count_before) {
+  std::string req = "with mess as (\n"
+			              "select index_in_char, text from server.message\n"
+			              "where chatid = ";
+  req += std::to_string(chatid) + ")\n"
+                                  "select index_in_char, text from mess\n"
+                                  "where index_in_char is not NULL and text is not NULL and index_in_char > " + std::to_string(count_before  - 20) + " and index_in_char < " + std::to_string(count_before);
+  
+  pqxx::nontransaction N(*connection);
+  return N.exec((char*)req.c_str());
+}

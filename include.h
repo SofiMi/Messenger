@@ -23,5 +23,8 @@ enum class msg_type : uint32_t {
   GetImg,
   SendImgMore,
   SendImgFinish,
-  GetChat
+  GetChat,
+  GetMessages,
+  SendMsgMore,
+  SendMsgFinish
 };
