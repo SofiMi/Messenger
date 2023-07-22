@@ -3,14 +3,6 @@
 #include "Server.h"
 #include <algorithm>
 
-bool Server::__on_client_connect(std::shared_ptr<net::connection<msg_type>> client) {
-  return true;
-}
-
-void Server::__on_client_disconnect(std::shared_ptr<net::connection<msg_type>> client) {
-  std::cout << "Removing client [" << client->get_id() << "] \n";
-}
-
 void Server::__on_message(std::shared_ptr<net::connection<msg_type>> connection_cl,
                             net::message<msg_type>& message) {
   switch (message.header.id) {
@@ -24,13 +16,13 @@ void Server::__on_message(std::shared_ptr<net::connection<msg_type>> connection_
     break;
   }
 
-  case msg_type::StopServer: {
-    server_do = false;
+  case msg_type::GetChat: {
+    GetChat(connection_cl, message);
     break;
   }
 
-  case msg_type::GetChat: {
-    GetChat(connection_cl, message);
+  case msg_type::StopServer: {
+    server_do = false;
     break;
   }
 
@@ -39,73 +31,21 @@ void Server::__on_message(std::shared_ptr<net::connection<msg_type>> connection_
     break;
   }
 
-  /*
-  case msg_type::GetUpdateById: {
-    int chat_id = 0;
-    //__msg.header.id = msg_type::ServerMessage;
-    //__msg.header.name = msg.header.name;
-    std::copy(&msg.data[0], &msg.data[0] + sizeof(size_t),
-              reinterpret_cast<char *>(&chat_id));
-    std::cout << "User_id = " << msg.header.userid
-              << ". Chat_id = " << chat_id << std::endl;
-    net::message<msg_type> new_msg;
-    new_msg.header.id = msg_type::NewMessageToThisChat;
-    new_msg.header.userid = chat_id;
-    std::string __data = "Hello!";
-    for (unsigned int i = 0; i < __data.size(); ++i) {
-      new_msg.data[i] = __data[i];
-    }
-    client->send(new_msg);
+  case msg_type::LastMessageId: {
+    LastMessageId(connection_cl, message);
+    break;
   }
-  */
-
-  /*
-  case msg_type::GetImg : {
-    SendImg(client);
   }
-  */
-  }
-}
-
-void Server::SendImg(std::shared_ptr<net::connection<msg_type>> client) {
-  std::string name = "images.jpeg";
-  std::ifstream in(name, std::ios::binary);
-  std::ofstream out(std::string("clientImageSofi.jpeg"), std::ios::binary);
-
-  if (!in.good()) {
-    //throw;
-    return;
-  }
-
-  in.seekg(0, std::ios::end);
-  size_t myFileSize = in.tellg();
-  in.seekg(0, std::ios::beg);
-
-  std::cout << "Count msg: " << myFileSize / 256 << std::endl;
-
-  while (in.tellg() < myFileSize) {
-    net::message<msg_type> __msg;
-    __msg.header.id = msg_type::SendImgMore;
-    in.read((char*)__msg.data.data(), 256);
-    out.write((char*)__msg.data.data(), 256);
-    client->send(__msg);
-    std::cout << "send" << std::endl;
-  }
-  std::cout << "END" << std::endl;
-  net::message<msg_type> __msg;
-  __msg.header.id = msg_type::SendImgFinish;
-  client->send(__msg);
-  in.close();
-  out.close();
 }
 
 void Server::CheckLogin(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message) {
-  std::wcout << "CheckLogin " << message.data.data() << std::endl;
+  /* Если переданный от пользователя логин корректен, то возвращаем его id. */
+  std::wcout << "CheckLogin: " << message.data.data() << std::endl;
   std::string login = message.data.data();
   int id;
   if ((id = db.GetIdByLogin(login)) != -1) {
     message.header.id = msg_type::LoginValid;
-    std::copy(reinterpret_cast<const char*>(&id), reinterpret_cast<const char*>(&id) + 4, &message.data[0]);
+    std::copy(reinterpret_cast<char*>(&id), reinterpret_cast<char*>(&id) + 4, &message.data[0]);
   } else {
     message.header.id = msg_type::LoginInvalid;
   }
@@ -113,6 +53,7 @@ void Server::CheckLogin(std::shared_ptr<net::connection<msg_type>> connection_cl
 }
 
 void Server::CheckPassword(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message) {
+  /* Проверка переданного id и пароля. */
   std::cout << "CheckPassword " << message.data.data() << std::endl;
   std::string password = message.data.data() + sizeof(int);
   int id;
@@ -217,4 +158,8 @@ void Server::GetMessages(std::shared_ptr<net::connection<msg_type>> connection_c
   }
   message.header.id = msg_type::SendMsgFinish;
   connection_cl->send(message);
+}
+
+void Server::LastMessageId(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message) {
+  
 }

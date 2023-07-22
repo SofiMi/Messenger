@@ -46,14 +46,12 @@ void MainWindow::timerEvent(QTimerEvent* event) {
      Происходит каждую секунду
      (startTimer в конструкторе).
   */
-  // запрос новых сообщений в данном чате
-  // client_->CheckUpdateByIdChat(chat_id_);
 
   // запрос старых сообщений / других друзей
   auto scrollBarMess = ui->messageScrollArea->verticalScrollBar();
   auto scrollBarFr = ui->friendScrollArea->verticalScrollBar();
 
-  if (static_cast<double>(scrollBarMess->value()) /
+  /*if (static_cast<double>(scrollBarMess->value()) /
           static_cast<double>(scrollBarMess->maximum()) <
       0.2) {
     AddOldMessages();
@@ -63,33 +61,18 @@ void MainWindow::timerEvent(QTimerEvent* event) {
           static_cast<double>(scrollBarFr->maximum()) >
       0.8) {
     AddOtherFriends();
-  }
-
-  // обработка новых сигналов от сервера
-  if (client_->is_connected() && !client_->get_in_comming().empty()) {
-    auto message = client_->get_in_comming().pop_front().msg;
-
-    switch (message.header.id) {
-    case msg_type::NewMessageToThisChat: {
-      QString qstr = message.data.data();
-      AddNewMessage(qstr);
-      break;
-    }
-    case msg_type::NewMessageToOtherChat: {
-      break;
-    }
-    }
-  }
+  }*/
 }
 
 void MainWindow::AddOldMessages() {
   /* Добавление в messageScrollArea старых сообщений. */
-  std::vector<std::string> messages = client_->GetMessage(15);
+  std::vector<std::string> messages = client_->GetMessage();
   QVBoxLayout* messages_box_layout =
       dynamic_cast<QVBoxLayout *>(ui->messageScrollAreaContext->layout());
 
   for (int i = messages.size() - 1; i > -1; --i) {
     QLabel* message = new QLabel(QString::fromStdString(messages[i]));
+    message->setStyleSheet("QLabel { background-color : white }");
     message->setWordWrap(true);
     messages_box_layout->insertWidget(0, message);
   }
@@ -100,6 +83,7 @@ void MainWindow::AddNewMessage(const QString& qstr) {
   QVBoxLayout* messages_box_layout =
       dynamic_cast<QVBoxLayout *>(ui->messageScrollAreaContext->layout());
   QLabel* message = new QLabel(qstr);
+  message->setStyleSheet("background-color: yellow");
   message->setWordWrap(true);
   messages_box_layout->addWidget(message);
 }
@@ -113,7 +97,10 @@ void MainWindow::AddOtherFriends() {
   for (int i = 0; i < friend_name.size(); ++i) {
     QPushButton* button = new QPushButton(QString::fromStdString(friend_name[i].second));
     QObject::connect(button, &QPushButton::clicked,
-     [this]() {
+     [this, chatid = friend_name[i].first]() {
+      client_->chatid_ = chatid;
+      client_->GetLastIdMessage();
+      std::cout << "chatid " << client_->chatid_ << " last_accept_message_id_in_chat_ " << client_->last_accept_message_id_in_chat_ << std::endl;
       while (auto* item = ui->messageScrollAreaContext->layout()->takeAt(0)) {
         delete item->widget();
         delete item;

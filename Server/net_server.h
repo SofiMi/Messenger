@@ -203,24 +203,15 @@ namespace net {
     }
 
   protected:
-    // This server class should override thse functions to implement
-    // customised functionality
-
-    // Called when a client connects, you can veto the connection by returning false
-    virtual bool __on_client_connect(std::shared_ptr<connection<T>> client)
-    {
-      return false;
+    virtual bool __on_client_connect(std::shared_ptr<connection<T>> client) {
+      return true;
     }
 
-    // Called when a client appears to have disconnected
-    virtual void __on_client_disconnect(std::shared_ptr<connection<T>> client)
-    {
+    virtual void __on_client_disconnect(std::shared_ptr<connection<T>> client){
+      std::cout << "Removing client [" << client->get_id() << "] \n";
     }
 
-    // Called when a message arrives
-    virtual void __on_message(std::shared_ptr<connection<T>> client, message<T> &msg)
-    {
-    }
+    virtual void __on_message(std::shared_ptr<connection<T>> client, message<T> &msg) {}
 
 
   protected:

@@ -5,22 +5,23 @@
 #include <string>
 
 class Client : public net::client_interface<msg_type> {
- private:
-  std::array<char, 256> user_name{};
-  uint32_t userid_;
-  int chatid_ = 1;
-  int count_chats_ = 0;
-  int message_index_ = 20;
-  int size_msg_last_ = 0;
  public:
+  bool Autorization(const std::string& login, const std::string& password, std::string& error_message);
+  std::vector<std::pair<int, std::string>> GetChats();
+  std::vector<std::string> GetMessage();
+  void GetLastIdMessage();
+  int chatid_ = 1;
+  int last_accept_message_id_in_chat_ = 20;
+ private:
   void CheckLogin(const std::string& login);
   void CheckPassword(const std::string& password);
+  void RequestForMessages();
+  void AcceptMessages(std::vector<std::string>& result);
 
-  void CheckUpdateByIdChat(size_t id);
-  void send_msg(std::string& __data);
-  void SetUserid(uint32_t userid);
-  std::vector<std::pair<int, std::string>> GetChats();
-  std::vector<std::string> GetMessage(size_t count);
+  int userid_;
+  int count_chats_ = 0;
+  int size_msg_last_ = 0;
 
-  std::string GetName() const { return user_name.data(); }
+  static const int COUNT_OLD_MESSAGES = 20;
+  static const int MESSAGE_BUFFER_SIZE = 254;
 };

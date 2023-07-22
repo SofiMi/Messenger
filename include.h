@@ -10,21 +10,28 @@ enum class msg_type : uint32_t {
   ServerMessage,
   PassString,
 
+  // Проверка Авторизации
   CheckLogin,
   CheckPassword,
   LoginValid,
   LoginInvalid,
   PasswordValid,
   PasswordInvalid,
+
+  // Получение старых сообщения
+  LastMessageId, 
+  GetMessages,
+  SendMsgMore,
+  SendMsgFinish,
+
+  // Получение чатов
+  SendImgMore,
+  SendImgFinish,
+  GetChat,
+
   StopServer,
   GetUpdateById,
   NewMessageToThisChat,
   NewMessageToOtherChat,
-  GetImg,
-  SendImgMore,
-  SendImgFinish,
-  GetChat,
-  GetMessages,
-  SendMsgMore,
-  SendMsgFinish
+  GetImg
 };

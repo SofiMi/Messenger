@@ -11,7 +11,7 @@ autorisation::autorisation(QWidget *parent)
   setMaximumSize(400, 300);
 
   client_ = std::make_shared<Client>();
-  client_->connect("127.0.0.1", 65000);
+  client_->connect("127.0.0.1", 10006);
 
   if (!client_->is_connected()) {
     std::cout << "No connection\n" << std::endl;
@@ -27,67 +27,14 @@ void autorisation::on_pushButton_clicked() {
 
     std::string login_w = login.toStdString();
     std::string password_w = password.toStdString();
+    std::string error_message;
 
-    client_->CheckLogin(login_w);
-    std::this_thread::sleep_for(std::chrono::milliseconds(5)); // wait server
-
-    if (client_->is_connected() && !client_->get_in_comming().empty()) {
-      auto msg = client_->get_in_comming().pop_front().msg;
-
-      switch (msg.header.id) {
-        case msg_type::ServerAccept: {
-          std::cout << "ServerAccept" << std::endl;
-        }
-        case msg_type::LoginValid: {
-          int userid;
-          std::copy(reinterpret_cast<int*>(&msg.data[0]), reinterpret_cast<int*>(&msg.data[0] + sizeof(int)), &userid);
-          client_->SetUserid(userid);
-          client_->CheckPassword(password_w);
-
-          std::this_thread::sleep_for(std::chrono::milliseconds(5)); // wait server
-
-          if (client_->is_connected() && !client_->get_in_comming().empty()) {
-            auto msg_password = client_->get_in_comming().pop_front().msg;
-
-            switch (msg_password.header.id) {
-            case msg_type::PasswordValid: {
-              hide();
-              main_window = new MainWindow(this, client_);
-              main_window->show();
-              break;
-            }
-
-            case msg_type::PasswordInvalid: {
-              QMessageBox::about(this, "PasswordInvalid", "PasswordInvalid");
-              break;
-            }
-
-            default: {
-              QMessageBox::about(this, "ServerErrord in Password", "ServerErrord in Password");
-            }
-            }
-          }
-
-          break;
-        }
-        case msg_type::LoginInvalid: {
-          QMessageBox::about(this, "LoginInvalid", "LoginInvalid");
-          break;
-        }
-        case msg_type::PasswordValid: {
-          QMessageBox::about(this, "ServerErrord: PV", "ServerErrord : PV");
-          break;
-        }
-        case msg_type::PasswordInvalid: {
-          QMessageBox::about(this, "ERROR:PasswordInvalid", "ERROR:PasswordInvalid");
-          break;
-        }
-        default: {
-          QMessageBox::about(this, "ServerErrord", "ServerErrord");
-        }
-      }
+    if (client_->Autorization(login_w, password_w, error_message)) {
+      hide();
+      main_window = new MainWindow(this, client_);
+      main_window->show();
     } else {
-      std::cout << "empty" << std::endl;
+      std::cout << error_message << std::endl;
     }
 }
 
