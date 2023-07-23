@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -65,12 +65,12 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>280</x>
       <y>10</y>
-      <width>511</width>
+      <width>491</width>
       <height>521</height>
      </rect>
     </property>
@@ -107,14 +107,14 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>507</width>
-          <height>415</height>
+          <width>487</width>
+          <height>413</height>
          </rect>
         </property>
        </widget>
       </widget>
      </item>
-     <item>
+     <item alignment="Qt::AlignTop">
       <widget class="QFrame" name="frame_3">
        <property name="minimumSize">
         <size>
@@ -125,7 +125,7 @@
        <property name="maximumSize">
         <size>
          <width>16777215</width>
-         <height>45</height>
+         <height>16777215</height>
         </size>
        </property>
        <property name="frameShape">
@@ -134,6 +134,29 @@
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLineEdit" name="InputMsg">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="SendMsg">
+            <property name="text">
+             <string>Отправить</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
      </item>
     </layout>

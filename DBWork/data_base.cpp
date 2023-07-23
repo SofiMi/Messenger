@@ -107,3 +107,21 @@ pqxx::result WorkDB::GetMessages(int chatid, int count_before) {
   pqxx::nontransaction N(*connection);
   return N.exec((char*)req.c_str());
 }
+
+void WorkDB::InsertMsg(int chatid, int userid, const std::string& text) {
+  /* Добавление нового сообщения в базу данных. */
+  pqxx::work W(*connection);
+
+  std::string messageid_req = "select max(messageid) + 1 from server.message";
+  pqxx::result messageid_res = W.exec((char*)messageid_req.c_str());
+  int messageid = messageid_res.begin()[0].as<int>();
+
+  std::string index_in_chat_req = "select max(index_in_char) + 1 from server.message";
+  pqxx::result index_in_chat_res = W.exec((char*)index_in_chat_req.c_str());
+  int index_in_chat = index_in_chat_res.begin()[0].as<int>();
+
+  std::string insert = "insert into server.message (messageid, chatid, userid, index_in_char, text)\n";
+  insert += "values (" + std::to_string(messageid) + ", " + std::to_string(chatid) + ", " + std::to_string(userid) + ", " + std::to_string(index_in_chat) + ", '" +  text + "')";
+  W.exec(insert.c_str());
+  W.commit();
+}

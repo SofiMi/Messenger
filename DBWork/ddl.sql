@@ -23,6 +23,7 @@ CREATE TABLE server.chat (
 CREATE TABLE server.message (
   messageid integer NOT NULL PRIMARY KEY,
   chatid integer NOT NULL,
+  userid integer NOT NULL,
   index_in_char integer NOT NULL,
   text character varying(1000) NOT NULL
 );

@@ -35,6 +35,11 @@ void Server::__on_message(std::shared_ptr<net::connection<msg_type>> connection_
     LastMessageId(connection_cl, message);
     break;
   }
+
+  case msg_type::NewMessage: {
+    NewMessage(connection_cl, message);
+    break;
+  }
   }
 }
 
@@ -155,6 +160,7 @@ void Server::GetMessages(std::shared_ptr<net::connection<msg_type>> connection_c
   }
   if (send_more) {
     connection_cl->send(n_message);
+    std::cout << "NEW MESSAGE." << std::endl;
   }
   message.header.id = msg_type::SendMsgFinish;
   connection_cl->send(message);
@@ -162,4 +168,33 @@ void Server::GetMessages(std::shared_ptr<net::connection<msg_type>> connection_c
 
 void Server::LastMessageId(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message) {
   
+}
+
+void Server::NewMessage(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message) {
+  std::cout << "NewMessage" << std::endl;
+  int userid, chatid, size_text;
+  bool is_new_message = false;
+  std::copy(&message.data[0], &message.data[0] + 4, &userid);
+
+  if (user_messages_memory_.find(userid) == user_messages_memory_.end() || (size_text = std::get<1>(user_messages_memory_[userid])) == 0) {
+    user_messages_memory_[userid] = {};
+    std::copy(&message.data[4], &message.data[8], &chatid);
+    std::copy(&message.data[8], &message.data[12], &size_text);
+    std::get<0>(user_messages_memory_[userid]) = chatid;
+    std::get<1>(user_messages_memory_[userid]) = size_text;
+    std::get<2>(user_messages_memory_[userid]) = std::string(size_text, 'a');
+    is_new_message = true;
+  }
+
+  std::string& str = std::get<2>(user_messages_memory_[userid]);
+  int index = is_new_message ? 12 : 4;
+  if (size_text <= 254 - index) {
+    std::copy(&message.data[index], &message.data[index] + size_text, &str[str.size() - size_text]);
+    std::get<1>(user_messages_memory_[userid]) = 0;
+    db.InsertMsg(std::get<0>(user_messages_memory_[userid]), userid, str);
+    std::cout << std::get<0>(user_messages_memory_[userid]) << " " << userid << " " <<  str << std::endl;
+  } else {
+    std::copy(&message.data[index], &message.data[index] + 254 - index, &str[str.size() - size_text]);
+    std::get<1>(user_messages_memory_[userid]) -= 254 - index;
+  }
 }

@@ -9,3 +9,17 @@
 66	8671	1689854103044124992	CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o	1a803309fda09910
 13284	14132	1689854108508125198	interface	9d61b3f494273912
 66	13284	1689854107656125166	CMakeFiles/interface.dir/autorisation.cpp.o	aff784a28aaf711d
+6	1320	1690101710028036841	interface_autogen/timestamp	c8e41cedd04c7a62
+6	1320	1690101710028036841	interface_autogen/mocs_compilation.cpp	c8e41cedd04c7a62
+6	1320	1690101710028036841	/home/sofia/Algo/Messenger/Client/build-interface-Desktop-Debug/interface_autogen/timestamp	c8e41cedd04c7a62
+6	1320	1690101710028036841	/home/sofia/Algo/Messenger/Client/build-interface-Desktop-Debug/interface_autogen/mocs_compilation.cpp	c8e41cedd04c7a62
+1321	13992	1690101722716037320	CMakeFiles/interface.dir/main.cpp.o	2bfbbd0885792353
+1321	14093	1690101722816037324	CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o	1a803309fda09910
+1320	14507	1690101723232037339	CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o	17719ff2329fc21b
+1321	15111	1690101723840037362	CMakeFiles/interface.dir/mainwindow.cpp.o	6145149a0f036e84
+1321	19334	1690101728056037521	CMakeFiles/interface.dir/autorisation.cpp.o	aff784a28aaf711d
+19335	20257	1690101728984037556	interface	9d61b3f494273912
+7	58	1690102234788056639	interface_autogen/timestamp	c8e41cedd04c7a62
+7	58	1690102234788056639	interface_autogen/mocs_compilation.cpp	c8e41cedd04c7a62
+7	58	1690102234788056639	/home/sofia/Algo/Messenger/Client/build-interface-Desktop-Debug/interface_autogen/timestamp	c8e41cedd04c7a62
+7	58	1690102234788056639	/home/sofia/Algo/Messenger/Client/build-interface-Desktop-Debug/interface_autogen/mocs_compilation.cpp	c8e41cedd04c7a62

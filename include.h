@@ -2,14 +2,6 @@
 #include <cstdint>
 
 enum class msg_type : uint32_t {
-  JoinServer,
-  ServerAccept,
-  ServerDeny,
-  ServerPing,
-  MessageAll,
-  ServerMessage,
-  PassString,
-
   // Проверка Авторизации
   CheckLogin,
   CheckPassword,
@@ -30,8 +22,5 @@ enum class msg_type : uint32_t {
   GetChat,
 
   StopServer,
-  GetUpdateById,
-  NewMessageToThisChat,
-  NewMessageToOtherChat,
-  GetImg
+  NewMessage,
 };

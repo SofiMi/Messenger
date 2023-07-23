@@ -10,6 +10,7 @@ class Client : public net::client_interface<msg_type> {
   std::vector<std::pair<int, std::string>> GetChats();
   std::vector<std::string> GetMessage();
   void GetLastIdMessage();
+  void SendNewMessage(const std::string& text);
   int chatid_ = 1;
   int last_accept_message_id_in_chat_ = 20;
  private:

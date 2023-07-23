@@ -12,8 +12,11 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFrame>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
@@ -25,17 +28,21 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout;
     QFrame *frame;
     QScrollArea *friendScrollArea;
     QWidget *friendScrollAreaContext;
-    QWidget *widget1;
+    QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout_3;
     QFrame *frame_2;
     QScrollArea *messageScrollArea;
     QWidget *messageScrollAreaContext;
     QFrame *frame_3;
+    QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout;
+    QLineEdit *InputMsg;
+    QPushButton *SendMsg;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -46,13 +53,13 @@ public:
         MainWindow->resize(800, 600);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        widget = new QWidget(centralwidget);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(20, 10, 251, 521));
-        verticalLayout = new QVBoxLayout(widget);
+        layoutWidget = new QWidget(centralwidget);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(20, 10, 251, 521));
+        verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        frame = new QFrame(widget);
+        frame = new QFrame(layoutWidget);
         frame->setObjectName(QString::fromUtf8("frame"));
         frame->setMinimumSize(QSize(0, 45));
         frame->setMaximumSize(QSize(16777215, 45));
@@ -61,7 +68,7 @@ public:
 
         verticalLayout->addWidget(frame);
 
-        friendScrollArea = new QScrollArea(widget);
+        friendScrollArea = new QScrollArea(layoutWidget);
         friendScrollArea->setObjectName(QString::fromUtf8("friendScrollArea"));
         friendScrollArea->setWidgetResizable(true);
         friendScrollAreaContext = new QWidget();
@@ -71,13 +78,13 @@ public:
 
         verticalLayout->addWidget(friendScrollArea, 0, Qt::AlignTop);
 
-        widget1 = new QWidget(centralwidget);
-        widget1->setObjectName(QString::fromUtf8("widget1"));
-        widget1->setGeometry(QRect(280, 10, 511, 521));
-        verticalLayout_3 = new QVBoxLayout(widget1);
+        layoutWidget1 = new QWidget(centralwidget);
+        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(280, 10, 491, 521));
+        verticalLayout_3 = new QVBoxLayout(layoutWidget1);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
-        frame_2 = new QFrame(widget1);
+        frame_2 = new QFrame(layoutWidget1);
         frame_2->setObjectName(QString::fromUtf8("frame_2"));
         frame_2->setMinimumSize(QSize(0, 45));
         frame_2->setMaximumSize(QSize(16777215, 45));
@@ -86,22 +93,39 @@ public:
 
         verticalLayout_3->addWidget(frame_2);
 
-        messageScrollArea = new QScrollArea(widget1);
+        messageScrollArea = new QScrollArea(layoutWidget1);
         messageScrollArea->setObjectName(QString::fromUtf8("messageScrollArea"));
         messageScrollArea->setWidgetResizable(true);
         messageScrollAreaContext = new QWidget();
         messageScrollAreaContext->setObjectName(QString::fromUtf8("messageScrollAreaContext"));
-        messageScrollAreaContext->setGeometry(QRect(0, 0, 507, 415));
+        messageScrollAreaContext->setGeometry(QRect(0, 0, 487, 415));
         messageScrollArea->setWidget(messageScrollAreaContext);
 
         verticalLayout_3->addWidget(messageScrollArea);
 
-        frame_3 = new QFrame(widget1);
+        frame_3 = new QFrame(layoutWidget1);
         frame_3->setObjectName(QString::fromUtf8("frame_3"));
         frame_3->setMinimumSize(QSize(0, 45));
         frame_3->setMaximumSize(QSize(16777215, 45));
         frame_3->setFrameShape(QFrame::StyledPanel);
         frame_3->setFrameShadow(QFrame::Raised);
+        verticalLayout_2 = new QVBoxLayout(frame_3);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        InputMsg = new QLineEdit(frame_3);
+        InputMsg->setObjectName(QString::fromUtf8("InputMsg"));
+
+        horizontalLayout->addWidget(InputMsg);
+
+        SendMsg = new QPushButton(frame_3);
+        SendMsg->setObjectName(QString::fromUtf8("SendMsg"));
+
+        horizontalLayout->addWidget(SendMsg);
+
+
+        verticalLayout_2->addLayout(horizontalLayout);
+
 
         verticalLayout_3->addWidget(frame_3);
 
@@ -122,6 +146,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        SendMsg->setText(QCoreApplication::translate("MainWindow", "\320\236\321\202\320\277\321\200\320\260\320\262\320\270\321\202\321\214", nullptr));
     } // retranslateUi
 
 };

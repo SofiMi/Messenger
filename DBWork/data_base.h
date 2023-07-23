@@ -16,4 +16,5 @@ class WorkDB {
   pqxx::result GetChat(int id, int count_before);
   pqxx::result GetMessages(int chatid, int count_before);
   ~WorkDB();
+  void InsertMsg(int chatid, int userid, const std::string& text);
 };

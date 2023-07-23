@@ -44,29 +44,31 @@ std::vector<std::pair<int, std::string>> Client::GetChats() {
     }
   }
 
-  while (more_message && is_connected() && !get_in_comming().empty()) {
-    auto input_message = get_in_comming().pop_front().msg;
-    int id, size;
-    switch (input_message.header.id) {
-      case msg_type::SendImgMore: {
-        for (int i = 0; i < 256; ) {
-          if (input_message.data[i++] == 0) {
-            break;
+  while (more_message && is_connected()) {
+    if (!get_in_comming().empty()) {
+      auto input_message = get_in_comming().pop_front().msg;
+      int id, size;
+      switch (input_message.header.id) {
+        case msg_type::SendImgMore: {
+          for (int i = 0; i < 256; ) {
+            if (input_message.data[i++] == 0) {
+              break;
+            }
+            // input_msg: 
+            // data [char = 1, int id_chat, int size, std::string name_chat(name_chat.size() = size), char = 1 ..., char = 0]
+            std::copy(&input_message.data[i], &input_message.data[i + 4], reinterpret_cast<char*>(&id));
+            std::copy(&input_message.data[i + 4], &input_message.data[i + 8], reinterpret_cast<char*>(&size));
+            std::string str(size, 'a');
+            std::copy(&input_message.data[i + 8], &input_message.data[i + size + 8], &str[0]);
+            i += 8 + size;
+            chats.push_back({id, str});
           }
-          // input_msg: 
-          // data [char = 1, int id_chat, int size, std::string name_chat(name_chat.size() = size), char = 1 ..., char = 0]
-          std::copy(&input_message.data[i], &input_message.data[i + 4], reinterpret_cast<char*>(&id));
-          std::copy(&input_message.data[i + 4], &input_message.data[i + 8], reinterpret_cast<char*>(&size));
-          std::string str(size, 'a');
-          std::copy(&input_message.data[i + 8], &input_message.data[i + size + 8], &str[0]);
-          i += 8 + size;
-          chats.push_back({id, str});
+          break;
         }
-        break;
-      }
-      case msg_type::SendImgFinish: {
-        more_message = false;
-        break;
+        case msg_type::SendImgFinish: {
+          more_message = false;
+          break;
+        }
       }
     }
   }
@@ -112,49 +114,53 @@ void Client::AcceptMessages(std::vector<std::string>& result) {
     std::cout << "wait messages\n" << std::endl;
   }
 
-  while (will_be_more_messages && is_connected() && !get_in_comming().empty()) {
-    std::cout << "NO EMPTY" << std::endl;
-    auto input_message = get_in_comming().pop_front().msg;
-    switch (input_message.header.id) {
-      case msg_type::SendMsgMore: {
-        for (int index_in_message = 0; index_in_message < MESSAGE_BUFFER_SIZE; ) {
-          if (!is_next_message) {
-            if (input_message.data[index_in_message++] == 0) {
-              break;
+  while (will_be_more_messages && is_connected()) {
+    if (!get_in_comming().empty()) {
+      std::cout << "NO EMPTY" << std::endl;
+      auto input_message = get_in_comming().pop_front().msg;
+      std::cout << static_cast<uint>(input_message.header.id) << std::endl;
+      switch (input_message.header.id) {
+        case msg_type::SendMsgMore: {
+          std::cout << "SendMsgMore\n";
+          for (int index_in_message = 0; index_in_message < MESSAGE_BUFFER_SIZE; ) {
+            if (!is_next_message) {
+              if (input_message.data[index_in_message++] == 0) {
+                break;
+              }
+              std::copy(&input_message.data[index_in_message], &input_message.data[index_in_message] + 4, reinterpret_cast<char*>(&id_msg));
+              std::copy(&input_message.data[index_in_message] + 4, &input_message.data[index_in_message] + 8, reinterpret_cast<char*>(&size_msg_last_));
+              input_text.resize(size_msg_last_);
+              index_in_message += 8;
             }
-            std::copy(&input_message.data[index_in_message], &input_message.data[index_in_message] + 4, reinterpret_cast<char*>(&id_msg));
-            std::copy(&input_message.data[index_in_message] + 4, &input_message.data[index_in_message] + 8, reinterpret_cast<char*>(&size_msg_last_));
-            input_text.resize(size_msg_last_);
-            index_in_message += 8;
+            if (size_msg_last_ < MESSAGE_BUFFER_SIZE - index_in_message) {
+              // принимаемый текст помещается в текущее сообщение
+              std::copy(&input_message.data[index_in_message], &input_message.data[index_in_message + size_msg_last_], &input_text[index_in_input_text]);
+              result.push_back(input_text);
+              std::cout << input_text << std::endl;
+
+              index_in_message += size_msg_last_;
+              size_msg_last_ = 0;
+              index_in_input_text = 0;
+
+              is_next_message = false;
+            } else {
+              // принимаемый текст не помещается в текущее сообщение
+              std::copy(&input_message.data[index_in_message], &input_message.data[MESSAGE_BUFFER_SIZE], &input_text[index_in_input_text]);
+
+              size_msg_last_ -= MESSAGE_BUFFER_SIZE - index_in_message;
+              index_in_input_text += MESSAGE_BUFFER_SIZE - index_in_message;
+              index_in_message = MESSAGE_BUFFER_SIZE;
+
+              is_next_message = true;
+            }
           }
-          if (size_msg_last_ < MESSAGE_BUFFER_SIZE - index_in_message) {
-            // принимаемый текст помещается в текущее сообщение
-            std::copy(&input_message.data[index_in_message], &input_message.data[index_in_message + size_msg_last_], &input_text[index_in_input_text]);
-            result.push_back(input_text);
-            std::cout << input_text << std::endl;
-
-            index_in_message += size_msg_last_;
-            size_msg_last_ = 0;
-            index_in_input_text = 0;
-
-            is_next_message = false;
-          } else {
-            // принимаемый текст не помещается в текущее сообщение
-            std::copy(&input_message.data[index_in_message], &input_message.data[MESSAGE_BUFFER_SIZE], &input_text[index_in_input_text]);
-
-            size_msg_last_ -= MESSAGE_BUFFER_SIZE - index_in_message;
-            index_in_input_text += MESSAGE_BUFFER_SIZE - index_in_message;
-            index_in_message = MESSAGE_BUFFER_SIZE;
-
-            is_next_message = true;
-          }
+          break;
+        } case msg_type::SendMsgFinish: {
+          std::cout << "SendImgFinish\n";
+          will_be_more_messages = false;
+          break;
         }
-        break;
-      } case msg_type::SendMsgFinish: {
-        std::cout << "SendImgFinish\n";
-        will_be_more_messages = false;
-        break;
-      }
+      } 
     }
   }
 }
@@ -230,5 +236,43 @@ void Client::GetLastIdMessage() {
     }
   }
   last_accept_message_id_in_chat_ = 20;
+}
+
+void Client::SendNewMessage(const std::string& text) {
+  std::cout << "chatid " << chatid_ << std::endl;
+  int size_text = text.size();
+  std::cout << size_text << std::endl;
+  net::message<msg_type> message;
+  message.header.id = msg_type::NewMessage;
+
+  std::copy(reinterpret_cast<char*>(&userid_), reinterpret_cast<char*>(&userid_) + 4, &message.data[0]);
+  std::copy(reinterpret_cast<char*>(&chatid_), reinterpret_cast<char*>(&chatid_) + 4, &message.data[4]);
+  std::copy(reinterpret_cast<char*>(&size_text), reinterpret_cast<char*>(&size_text) + 4, &message.data[8]);
+
+  int index_text = 0;
+
+  if (size_text <= MESSAGE_BUFFER_SIZE - 12) {
+    std::copy(&text[index_text], &text[index_text] + size_text, &message.data[12]);
+    send(message);
+  } else {
+    std::copy(&text[index_text], &text[index_text] + MESSAGE_BUFFER_SIZE - 12, &message.data[12]);
+    size_text -= MESSAGE_BUFFER_SIZE - 12;
+    index_text += MESSAGE_BUFFER_SIZE - 12;
+    send(message);
+
+    while (size_text > MESSAGE_BUFFER_SIZE - 4) {
+      std::copy(reinterpret_cast<char*>(&userid_), reinterpret_cast<char*>(&userid_) + 4, &message.data[0]);
+      std::copy(&text[index_text], &text[index_text] + MESSAGE_BUFFER_SIZE - 4, &message.data[4]);
+      size_text -= MESSAGE_BUFFER_SIZE - 4;
+      index_text += MESSAGE_BUFFER_SIZE - 4;
+      send(message);
+    }
+
+    if (size_text > 0) {
+      std::copy(reinterpret_cast<char*>(&userid_), reinterpret_cast<char*>(&userid_) + 4, &message.data[0]);
+      std::copy(&text[index_text], &text[index_text] + size_text, &message.data[4]);
+      send(message);
+    }
+  }
 }
 

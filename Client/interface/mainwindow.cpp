@@ -40,30 +40,6 @@ void MainWindow::resizeEvent(QResizeEvent* event) {
   size_t height = this->size().height();
 }
 
-void MainWindow::timerEvent(QTimerEvent* event) {
-  /* Обновление событий на экране,
-     связанные с серверной частью.
-     Происходит каждую секунду
-     (startTimer в конструкторе).
-  */
-
-  // запрос старых сообщений / других друзей
-  auto scrollBarMess = ui->messageScrollArea->verticalScrollBar();
-  auto scrollBarFr = ui->friendScrollArea->verticalScrollBar();
-
-  /*if (static_cast<double>(scrollBarMess->value()) /
-          static_cast<double>(scrollBarMess->maximum()) <
-      0.2) {
-    AddOldMessages();
-  }
-
-  if (static_cast<double>(scrollBarFr->value()) /
-          static_cast<double>(scrollBarFr->maximum()) >
-      0.8) {
-    AddOtherFriends();
-  }*/
-}
-
 void MainWindow::AddOldMessages() {
   /* Добавление в messageScrollArea старых сообщений. */
   std::vector<std::string> messages = client_->GetMessage();
@@ -112,3 +88,22 @@ void MainWindow::AddOtherFriends() {
   }
 }
 
+
+void MainWindow::on_SendMsg_clicked(bool checked) {
+  /* Отправление нового сообщения */
+  QString qtext = ui->InputMsg->text();
+  ui->InputMsg->clear();
+
+  // Добавляем сообщение в чат
+  QVBoxLayout* messages_box_layout =
+      dynamic_cast<QVBoxLayout *>(ui->messageScrollAreaContext->layout());
+  
+  QLabel* new_message = new QLabel(qtext);
+  new_message->setStyleSheet("QLabel { background-color : white }");
+  new_message->setWordWrap(true);
+  messages_box_layout->addWidget(new_message);
+
+  // Передача сообщения серверу
+  std::string text = qtext.toStdString();
+  client_->SendNewMessage(text);
+}

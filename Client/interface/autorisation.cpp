@@ -11,7 +11,7 @@ autorisation::autorisation(QWidget *parent)
   setMaximumSize(400, 300);
 
   client_ = std::make_shared<Client>();
-  client_->connect("127.0.0.1", 10006);
+  client_->connect("127.0.0.1", 10007);
 
   if (!client_->is_connected()) {
     std::cout << "No connection\n" << std::endl;

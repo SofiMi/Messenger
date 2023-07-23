@@ -16,9 +16,11 @@ public:
     MainWindow(QWidget *parent, std::shared_ptr<Client>& client);
     ~MainWindow();
 
+private slots:
+    void on_SendMsg_clicked(bool checked);
+
 private:
   void resizeEvent(QResizeEvent* event);
-  void timerEvent(QTimerEvent *event);
 
   void AddOldMessages();
   void AddNewMessage(const QString& qstr);

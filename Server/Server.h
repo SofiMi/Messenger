@@ -2,6 +2,9 @@
 #include "../include.h"
 #include "net_server.h"
 #include "../DBWork/data_base.h"
+#include <unordered_map>
+#include <tuple>
+#include <string>
 
 class Server : public net::server_interface<msg_type> {
 public:
@@ -18,5 +21,8 @@ private:
   void CheckLogin(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message);
   void GetChat(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message);
   void GetMessages(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message);
-  void LastMessageId(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message);
+  void LastMessageId(std::shared_ptr<net::connection<msg_type>> nnection_cl, net::message<msg_type>& message);
+  void NewMessage(std::shared_ptr<net::connection<msg_type>> nnection_cl, net::message<msg_type>& message);
+
+  std::unordered_map<int, std::tuple<int, int, std::string>> user_messages_memory_; // <userid, <chatid, size_message (оставшаяся), message>>
 };
