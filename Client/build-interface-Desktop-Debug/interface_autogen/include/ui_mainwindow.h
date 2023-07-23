@@ -98,7 +98,7 @@ public:
         messageScrollArea->setWidgetResizable(true);
         messageScrollAreaContext = new QWidget();
         messageScrollAreaContext->setObjectName(QString::fromUtf8("messageScrollAreaContext"));
-        messageScrollAreaContext->setGeometry(QRect(0, 0, 487, 415));
+        messageScrollAreaContext->setGeometry(QRect(0, 0, 487, 413));
         messageScrollArea->setWidget(messageScrollAreaContext);
 
         verticalLayout_3->addWidget(messageScrollArea);
@@ -106,7 +106,7 @@ public:
         frame_3 = new QFrame(layoutWidget1);
         frame_3->setObjectName(QString::fromUtf8("frame_3"));
         frame_3->setMinimumSize(QSize(0, 45));
-        frame_3->setMaximumSize(QSize(16777215, 45));
+        frame_3->setMaximumSize(QSize(16777215, 16777215));
         frame_3->setFrameShape(QFrame::StyledPanel);
         frame_3->setFrameShadow(QFrame::Raised);
         verticalLayout_2 = new QVBoxLayout(frame_3);
@@ -115,6 +115,11 @@ public:
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         InputMsg = new QLineEdit(frame_3);
         InputMsg->setObjectName(QString::fromUtf8("InputMsg"));
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(InputMsg->sizePolicy().hasHeightForWidth());
+        InputMsg->setSizePolicy(sizePolicy);
 
         horizontalLayout->addWidget(InputMsg);
 
@@ -127,7 +132,7 @@ public:
         verticalLayout_2->addLayout(horizontalLayout);
 
 
-        verticalLayout_3->addWidget(frame_3);
+        verticalLayout_3->addWidget(frame_3, 0, Qt::AlignTop);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);

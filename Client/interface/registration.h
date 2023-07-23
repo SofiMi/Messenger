@@ -1,0 +1,27 @@
+#ifndef REGISTRATION_H
+#define REGISTRATION_H
+
+#include <QMainWindow>
+#include "../Client.h"
+
+namespace Ui {
+class Registration;
+}
+
+class Registration : public QMainWindow {
+    Q_OBJECT
+
+ public:
+    explicit Registration(QWidget* parent, std::shared_ptr<Client>& client);
+    ~Registration();
+
+private slots:
+    void on_pushButton_clicked();
+    void on_to_autorization_clicked();
+
+private:
+    Ui::Registration* ui;
+    std::shared_ptr<Client> client_;
+};
+
+#endif // REGISTRATION_H

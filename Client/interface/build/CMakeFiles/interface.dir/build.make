@@ -111,24 +111,38 @@ CMakeFiles/interface.dir/mainwindow.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/interface.dir/mainwindow.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sofia/Algo/Messenger/Client/interface/mainwindow.cpp -o CMakeFiles/interface.dir/mainwindow.cpp.s
 
-CMakeFiles/interface.dir/autorisation.cpp.o: CMakeFiles/interface.dir/flags.make
-CMakeFiles/interface.dir/autorisation.cpp.o: ../autorisation.cpp
-CMakeFiles/interface.dir/autorisation.cpp.o: CMakeFiles/interface.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sofia/Algo/Messenger/Client/interface/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/interface.dir/autorisation.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/interface.dir/autorisation.cpp.o -MF CMakeFiles/interface.dir/autorisation.cpp.o.d -o CMakeFiles/interface.dir/autorisation.cpp.o -c /home/sofia/Algo/Messenger/Client/interface/autorisation.cpp
+CMakeFiles/interface.dir/registration.cpp.o: CMakeFiles/interface.dir/flags.make
+CMakeFiles/interface.dir/registration.cpp.o: ../registration.cpp
+CMakeFiles/interface.dir/registration.cpp.o: CMakeFiles/interface.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sofia/Algo/Messenger/Client/interface/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/interface.dir/registration.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/interface.dir/registration.cpp.o -MF CMakeFiles/interface.dir/registration.cpp.o.d -o CMakeFiles/interface.dir/registration.cpp.o -c /home/sofia/Algo/Messenger/Client/interface/registration.cpp
 
-CMakeFiles/interface.dir/autorisation.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/interface.dir/autorisation.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sofia/Algo/Messenger/Client/interface/autorisation.cpp > CMakeFiles/interface.dir/autorisation.cpp.i
+CMakeFiles/interface.dir/registration.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/interface.dir/registration.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sofia/Algo/Messenger/Client/interface/registration.cpp > CMakeFiles/interface.dir/registration.cpp.i
 
-CMakeFiles/interface.dir/autorisation.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/interface.dir/autorisation.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sofia/Algo/Messenger/Client/interface/autorisation.cpp -o CMakeFiles/interface.dir/autorisation.cpp.s
+CMakeFiles/interface.dir/registration.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/interface.dir/registration.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sofia/Algo/Messenger/Client/interface/registration.cpp -o CMakeFiles/interface.dir/registration.cpp.s
+
+CMakeFiles/interface.dir/autorization.cpp.o: CMakeFiles/interface.dir/flags.make
+CMakeFiles/interface.dir/autorization.cpp.o: ../autorization.cpp
+CMakeFiles/interface.dir/autorization.cpp.o: CMakeFiles/interface.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sofia/Algo/Messenger/Client/interface/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/interface.dir/autorization.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/interface.dir/autorization.cpp.o -MF CMakeFiles/interface.dir/autorization.cpp.o.d -o CMakeFiles/interface.dir/autorization.cpp.o -c /home/sofia/Algo/Messenger/Client/interface/autorization.cpp
+
+CMakeFiles/interface.dir/autorization.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/interface.dir/autorization.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sofia/Algo/Messenger/Client/interface/autorization.cpp > CMakeFiles/interface.dir/autorization.cpp.i
+
+CMakeFiles/interface.dir/autorization.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/interface.dir/autorization.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sofia/Algo/Messenger/Client/interface/autorization.cpp -o CMakeFiles/interface.dir/autorization.cpp.s
 
 CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o: CMakeFiles/interface.dir/flags.make
 CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o: /home/sofia/Algo/Messenger/Client/Client.cpp
 CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o: CMakeFiles/interface.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sofia/Algo/Messenger/Client/interface/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sofia/Algo/Messenger/Client/interface/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o -MF CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o.d -o CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o -c /home/sofia/Algo/Messenger/Client/Client.cpp
 
 CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.i: cmake_force
@@ -144,7 +158,8 @@ interface_OBJECTS = \
 "CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o" \
 "CMakeFiles/interface.dir/main.cpp.o" \
 "CMakeFiles/interface.dir/mainwindow.cpp.o" \
-"CMakeFiles/interface.dir/autorisation.cpp.o" \
+"CMakeFiles/interface.dir/registration.cpp.o" \
+"CMakeFiles/interface.dir/autorization.cpp.o" \
 "CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o"
 
 # External object files for target interface
@@ -153,14 +168,15 @@ interface_EXTERNAL_OBJECTS =
 interface: CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o
 interface: CMakeFiles/interface.dir/main.cpp.o
 interface: CMakeFiles/interface.dir/mainwindow.cpp.o
-interface: CMakeFiles/interface.dir/autorisation.cpp.o
+interface: CMakeFiles/interface.dir/registration.cpp.o
+interface: CMakeFiles/interface.dir/autorization.cpp.o
 interface: CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o
 interface: CMakeFiles/interface.dir/build.make
 interface: /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.3
 interface: /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.15.3
 interface: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.3
 interface: CMakeFiles/interface.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sofia/Algo/Messenger/Client/interface/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable interface"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sofia/Algo/Messenger/Client/interface/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable interface"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/interface.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

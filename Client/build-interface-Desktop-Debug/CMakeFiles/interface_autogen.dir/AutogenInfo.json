@@ -80,15 +80,21 @@
 			null
 		],
 		[
-			"/home/sofia/Algo/Messenger/Client/interface/autorisation.h",
+			"/home/sofia/Algo/Messenger/Client/interface/autorization.h",
 			"MU",
-			"EWIEGA46WW/moc_autorisation.cpp",
+			"EWIEGA46WW/moc_autorization.cpp",
 			null
 		],
 		[
 			"/home/sofia/Algo/Messenger/Client/interface/mainwindow.h",
 			"MU",
 			"EWIEGA46WW/moc_mainwindow.cpp",
+			null
+		],
+		[
+			"/home/sofia/Algo/Messenger/Client/interface/registration.h",
+			"MU",
+			"EWIEGA46WW/moc_registration.cpp",
 			null
 		],
 		[
@@ -182,13 +188,18 @@
 	[
 		[ "/home/sofia/Algo/Messenger/Client/Client.cpp", "MU", null ],
 		[
-			"/home/sofia/Algo/Messenger/Client/interface/autorisation.cpp",
+			"/home/sofia/Algo/Messenger/Client/interface/autorization.cpp",
 			"MU",
 			null
 		],
 		[ "/home/sofia/Algo/Messenger/Client/interface/main.cpp", "MU", null ],
 		[
 			"/home/sofia/Algo/Messenger/Client/interface/mainwindow.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/sofia/Algo/Messenger/Client/interface/registration.cpp",
 			"MU",
 			null
 		]

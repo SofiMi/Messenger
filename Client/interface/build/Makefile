@@ -142,29 +142,29 @@ interface_autogen/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/interface_autogen.dir/build.make CMakeFiles/interface_autogen.dir/build
 .PHONY : interface_autogen/fast
 
-autorisation.o: autorisation.cpp.o
-.PHONY : autorisation.o
+autorization.o: autorization.cpp.o
+.PHONY : autorization.o
 
 # target to build an object file
-autorisation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/interface.dir/build.make CMakeFiles/interface.dir/autorisation.cpp.o
-.PHONY : autorisation.cpp.o
+autorization.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/interface.dir/build.make CMakeFiles/interface.dir/autorization.cpp.o
+.PHONY : autorization.cpp.o
 
-autorisation.i: autorisation.cpp.i
-.PHONY : autorisation.i
+autorization.i: autorization.cpp.i
+.PHONY : autorization.i
 
 # target to preprocess a source file
-autorisation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/interface.dir/build.make CMakeFiles/interface.dir/autorisation.cpp.i
-.PHONY : autorisation.cpp.i
+autorization.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/interface.dir/build.make CMakeFiles/interface.dir/autorization.cpp.i
+.PHONY : autorization.cpp.i
 
-autorisation.s: autorisation.cpp.s
-.PHONY : autorisation.s
+autorization.s: autorization.cpp.s
+.PHONY : autorization.s
 
 # target to generate assembly for a file
-autorisation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/interface.dir/build.make CMakeFiles/interface.dir/autorisation.cpp.s
-.PHONY : autorisation.cpp.s
+autorization.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/interface.dir/build.make CMakeFiles/interface.dir/autorization.cpp.s
+.PHONY : autorization.cpp.s
 
 home/sofia/Algo/Messenger/Client/Client.o: home/sofia/Algo/Messenger/Client/Client.cpp.o
 .PHONY : home/sofia/Algo/Messenger/Client/Client.o
@@ -262,6 +262,30 @@ mainwindow.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/interface.dir/build.make CMakeFiles/interface.dir/mainwindow.cpp.s
 .PHONY : mainwindow.cpp.s
 
+registration.o: registration.cpp.o
+.PHONY : registration.o
+
+# target to build an object file
+registration.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/interface.dir/build.make CMakeFiles/interface.dir/registration.cpp.o
+.PHONY : registration.cpp.o
+
+registration.i: registration.cpp.i
+.PHONY : registration.i
+
+# target to preprocess a source file
+registration.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/interface.dir/build.make CMakeFiles/interface.dir/registration.cpp.i
+.PHONY : registration.cpp.i
+
+registration.s: registration.cpp.s
+.PHONY : registration.s
+
+# target to generate assembly for a file
+registration.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/interface.dir/build.make CMakeFiles/interface.dir/registration.cpp.s
+.PHONY : registration.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -272,9 +296,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... interface_autogen"
 	@echo "... interface"
-	@echo "... autorisation.o"
-	@echo "... autorisation.i"
-	@echo "... autorisation.s"
+	@echo "... autorization.o"
+	@echo "... autorization.i"
+	@echo "... autorization.s"
 	@echo "... home/sofia/Algo/Messenger/Client/Client.o"
 	@echo "... home/sofia/Algo/Messenger/Client/Client.i"
 	@echo "... home/sofia/Algo/Messenger/Client/Client.s"
@@ -287,6 +311,9 @@ help:
 	@echo "... mainwindow.o"
 	@echo "... mainwindow.i"
 	@echo "... mainwindow.s"
+	@echo "... registration.o"
+	@echo "... registration.i"
+	@echo "... registration.s"
 .PHONY : help
 
 

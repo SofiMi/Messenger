@@ -17,4 +17,8 @@ class WorkDB {
   pqxx::result GetMessages(int chatid, int count_before);
   ~WorkDB();
   void InsertMsg(int chatid, int userid, const std::string& text);
+  int AddNewUser(const std::vector<std::string>& user_info);
+
+  int CountSameNick(const std::string& nick);
+  int CountSameLogin(const std::string& login);
 };

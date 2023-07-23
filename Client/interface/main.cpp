@@ -1,10 +1,10 @@
-#include "autorisation.h"
+#include "autorization.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    autorisation w;
+    autorization w;
     w.show();
     return a.exec();
 }

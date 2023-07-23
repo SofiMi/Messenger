@@ -1,7 +1,7 @@
 CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o: \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/mocs_compilation.cpp \
  /usr/include/stdc-predef.h \
- /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/moc_autorisation.cpp \
+ /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/moc_autorization.cpp \
  /usr/include/c++/11/memory /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -199,9 +199,9 @@ CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o: \
  /usr/include/c++/11/bits/uses_allocator_args.h \
  /usr/include/c++/11/pstl/glue_memory_defs.h \
  /usr/include/c++/11/pstl/execution_defs.h \
- /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../autorisation.h \
- /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QWidget \
- /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qwidget.h \
+ /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../autorization.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QMainWindow \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qmainwindow.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtwidgetsglobal.h \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qtguiglobal.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qglobal.h \
@@ -238,6 +238,7 @@ CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qversiontagging.h \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qtgui-config.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtwidgets-config.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qwidget.h \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qwindowdefs.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qobjectdefs.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qnamespace.h \
@@ -308,12 +309,9 @@ CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qsizepolicy.h \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qcursor.h \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qkeysequence.h \
- /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../mainwindow.h \
- /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QMainWindow \
- /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qmainwindow.h \
- /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qwidget.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtabwidget.h \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qicon.h \
+ /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../mainwindow.h \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../Client.h \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../net_client.h \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../../NetWork/net_common.h \
@@ -1240,4 +1238,6 @@ CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o: \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../../NetWork/net_message.h \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../../include.h \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/moc_mainwindow.cpp \
- /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../mainwindow.h
+ /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../mainwindow.h \
+ /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/moc_registration.cpp \
+ /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../registration.h

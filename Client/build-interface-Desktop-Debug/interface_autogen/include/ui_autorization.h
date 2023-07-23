@@ -15,51 +15,56 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
-class Ui_Autorisation
+class Ui_autorization
 {
 public:
+    QWidget *centralwidget;
     QGroupBox *groupBox;
-    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
-    QLabel *login_lavel;
+    QLabel *login_l;
     QLineEdit *login;
     QHBoxLayout *horizontalLayout_2;
-    QLabel *password_label;
+    QLabel *password_l;
     QLineEdit *password;
-    QPushButton *pushButton;
+    QPushButton *to_main;
+    QPushButton *to_registration;
+    QMenuBar *menubar;
+    QStatusBar *statusbar;
 
-    void setupUi(QWidget *Autorisation)
+    void setupUi(QMainWindow *autorization)
     {
-        if (Autorisation->objectName().isEmpty())
-            Autorisation->setObjectName(QString::fromUtf8("Autorisation"));
-        Autorisation->resize(400, 300);
-        groupBox = new QGroupBox(Autorisation);
+        if (autorization->objectName().isEmpty())
+            autorization->setObjectName(QString::fromUtf8("autorization"));
+        autorization->resize(419, 309);
+        centralwidget = new QWidget(autorization);
+        centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
+        groupBox = new QGroupBox(centralwidget);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setGeometry(QRect(60, 70, 261, 151));
-        layoutWidget = new QWidget(groupBox);
-        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 30, 219, 95));
-        verticalLayout_2 = new QVBoxLayout(layoutWidget);
+        groupBox->setGeometry(QRect(80, 50, 233, 137));
+        groupBox->setAlignment(Qt::AlignCenter);
+        verticalLayout_2 = new QVBoxLayout(groupBox);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        login_lavel = new QLabel(layoutWidget);
-        login_lavel->setObjectName(QString::fromUtf8("login_lavel"));
+        login_l = new QLabel(groupBox);
+        login_l->setObjectName(QString::fromUtf8("login_l"));
 
-        horizontalLayout->addWidget(login_lavel);
+        horizontalLayout->addWidget(login_l);
 
-        login = new QLineEdit(layoutWidget);
+        login = new QLineEdit(groupBox);
         login->setObjectName(QString::fromUtf8("login"));
 
         horizontalLayout->addWidget(login);
@@ -69,12 +74,12 @@ public:
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        password_label = new QLabel(layoutWidget);
-        password_label->setObjectName(QString::fromUtf8("password_label"));
+        password_l = new QLabel(groupBox);
+        password_l->setObjectName(QString::fromUtf8("password_l"));
 
-        horizontalLayout_2->addWidget(password_label);
+        horizontalLayout_2->addWidget(password_l);
 
-        password = new QLineEdit(layoutWidget);
+        password = new QLineEdit(groupBox);
         password->setObjectName(QString::fromUtf8("password"));
 
         horizontalLayout_2->addWidget(password);
@@ -82,33 +87,51 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_2);
 
+        to_main = new QPushButton(groupBox);
+        to_main->setObjectName(QString::fromUtf8("to_main"));
+
+        verticalLayout->addWidget(to_main);
+
 
         verticalLayout_2->addLayout(verticalLayout);
 
-        pushButton = new QPushButton(layoutWidget);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        to_registration = new QPushButton(centralwidget);
+        to_registration->setObjectName(QString::fromUtf8("to_registration"));
+        to_registration->setGeometry(QRect(90, 190, 211, 21));
+        to_registration->setCursor(QCursor(Qt::PointingHandCursor));
+        to_registration->setAutoDefault(false);
+        to_registration->setFlat(true);
+        autorization->setCentralWidget(centralwidget);
+        menubar = new QMenuBar(autorization);
+        menubar->setObjectName(QString::fromUtf8("menubar"));
+        menubar->setGeometry(QRect(0, 0, 419, 22));
+        autorization->setMenuBar(menubar);
+        statusbar = new QStatusBar(autorization);
+        statusbar->setObjectName(QString::fromUtf8("statusbar"));
+        autorization->setStatusBar(statusbar);
 
-        verticalLayout_2->addWidget(pushButton);
+        retranslateUi(autorization);
+
+        to_registration->setDefault(false);
 
 
-        retranslateUi(Autorisation);
-
-        QMetaObject::connectSlotsByName(Autorisation);
+        QMetaObject::connectSlotsByName(autorization);
     } // setupUi
 
-    void retranslateUi(QWidget *Autorisation)
+    void retranslateUi(QMainWindow *autorization)
     {
-        Autorisation->setWindowTitle(QCoreApplication::translate("Autorisation", "Messanger", nullptr));
-        groupBox->setTitle(QCoreApplication::translate("Autorisation", "\320\220\320\262\321\202\320\276\321\200\320\270\320\267\320\260\321\206\320\270\321\217", nullptr));
-        login_lavel->setText(QCoreApplication::translate("Autorisation", "login", nullptr));
-        password_label->setText(QCoreApplication::translate("Autorisation", "password", nullptr));
-        pushButton->setText(QCoreApplication::translate("Autorisation", "\320\220\320\262\321\202\320\276\321\200\320\270\320\267\320\270\321\200\320\276\320\262\320\260\321\202\321\214\321\201\321\217", nullptr));
+        autorization->setWindowTitle(QCoreApplication::translate("autorization", "MainWindow", nullptr));
+        groupBox->setTitle(QCoreApplication::translate("autorization", "\320\220\320\262\321\202\320\276\321\200\320\270\320\267\320\260\321\206\320\270\321\217", nullptr));
+        login_l->setText(QCoreApplication::translate("autorization", " \320\233\320\276\320\263\320\270\320\275   ", nullptr));
+        password_l->setText(QCoreApplication::translate("autorization", "\320\237\320\260\321\200\320\276\320\273\321\214:", nullptr));
+        to_main->setText(QCoreApplication::translate("autorization", "\320\220\320\262\321\202\320\276\321\200\320\270\320\267\320\276\320\262\320\260\321\202\321\214\321\201\321\217", nullptr));
+        to_registration->setText(QCoreApplication::translate("autorization", "\320\227\320\260\321\200\320\265\320\263\320\270\321\201\321\202\321\200\320\270\321\200\320\276\320\262\320\260\321\202\321\214\321\201\321\217", nullptr));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class Autorisation: public Ui_Autorisation {};
+    class autorization: public Ui_autorization {};
 } // namespace Ui
 
 QT_END_NAMESPACE

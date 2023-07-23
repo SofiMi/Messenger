@@ -34,6 +34,7 @@ public:
     QLabel *password_l;
     QLineEdit *password;
     QPushButton *pushButton;
+    QPushButton *pushButton_2;
 
     void setupUi(QWidget *autorisation)
     {
@@ -85,8 +86,17 @@ public:
 
         verticalLayout_2->addLayout(verticalLayout);
 
+        pushButton_2 = new QPushButton(autorisation);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        pushButton_2->setGeometry(QRect(90, 200, 211, 21));
+        pushButton_2->setCursor(QCursor(Qt::PointingHandCursor));
+        pushButton_2->setAutoDefault(false);
+        pushButton_2->setFlat(true);
 
         retranslateUi(autorisation);
+
+        pushButton_2->setDefault(false);
+
 
         QMetaObject::connectSlotsByName(autorisation);
     } // setupUi
@@ -98,6 +108,7 @@ public:
         login_l->setText(QCoreApplication::translate("autorisation", "\320\233\320\276\320\263\320\270\320\275:", nullptr));
         password_l->setText(QCoreApplication::translate("autorisation", "\320\237\320\260\321\200\320\276\320\273\321\214:", nullptr));
         pushButton->setText(QCoreApplication::translate("autorisation", "\320\220\320\262\321\202\320\276\321\200\320\270\320\267\320\276\320\262\320\260\321\202\321\214\321\201\321\217", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("autorisation", "\320\227\320\260\321\200\320\265\320\263\320\270\321\201\321\202\321\200\320\270\321\200\320\276\320\262\320\260\321\202\321\214\321\201\321\217", nullptr));
     } // retranslateUi
 
 };

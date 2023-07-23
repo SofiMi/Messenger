@@ -73,9 +73,17 @@ build CMakeFiles/interface.dir/mainwindow.cpp.o: CXX_COMPILER__interface_Debug /
   OBJECT_DIR = CMakeFiles/interface.dir
   OBJECT_FILE_DIR = CMakeFiles/interface.dir
 
-build CMakeFiles/interface.dir/autorisation.cpp.o: CXX_COMPILER__interface_Debug /home/sofia/Algo/Messenger/Client/interface/autorisation.cpp || cmake_object_order_depends_target_interface
+build CMakeFiles/interface.dir/registration.cpp.o: CXX_COMPILER__interface_Debug /home/sofia/Algo/Messenger/Client/interface/registration.cpp || cmake_object_order_depends_target_interface
   DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
-  DEP_FILE = CMakeFiles/interface.dir/autorisation.cpp.o.d
+  DEP_FILE = CMakeFiles/interface.dir/registration.cpp.o.d
+  FLAGS = -g -fPIC -std=gnu++20
+  INCLUDES = -I/home/sofia/Algo/Messenger/Client/build-interface-Desktop-Debug -I/home/sofia/Algo/Messenger/Client/interface -I/home/sofia/Algo/Messenger/Client/build-interface-Desktop-Debug/interface_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++
+  OBJECT_DIR = CMakeFiles/interface.dir
+  OBJECT_FILE_DIR = CMakeFiles/interface.dir
+
+build CMakeFiles/interface.dir/autorization.cpp.o: CXX_COMPILER__interface_Debug /home/sofia/Algo/Messenger/Client/interface/autorization.cpp || cmake_object_order_depends_target_interface
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = CMakeFiles/interface.dir/autorization.cpp.o.d
   FLAGS = -g -fPIC -std=gnu++20
   INCLUDES = -I/home/sofia/Algo/Messenger/Client/build-interface-Desktop-Debug -I/home/sofia/Algo/Messenger/Client/interface -I/home/sofia/Algo/Messenger/Client/build-interface-Desktop-Debug/interface_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++
   OBJECT_DIR = CMakeFiles/interface.dir
@@ -97,7 +105,7 @@ build CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o: CX
 #############################################
 # Link the executable interface
 
-build interface: CXX_EXECUTABLE_LINKER__interface_Debug CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o CMakeFiles/interface.dir/main.cpp.o CMakeFiles/interface.dir/mainwindow.cpp.o CMakeFiles/interface.dir/autorisation.cpp.o CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o | /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.3 /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.15.3 /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.3 || interface_autogen interface_autogen_timestamp_deps
+build interface: CXX_EXECUTABLE_LINKER__interface_Debug CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o CMakeFiles/interface.dir/main.cpp.o CMakeFiles/interface.dir/mainwindow.cpp.o CMakeFiles/interface.dir/registration.cpp.o CMakeFiles/interface.dir/autorization.cpp.o CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o | /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.3 /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.15.3 /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.3 || interface_autogen interface_autogen_timestamp_deps
   FLAGS = -g
   LINK_LIBRARIES = /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.3  /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.15.3  /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.3
   OBJECT_DIR = CMakeFiles/interface.dir
@@ -139,7 +147,7 @@ build interface_autogen_timestamp_deps: phony CMakeFiles/interface_autogen_times
 #############################################
 # Utility command for interface_autogen
 
-build interface_autogen: phony CMakeFiles/interface_autogen interface_autogen/include/ui_mainwindow.h interface_autogen/include/ui_autorisation.h interface_autogen/timestamp interface_autogen/mocs_compilation.cpp interface_autogen_timestamp_deps
+build interface_autogen: phony CMakeFiles/interface_autogen interface_autogen/include/ui_mainwindow.h interface_autogen/include/ui_registration.h interface_autogen/include/ui_autorization.h interface_autogen/timestamp interface_autogen/mocs_compilation.cpp interface_autogen_timestamp_deps
 
 
 #############################################
@@ -155,13 +163,13 @@ build interface_autogen/timestamp interface_autogen/mocs_compilation.cpp | ${cma
 #############################################
 # Phony custom command for CMakeFiles/interface_autogen_timestamp_deps
 
-build CMakeFiles/interface_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/interface_autogen_timestamp_deps: phony /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.3 /usr/lib/qt5/bin/uic /usr/lib/qt5/bin/moc
+build CMakeFiles/interface_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/interface_autogen_timestamp_deps: phony /usr/lib/qt5/bin/uic /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.3 /usr/lib/qt5/bin/moc
 
 
 #############################################
 # Phony custom command for CMakeFiles/interface_autogen
 
-build CMakeFiles/interface_autogen interface_autogen/include/ui_mainwindow.h interface_autogen/include/ui_autorisation.h | ${cmake_ninja_workdir}CMakeFiles/interface_autogen ${cmake_ninja_workdir}interface_autogen/include/ui_mainwindow.h ${cmake_ninja_workdir}interface_autogen/include/ui_autorisation.h: phony interface_autogen/timestamp || interface_autogen_timestamp_deps
+build CMakeFiles/interface_autogen interface_autogen/include/ui_mainwindow.h interface_autogen/include/ui_registration.h interface_autogen/include/ui_autorization.h | ${cmake_ninja_workdir}CMakeFiles/interface_autogen ${cmake_ninja_workdir}interface_autogen/include/ui_mainwindow.h ${cmake_ninja_workdir}interface_autogen/include/ui_registration.h ${cmake_ninja_workdir}interface_autogen/include/ui_autorization.h: phony interface_autogen/timestamp || interface_autogen_timestamp_deps
 
 # =============================================================================
 # Target aliases.

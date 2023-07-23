@@ -6,40 +6,55 @@
 void Server::__on_message(std::shared_ptr<net::connection<msg_type>> connection_cl,
                             net::message<msg_type>& message) {
   switch (message.header.id) {
-  case msg_type::CheckLogin: {
-    CheckLogin(connection_cl, message);
-    break;
-  }
+    case msg_type::CheckLogin: {
+      CheckLogin(connection_cl, message);
+      break;
+    }
 
-  case msg_type::CheckPassword: {
-    CheckPassword(connection_cl, message);
-    break;
-  }
+    case msg_type::CheckPassword: {
+      CheckPassword(connection_cl, message);
+      break;
+    }
 
-  case msg_type::GetChat: {
-    GetChat(connection_cl, message);
-    break;
-  }
+    case msg_type::GetChat: {
+      GetChat(connection_cl, message);
+      break;
+    }
 
-  case msg_type::StopServer: {
-    server_do = false;
-    break;
-  }
+    case msg_type::StopServer: {
+      server_do = false;
+      break;
+    }
 
-  case msg_type::GetMessages: {
-    GetMessages(connection_cl, message);
-    break;
-  }
+    case msg_type::GetMessages: {
+      GetMessages(connection_cl, message);
+      break;
+    }
 
-  case msg_type::LastMessageId: {
-    LastMessageId(connection_cl, message);
-    break;
-  }
+    case msg_type::LastMessageId: {
+      LastMessageId(connection_cl, message);
+      break;
+    }
 
-  case msg_type::NewMessage: {
-    NewMessage(connection_cl, message);
-    break;
-  }
+    case msg_type::NewMessage: {
+      NewMessage(connection_cl, message);
+      break;
+    }
+
+    case msg_type::AddNewUser: {
+      AddNewUser(connection_cl, message);
+      break;
+    }
+    
+    case msg_type::CheckUniqueLogin: {
+      CheckUniqueLogin(connection_cl, message);
+      break;
+    }
+
+    case msg_type::CheckUniqueNick: {
+      CheckUniqueNick(connection_cl, message);
+      break;
+    }
   }
 }
 
@@ -197,4 +212,63 @@ void Server::NewMessage(std::shared_ptr<net::connection<msg_type>> connection_cl
     std::copy(&message.data[index], &message.data[index] + 254 - index, &str[str.size() - size_text]);
     std::get<1>(user_messages_memory_[userid]) -= 254 - index;
   }
+}
+
+void Server::AddNewUser(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message) {
+  /*  Регистрация нового пользователя.
+
+      std::vector<std::string> user_info = {
+        login,
+        password,
+        name,
+        nickname
+      }
+  */
+  std::cout << "AddNewUser" << std::endl;
+  int size_text, index_msg = 0;
+  std::vector<std::string> user_info(4);
+
+  for (int i = 0; i < 4; ++i) {
+    std::copy(&message.data[index_msg], &message.data[index_msg + 4], reinterpret_cast<char*>(&size_text));
+    user_info[i].resize(size_text);
+    std::copy(&message.data[index_msg + 4], &message.data[index_msg + 4 + size_text], reinterpret_cast<char*>(&(user_info[i][0])));
+    index_msg += 4 + size_text;
+  }
+
+  int userid = db.AddNewUser(user_info);
+  std::copy(reinterpret_cast<char*>(&userid), reinterpret_cast<char*>(&userid) + 4, &message.data[0]);
+  connection_cl->send(message);
+}
+
+void Server::CheckUniqueNick(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message) {
+  /* 
+    Проверка уникальности никнейма.
+    Если это правда, то будет отправлен 0.
+  */
+  int size_text;
+  std::string nick;
+  std::copy(&message.data[0], &message.data[4], reinterpret_cast<char*>(&size_text));
+  nick.resize(size_text);
+  std::copy(&message.data[4], &message.data[4 + size_text], reinterpret_cast<char*>(&nick[0]));
+
+  int count_same_nick = db.CountSameNick(nick);
+  std::copy(reinterpret_cast<char*>(&count_same_nick), reinterpret_cast<char*>(&count_same_nick) + 4, &message.data[0]);
+  connection_cl->send(message);
+}
+
+void Server::CheckUniqueLogin(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message) {
+  /* 
+    Проверка уникальности логина.
+    Если это правда, то будет отправлен 0.
+  */
+  int size_text;
+  std::string login;
+  std::copy(&message.data[0], &message.data[4], reinterpret_cast<char*>(&size_text));
+  login.resize(size_text);
+  std::copy(&message.data[4], &message.data[4 + size_text], reinterpret_cast<char*>(&login[0]));
+
+  int count_same_login = db.CountSameLogin(login);
+  std::cout <<  count_same_login << std::endl;
+  std::copy(reinterpret_cast<char*>(&count_same_login), reinterpret_cast<char*>(&count_same_login) + 4, &message.data[0]);
+  connection_cl->send(message);
 }

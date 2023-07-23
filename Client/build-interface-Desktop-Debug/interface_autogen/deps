@@ -5,11 +5,13 @@ interface_autogen/timestamp: \
 	/home/sofia/Algo/Messenger/Client/build-interface-Desktop-Debug/CMakeFiles/3.22.1/CMakeSystem.cmake \
 	/home/sofia/Algo/Messenger/Client/build-interface-Desktop-Debug/interface_autogen/moc_predefs.h \
 	/home/sofia/Algo/Messenger/Client/interface/CMakeLists.txt \
-	/home/sofia/Algo/Messenger/Client/interface/autorisation.cpp \
-	/home/sofia/Algo/Messenger/Client/interface/autorisation.h \
+	/home/sofia/Algo/Messenger/Client/interface/autorization.cpp \
+	/home/sofia/Algo/Messenger/Client/interface/autorization.h \
 	/home/sofia/Algo/Messenger/Client/interface/main.cpp \
 	/home/sofia/Algo/Messenger/Client/interface/mainwindow.cpp \
 	/home/sofia/Algo/Messenger/Client/interface/mainwindow.h \
+	/home/sofia/Algo/Messenger/Client/interface/registration.cpp \
+	/home/sofia/Algo/Messenger/Client/interface/registration.h \
 	/home/sofia/Algo/Messenger/Client/net_client.h \
 	/home/sofia/Algo/Messenger/NetWork/net.h \
 	/home/sofia/Algo/Messenger/NetWork/net_common.h \
@@ -1268,7 +1270,6 @@ interface_autogen/timestamp: \
 	/usr/include/x86_64-linux-gnu/qt5/QtGui/qtransform.h \
 	/usr/include/x86_64-linux-gnu/qt5/QtGui/qwindowdefs.h \
 	/usr/include/x86_64-linux-gnu/qt5/QtWidgets/QMainWindow \
-	/usr/include/x86_64-linux-gnu/qt5/QtWidgets/QWidget \
 	/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qmainwindow.h \
 	/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qsizepolicy.h \
 	/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtabwidget.h \
@@ -1350,6 +1351,7 @@ interface_autogen/timestamp: \
 	/usr/share/cmake-3.22/Modules/Platform/Linux.cmake \
 	/usr/share/cmake-3.22/Modules/Platform/UnixPaths.cmake \
 	/usr/share/qtcreator/package-manager/auto-setup.cmake \
-	/home/sofia/Algo/Messenger/Client/interface/autorisation.ui \
+	/home/sofia/Algo/Messenger/Client/interface/autorization.ui \
 	/home/sofia/Algo/Messenger/Client/interface/mainwindow.ui \
+	/home/sofia/Algo/Messenger/Client/interface/registration.ui \
 	/usr/bin/cmake

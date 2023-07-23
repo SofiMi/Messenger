@@ -276,3 +276,84 @@ void Client::SendNewMessage(const std::string& text) {
   }
 }
 
+void Client::AddNewUser(std::vector<std::string>& user_info) {
+  /*  Регистрация нового пользователя.
+
+      std::vector<std::string> user_info = {
+        login,
+        password,
+        name,
+        nickname
+      }
+  */
+  net::message<msg_type> message;
+  message.header.id = msg_type::AddNewUser;
+  int index_msg = 0;
+
+  for (int i = 0; i < 4; ++i) {
+    int size_text = user_info[i].size();
+    std::copy(reinterpret_cast<char*>(&size_text), reinterpret_cast<char*>(&size_text) + 4, &message.data[index_msg]);
+    std::copy(reinterpret_cast<char*>(&user_info[i][0]), reinterpret_cast<char*>(&user_info[i][0]) + size_text, &message.data[index_msg + 4]);
+    index_msg += 4 + size_text;
+  }
+
+  send(message);
+
+  while (is_connected() && get_in_comming().empty()) {}
+
+  if (is_connected() && get_in_comming().empty()) {
+    auto message_result = get_in_comming().pop_front().msg;
+    switch (message_result.header.id) {
+      case msg_type::AddNewUser: {
+        std::copy(&message.data[0], &message.data[0] + 4, &userid_);
+        break;
+      }
+    }
+  }
+}
+
+bool Client::CheckUniqueNickname(const std::string& nickname) {
+  /* Проверка того, является ли никнейм уникальным. */
+  net::message<msg_type> message;
+  message.header.id = msg_type::CheckUniqueNick;
+  int size = nickname.size();
+  std::copy(reinterpret_cast<char*>(&size), reinterpret_cast<char*>(&size) + 4, &message.data[0]);
+  std::copy(reinterpret_cast<const char*>(&nickname[0]), reinterpret_cast<const char*>(&nickname[0]) + size, &message.data[4]);
+  send(message);
+
+  while (is_connected() && get_in_comming().empty()) {}
+
+  if (is_connected() && !get_in_comming().empty()) {
+    auto message_result = get_in_comming().pop_front().msg;
+    switch (message_result.header.id) {
+      case msg_type::CheckUniqueNick: {
+        std::copy(&message_result.data[0], &message_result.data[0] + 4, reinterpret_cast<char*>(&size));
+        break;
+      }
+    }
+  }
+  return size == 0;
+}
+
+bool Client::CheckUniqueLogin(const std::string& login) {
+  /* Проверка того, является ли логин уникальным. */
+  net::message<msg_type> message;
+  message.header.id = msg_type::CheckUniqueLogin;
+  int size = login.size();
+  std::copy(reinterpret_cast<char*>(&size), reinterpret_cast<char*>(&size) + 4, &message.data[0]);
+  std::copy(reinterpret_cast<const char*>(&login[0]), reinterpret_cast<const char*>(&login[0]) + size, &message.data[4]);
+  send(message);
+
+  while (is_connected() && get_in_comming().empty()) {}
+
+  if (is_connected() && !get_in_comming().empty()) {
+    auto message_result = get_in_comming().pop_front().msg;
+    switch (message_result.header.id) {
+      case msg_type::CheckUniqueLogin: {
+        std::copy(&message_result.data[0], &message_result.data[0] + 4, reinterpret_cast<char*>(&size));
+        break;
+      }
+    }
+  }
+  return size == 0;
+}

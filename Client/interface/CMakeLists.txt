@@ -19,9 +19,14 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-        autorisation.h
-        autorisation.cpp
-        autorisation.ui
+
+        registration.h
+        registration.cpp
+        registration.ui
+
+        autorization.h
+        autorization.cpp
+        autorization.ui
 
         ../../NetWork/net_message.h
         ../../NetWork/net_common.h

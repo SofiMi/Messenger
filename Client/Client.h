@@ -6,7 +6,13 @@
 
 class Client : public net::client_interface<msg_type> {
  public:
+  // Авторизация и рестрация
   bool Autorization(const std::string& login, const std::string& password, std::string& error_message);
+  void AddNewUser(std::vector<std::string>& user_info);
+  bool CheckUniqueNickname(const std::string& nickname);
+  bool CheckUniqueLogin(const std::string& nickname);
+
+  // Главная страница
   std::vector<std::pair<int, std::string>> GetChats();
   std::vector<std::string> GetMessage();
   void GetLastIdMessage();

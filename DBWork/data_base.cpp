@@ -125,3 +125,44 @@ void WorkDB::InsertMsg(int chatid, int userid, const std::string& text) {
   W.exec(insert.c_str());
   W.commit();
 }
+
+int WorkDB::AddNewUser(const std::vector<std::string>& user_info) {
+  /*  Регистрация нового пользователя.
+
+    std::vector<std::string> user_info = {
+      login,
+      password,
+      name,
+      nickname
+    }
+  */
+  pqxx::work W(*connection);
+  std::string id_req = "select max(userid) + 1 from server.user";
+  pqxx::result id_res = W.exec((char*)id_req.c_str());
+  int userid = id_res.begin()[0].as<int>();
+
+  std::string insert = "insert into server.user (userid, login, password, name, nickname)\n";
+  insert += "values (" + std::to_string(userid) + ", '" + user_info[0] + "', '" + user_info[1] + "', '" + user_info[2] + "', '" +  user_info[3] + "')";
+  W.exec(insert.c_str());
+  W.commit();
+
+  return userid;
+}
+
+int WorkDB::CountSameNick(const std::string& nick) {
+  /* Количество таких же никнеймов. 0/1*/
+  pqxx::work W(*connection);
+  std::string req = "select count(*) from server.user\n"
+                      "where nickname = '" + nick + "'";
+  pqxx::result res = W.exec((char*)req.c_str());
+  return res.begin()[0].as<int>();
+}
+
+int WorkDB::CountSameLogin(const std::string& login) {
+  /* Количество таких же логинов. 0/1*/
+  pqxx::work W(*connection);
+  std::string req = "select count(*) from server.user\n"
+                      "where login = '" + login + "'";
+  pqxx::result res = W.exec((char*)req.c_str());
+  return res.begin()[0].as<int>();
+}

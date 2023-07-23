@@ -21,6 +21,15 @@ enum class msg_type : uint32_t {
   SendImgFinish,
   GetChat,
 
+  // Прекращение работы сервера
   StopServer,
+
+  // Отправка нового сообщение
   NewMessage,
+
+  // Добавление нового пользователя
+  AddNewUser,
+  CheckUniqueLogin,
+  CheckUniqueNick
+
 };
