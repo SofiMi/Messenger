@@ -38,7 +38,7 @@ std::vector<std::pair<int, std::string>> Client::GetChats() {
     //std::cout << "wait chats\n";
     i++;
     if (i % 1000000 == 0) {
-      std::cout << "send message\n";
+      //std::cout << "send message\n";
       send(message);
       std::this_thread::sleep_for(std::chrono::milliseconds(5)); // wait server
     }
@@ -49,6 +49,10 @@ std::vector<std::pair<int, std::string>> Client::GetChats() {
       auto input_message = get_in_comming().pop_front().msg;
       int id, size;
       switch (input_message.header.id) {
+        case msg_type::NewMessage: {
+          std::cout << "[-----------New message----------]" << std::endl;
+          break;
+        }
         case msg_type::SendImgMore: {
           for (int i = 0; i < 256; ) {
             if (input_message.data[i++] == 0) {
@@ -87,7 +91,7 @@ void Client::RequestForMessages() {
     Отправляет запрос на сервер с новой порцией старых сообщений.
     Передаем id текущего чата и последнеe доставленное id сообщения в чате.
   */
-  std::cout << "RequestForMessages()" << std::endl;
+  //std::cout << "RequestForMessages()" << std::endl;
   net::message<msg_type> message;
   message.header.id = msg_type::GetMessages;
   std::copy(reinterpret_cast<char*>(&chatid_), reinterpret_cast<char*>(&chatid_) + 4, &message.data[0]);
@@ -98,7 +102,7 @@ void Client::RequestForMessages() {
 }
 
 void Client::AcceptMessages(std::vector<std::string>& result) {
-  std::cout << "AcceptMessages()" << std::endl;
+  std::cout << "\n[Start AcceptMessages]" << std::endl;
   /*
     Принимаем сообщения 2 подтипов:
       - [char 0|1, int id_msg, int size, std::string, char 0|1 ...]
@@ -111,17 +115,19 @@ void Client::AcceptMessages(std::vector<std::string>& result) {
   bool will_be_more_messages = true, is_next_message = false;
   
   while (is_connected() && get_in_comming().empty()) {
-    std::cout << "wait messages\n" << std::endl;
+    //std::cout << "wait messages\n" << std::endl;
   }
 
   while (will_be_more_messages && is_connected()) {
     if (!get_in_comming().empty()) {
-      std::cout << "NO EMPTY" << std::endl;
       auto input_message = get_in_comming().pop_front().msg;
-      std::cout << static_cast<uint>(input_message.header.id) << std::endl;
+      //std::cout << "I have msg by server. Index of msg.id = " << static_cast<uint>(input_message.header.id) << std::endl;
       switch (input_message.header.id) {
+         case msg_type::NewMessage: {
+          std::cout << "[-----------New message----------]" << std::endl;
+          break;
+        }
         case msg_type::SendMsgMore: {
-          std::cout << "SendMsgMore\n";
           for (int index_in_message = 0; index_in_message < MESSAGE_BUFFER_SIZE; ) {
             if (!is_next_message) {
               if (input_message.data[index_in_message++] == 0) {
@@ -136,7 +142,6 @@ void Client::AcceptMessages(std::vector<std::string>& result) {
               // принимаемый текст помещается в текущее сообщение
               std::copy(&input_message.data[index_in_message], &input_message.data[index_in_message + size_msg_last_], &input_text[index_in_input_text]);
               result.push_back(input_text);
-              std::cout << input_text << std::endl;
 
               index_in_message += size_msg_last_;
               size_msg_last_ = 0;
@@ -156,13 +161,13 @@ void Client::AcceptMessages(std::vector<std::string>& result) {
           }
           break;
         } case msg_type::SendMsgFinish: {
-          std::cout << "SendImgFinish\n";
           will_be_more_messages = false;
           break;
         }
       } 
     }
   }
+  std::cout << "[End AcceptMessages]\n" << std::endl;
 }
 
 bool Client::Autorization(const std::string& login, const std::string& password, std::string& error_message) {
@@ -170,7 +175,7 @@ bool Client::Autorization(const std::string& login, const std::string& password,
   std::this_thread::sleep_for(std::chrono::milliseconds(5)); // wait server
   
   while(is_connected() && get_in_comming().empty()) {
-    std::cout << "wait autorization\n";
+    //std::cout << "wait autorization\n";
   }
 
   if (is_connected() && !get_in_comming().empty()) {
@@ -219,6 +224,7 @@ bool Client::Autorization(const std::string& login, const std::string& password,
 }
 
 void Client::GetLastIdMessage() {
+  /* Устанавливаем id последнего сообщения в текущем чате. */
   net::message<msg_type> message;
   message.header.id = msg_type::LastMessageId;
   std::copy(reinterpret_cast<char*>(&chatid_), reinterpret_cast<char*>(&chatid_) + 4, &message.data[0]);
@@ -226,22 +232,27 @@ void Client::GetLastIdMessage() {
   send(message);
   std::this_thread::sleep_for(std::chrono::milliseconds(5)); // wait server
 
+  while (is_connected() && get_in_comming().empty()) {}
+
   if (is_connected() && !get_in_comming().empty()) {
     auto message_result = get_in_comming().pop_front().msg;
     switch (message_result.header.id) {
+      case msg_type::NewMessage: {
+        std::cout << "[-----------New message----------]" << std::endl;
+        break;
+      }
       case msg_type::LastMessageId: {
-        std::copy(&message.data[0], &message.data[0] + 4, &last_accept_message_id_in_chat_);
+        std::copy(&message_result.data[0], &message_result.data[0] + 4, reinterpret_cast<char*>(&last_accept_message_id_in_chat_));
         break;
       }
     }
   }
-  last_accept_message_id_in_chat_ = 20;
 }
 
 void Client::SendNewMessage(const std::string& text) {
-  std::cout << "chatid " << chatid_ << std::endl;
+  //std::cout << "chatid " << chatid_ << std::endl;
   int size_text = text.size();
-  std::cout << size_text << std::endl;
+  //std::cout << size_text << std::endl;
   net::message<msg_type> message;
   message.header.id = msg_type::NewMessage;
 

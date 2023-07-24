@@ -129,7 +129,7 @@ void Server::GetChat(std::shared_ptr<net::connection<msg_type>> connection_cl, n
 }
 
 void Server::GetMessages(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message) {
-  std::cout << "GetMessages" << std::endl;
+  std::cout << "\n[Start GetMessages]" << std::endl;
   int chatid, count_before;
   std::copy(&message.data[0], &message.data[0] + 4, reinterpret_cast<char*>(&chatid));
   std::copy(&message.data[0] + 4, &message.data[0] + 8, reinterpret_cast<char*>(&count_before));
@@ -144,7 +144,7 @@ void Server::GetMessages(std::shared_ptr<net::connection<msg_type>> connection_c
     std::string name = row[1].as<std::string>();
     int id = row[0].as<int>();
     int size = name.size();
-    std::cout << id << " " << size << " " << name << std::endl;
+    std::cout << "[db res] id = " << id << " size = " << size << " name = " << name << std::endl;
 
     n_message.data[j++] = 1;
     std::copy(reinterpret_cast<char*>(&id), reinterpret_cast<char*>(&id) + 4, &n_message.data[j]);
@@ -155,34 +155,42 @@ void Server::GetMessages(std::shared_ptr<net::connection<msg_type>> connection_c
 
     while(size - index_name > 254 - j) {
       std::copy(&name[index_name], &name[index_name] + 254 - j, &n_message.data[j]);
-      std::cout << id << " " << size << " " << name << std::endl;
       connection_cl->send(n_message);
       index_name += 254 - j;
       j = 0;
-      std::cout << "NEW MESSAGE. \n (size - index_name) = " << size - index_name << std::endl;
+      std::cout << "Big msg. Send in the new msg. \n" << std::endl;
     }
 
-    if (size - index_name > 0) {
+    if (size - index_name > 0 || size == 0) {
       send_more = true;
     } else {
       send_more = false;
     }
-    //std::cout << id << " " << size << " " << name << std::endl;
     std::copy(&name[index_name], &name[index_name] + size - index_name, &n_message.data[j]);
     j += size - index_name;
     index_name = 0;
     n_message.data[j] = 0;
   }
+
   if (send_more) {
     connection_cl->send(n_message);
-    std::cout << "NEW MESSAGE." << std::endl;
+    std::cout << "Send msg." << std::endl;
   }
+
   message.header.id = msg_type::SendMsgFinish;
   connection_cl->send(message);
+  std::cout << "\n[End GetMessages]" << std::endl;
 }
 
 void Server::LastMessageId(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message) {
-  
+  // [chatid int, userid int]
+  int userid, chatid;
+  std::copy(reinterpret_cast<char*>(&message.data[0]), reinterpret_cast<char*>(&message.data[0]) + 4, reinterpret_cast<char*>(&chatid));
+  std::copy(reinterpret_cast<char*>(&message.data[4]), reinterpret_cast<char*>(&message.data[4]) + 4, reinterpret_cast<char*>(&userid));
+
+  int index = db.GetCountMsgInChat(chatid);
+  std::copy(reinterpret_cast<char*>(&index), reinterpret_cast<char*>(&index) + 4, reinterpret_cast<char*>(&message.data[0]));
+  connection_cl->send(message);
 }
 
 void Server::NewMessage(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message) {
@@ -198,7 +206,12 @@ void Server::NewMessage(std::shared_ptr<net::connection<msg_type>> connection_cl
     std::get<0>(user_messages_memory_[userid]) = chatid;
     std::get<1>(user_messages_memory_[userid]) = size_text;
     std::get<2>(user_messages_memory_[userid]) = std::string(size_text, 'a');
+    std::get<3>(user_messages_memory_[userid]) = connection_cl;
     is_new_message = true;
+  }
+
+  if (std::get<3>(user_messages_memory_[userid]) != connection_cl) {
+    std::get<3>(user_messages_memory_[userid]) = connection_cl;
   }
 
   std::string& str = std::get<2>(user_messages_memory_[userid]);
@@ -208,6 +221,15 @@ void Server::NewMessage(std::shared_ptr<net::connection<msg_type>> connection_cl
     std::get<1>(user_messages_memory_[userid]) = 0;
     db.InsertMsg(std::get<0>(user_messages_memory_[userid]), userid, str);
     std::cout << std::get<0>(user_messages_memory_[userid]) << " " << userid << " " <<  str << std::endl;
+
+    pqxx::result res_userid = db.GetUseridByChatitd(std::get<0>(user_messages_memory_[userid]));
+    net::message<msg_type> output_message;
+    output_message.header.id = msg_type::NewMessage;
+    for (auto iter: res_userid) {
+      if (iter[0].as<int>() != userid && user_messages_memory_.find(iter[0].as<int>()) != user_messages_memory_.end()) {
+        std::get<3>(user_messages_memory_[iter[0].as<int>()])->send(output_message);
+      }
+    }
   } else {
     std::copy(&message.data[index], &message.data[index] + 254 - index, &str[str.size() - size_text]);
     std::get<1>(user_messages_memory_[userid]) -= 254 - index;

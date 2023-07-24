@@ -27,5 +27,5 @@ private:
   void CheckUniqueNick(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message);
   void CheckUniqueLogin(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message);
 
-  std::unordered_map<int, std::tuple<int, int, std::string>> user_messages_memory_; // <userid, <chatid, size_message (оставшаяся), message>>
+  std::unordered_map<int, std::tuple<int, int, std::string, std::shared_ptr<net::connection<msg_type>>>> user_messages_memory_; // <userid, <chatid, size_message (оставшаяся), message>>
 };

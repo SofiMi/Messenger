@@ -166,3 +166,19 @@ int WorkDB::CountSameLogin(const std::string& login) {
   pqxx::result res = W.exec((char*)req.c_str());
   return res.begin()[0].as<int>();
 }
+
+pqxx::result WorkDB::GetUseridByChatitd(int chatid) {
+  pqxx::work W(*connection);
+  std::string req = "select userid from server.chat\n"
+                    "where chatid = " + std::to_string(chatid);
+  pqxx::result res = W.exec((char*)req.c_str());
+  return res;
+}
+
+int WorkDB::GetCountMsgInChat(int chatid) {
+  pqxx::work W(*connection);
+  std::string req = "select max(index_in_char) + 1 from server.message\n"
+                    "where chatid = " + std::to_string(chatid);
+  pqxx::result res = W.exec((char*)req.c_str());
+  return res.begin()[0].as<int>();
+}

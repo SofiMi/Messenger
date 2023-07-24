@@ -76,7 +76,7 @@ void MainWindow::AddOtherFriends() {
      [this, chatid = friend_name[i].first]() {
       client_->chatid_ = chatid;
       client_->GetLastIdMessage();
-      std::cout << "chatid " << client_->chatid_ << " last_accept_message_id_in_chat_ " << client_->last_accept_message_id_in_chat_ << std::endl;
+      //std::cout << "chatid " << client_->chatid_ << " last_accept_message_id_in_chat_ " << client_->last_accept_message_id_in_chat_ << std::endl;
       while (auto* item = ui->messageScrollAreaContext->layout()->takeAt(0)) {
         delete item->widget();
         delete item;
@@ -92,18 +92,23 @@ void MainWindow::AddOtherFriends() {
 void MainWindow::on_SendMsg_clicked(bool checked) {
   /* Отправление нового сообщения */
   QString qtext = ui->InputMsg->text();
-  ui->InputMsg->clear();
 
-  // Добавляем сообщение в чат
-  QVBoxLayout* messages_box_layout =
-      dynamic_cast<QVBoxLayout *>(ui->messageScrollAreaContext->layout());
-  
-  QLabel* new_message = new QLabel(qtext);
-  new_message->setStyleSheet("QLabel { background-color : white }");
-  new_message->setWordWrap(true);
-  messages_box_layout->addWidget(new_message);
+  if (qtext.toStdString().size() > 0) {
+     ui->InputMsg->clear();
 
-  // Передача сообщения серверу
-  std::string text = qtext.toStdString();
-  client_->SendNewMessage(text);
+    // Добавляем сообщение в чат
+    QVBoxLayout* messages_box_layout =
+        dynamic_cast<QVBoxLayout *>(ui->messageScrollAreaContext->layout());
+    
+    QLabel* new_message = new QLabel(qtext);
+    new_message->setStyleSheet("QLabel { background-color : white }");
+    new_message->setWordWrap(true);
+    messages_box_layout->addWidget(new_message);
+
+    // Передача сообщения серверу
+    std::string text = qtext.toStdString();
+    client_->SendNewMessage(text);
+  } else {
+    QMessageBox::about(this, "Неправильный ввод", "Сообщение не может быть пустым");
+  }
 }

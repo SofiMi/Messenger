@@ -21,4 +21,7 @@ class WorkDB {
 
   int CountSameNick(const std::string& nick);
   int CountSameLogin(const std::string& login);
+
+  pqxx::result GetUseridByChatitd(int chatid);
+  int GetCountMsgInChat(int chat);
 };
