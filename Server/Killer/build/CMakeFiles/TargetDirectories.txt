@@ -1,3 +1,0 @@
-/home/sofia/Algo/Messenger/Server/Killer/build/CMakeFiles/Killer.dir
-/home/sofia/Algo/Messenger/Server/Killer/build/CMakeFiles/edit_cache.dir
-/home/sofia/Algo/Messenger/Server/Killer/build/CMakeFiles/rebuild_cache.dir

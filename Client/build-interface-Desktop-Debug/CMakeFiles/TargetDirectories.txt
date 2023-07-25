@@ -1,5 +1,0 @@
-/home/sofia/Algo/Messenger/Client/build-interface-Desktop-Debug/CMakeFiles/interface.dir
-/home/sofia/Algo/Messenger/Client/build-interface-Desktop-Debug/CMakeFiles/edit_cache.dir
-/home/sofia/Algo/Messenger/Client/build-interface-Desktop-Debug/CMakeFiles/rebuild_cache.dir
-/home/sofia/Algo/Messenger/Client/build-interface-Desktop-Debug/CMakeFiles/interface_autogen_timestamp_deps.dir
-/home/sofia/Algo/Messenger/Client/build-interface-Desktop-Debug/CMakeFiles/interface_autogen.dir

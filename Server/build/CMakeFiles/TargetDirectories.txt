@@ -1,3 +1,0 @@
-/home/sofia/Algo/Messenger/Server/build/CMakeFiles/Server.dir
-/home/sofia/Algo/Messenger/Server/build/CMakeFiles/edit_cache.dir
-/home/sofia/Algo/Messenger/Server/build/CMakeFiles/rebuild_cache.dir
