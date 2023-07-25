@@ -55,6 +55,26 @@ void Server::__on_message(std::shared_ptr<net::connection<msg_type>> connection_
       CheckUniqueNick(connection_cl, message);
       break;
     }
+
+    case msg_type::CheckChatName: {
+      CheckChatName(connection_cl, message);
+      break;
+    }
+
+    case msg_type::CreateNewChat: {
+      CreateNewChat(connection_cl, message);
+      break;
+    }
+
+    case msg_type::CheckTetAtTetChat: {
+      CheckTetAtTetChat(connection_cl, message);
+      break;
+    }
+
+    case msg_type::GetDataUpdate: {
+      GetDataUpdate(connection_cl, message);
+      break;
+    }
   }
 }
 
@@ -128,57 +148,13 @@ void Server::GetChat(std::shared_ptr<net::connection<msg_type>> connection_cl, n
   connection_cl->send(message);
 }
 
-void Server::GetMessages(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message) {
+void Server::GetMessages(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& input_message) {
   std::cout << "\n[Start GetMessages]" << std::endl;
   int chatid, count_before;
-  std::copy(&message.data[0], &message.data[0] + 4, reinterpret_cast<char*>(&chatid));
-  std::copy(&message.data[0] + 4, &message.data[0] + 8, reinterpret_cast<char*>(&count_before));
-  pqxx::result messages = db.GetMessages(chatid, count_before);
-
-  size_t j = 0;
-  net::message<msg_type> n_message;
-  n_message.header.id = msg_type::SendMsgMore;
-  bool send_more = true;
-
-  for (auto row = messages.begin(); row != messages.end(); ++row) {
-    std::string name = row[1].as<std::string>();
-    int id = row[0].as<int>();
-    int size = name.size();
-    std::cout << "[db res] id = " << id << " size = " << size << " name = " << name << std::endl;
-
-    n_message.data[j++] = 1;
-    std::copy(reinterpret_cast<char*>(&id), reinterpret_cast<char*>(&id) + 4, &n_message.data[j]);
-    std::copy(reinterpret_cast<char*>(&size), reinterpret_cast<char*>(&size) + 4, &n_message.data[j + 4]);
-
-    j += 8;
-    int index_name = 0;
-
-    while(size - index_name > 254 - j) {
-      std::copy(&name[index_name], &name[index_name] + 254 - j, &n_message.data[j]);
-      connection_cl->send(n_message);
-      index_name += 254 - j;
-      j = 0;
-      std::cout << "Big msg. Send in the new msg. \n" << std::endl;
-    }
-
-    if (size - index_name > 0 || size == 0) {
-      send_more = true;
-    } else {
-      send_more = false;
-    }
-    std::copy(&name[index_name], &name[index_name] + size - index_name, &n_message.data[j]);
-    j += size - index_name;
-    index_name = 0;
-    n_message.data[j] = 0;
-  }
-
-  if (send_more) {
-    connection_cl->send(n_message);
-    std::cout << "Send msg." << std::endl;
-  }
-
-  message.header.id = msg_type::SendMsgFinish;
-  connection_cl->send(message);
+  std::copy(&input_message.data[0], &input_message.data[0] + 4, reinterpret_cast<char*>(&chatid));
+  std::copy(&input_message.data[0] + 4, &input_message.data[0] + 8, reinterpret_cast<char*>(&count_before));
+  pqxx::result texts = db.GetMessages(chatid, count_before);
+  SendManyMsg(connection_cl, static_cast<uint32_t>(msg_type::SendMsgMore), static_cast<uint32_t>(msg_type::SendMsgFinish), texts);
   std::cout << "\n[End GetMessages]" << std::endl;
 }
 
@@ -290,7 +266,110 @@ void Server::CheckUniqueLogin(std::shared_ptr<net::connection<msg_type>> connect
   std::copy(&message.data[4], &message.data[4 + size_text], reinterpret_cast<char*>(&login[0]));
 
   int count_same_login = db.CountSameLogin(login);
-  std::cout <<  count_same_login << std::endl;
   std::copy(reinterpret_cast<char*>(&count_same_login), reinterpret_cast<char*>(&count_same_login) + 4, &message.data[0]);
   connection_cl->send(message);
+}
+
+void Server::CheckChatName(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message) {
+  int size_text, userid;
+  std::string name;
+  std::copy(&message.data[0], &message.data[4], reinterpret_cast<char*>(&userid));
+  std::copy(&message.data[4], &message.data[8], reinterpret_cast<char*>(&size_text));
+  name.resize(size_text);
+  std::copy(&message.data[8], &message.data[8 + size_text], reinterpret_cast<char*>(&name[0]));
+
+  int chatid = db.ChatIdByNameAndUserid(userid, name);
+  std::copy(reinterpret_cast<char*>(&chatid), reinterpret_cast<char*>(&chatid) + 4, &message.data[0]);
+  connection_cl->send(message);
+}
+
+void Server::CreateNewChat(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message) {
+  int size_text, userid;
+  std::string name;
+  std::copy(&message.data[0], &message.data[4], reinterpret_cast<char*>(&userid));
+  std::copy(&message.data[4], &message.data[8], reinterpret_cast<char*>(&size_text));
+  name.resize(size_text);
+  std::copy(&message.data[8], &message.data[8 + size_text], reinterpret_cast<char*>(&name[0]));
+
+  auto chat = db.CreateNewChat(userid, name);
+  size_text = chat.second.size();
+  std::copy(reinterpret_cast<char*>(&chat.first), reinterpret_cast<char*>(&chat.first) + 4, &message.data[0]);
+  std::copy(reinterpret_cast<char*>(&size_text), reinterpret_cast<char*>(&size_text) + 4, &message.data[4]);
+  std::copy(&chat.second[0], &chat.second[size_text], reinterpret_cast<char*>(&message.data[8]));
+  connection_cl->send(message);
+}
+
+void Server::CheckTetAtTetChat(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message) {
+  int size_text, userid;
+  std::string name;
+  std::copy(&message.data[0], &message.data[4], reinterpret_cast<char*>(&userid));
+  std::copy(&message.data[4], &message.data[8], reinterpret_cast<char*>(&size_text));
+  name.resize(size_text);
+  std::copy(&message.data[8], &message.data[8 + size_text], reinterpret_cast<char*>(&name[0]));
+
+  int chatid = db.CheckTetAtTetChat(userid, name);
+  std::copy(reinterpret_cast<char*>(&chatid), reinterpret_cast<char*>(&chatid) + 4, &message.data[0]);
+  connection_cl->send(message);
+}
+
+void Server::SendManyMsg(std::shared_ptr<net::connection<msg_type>> connection_cl, uint32_t enum_send_more, uint32_t finish, pqxx::result& texts) {
+  int index_message = 0;
+  int index_name = 0;
+  net::message<msg_type> output_message;
+  output_message.header.id = static_cast<msg_type>(enum_send_more);
+  bool send_more = true;
+
+  for (auto row = texts.begin(); row != texts.end(); ++row) {
+    std::string name = row[1].as<std::string>();
+    int id = row[0].as<int>();
+    int size_text = name.size();
+    std::cout << "[db res] id = " << id << " size = " << size_text << " name = " << name << "index in msg = " << index_message << std::endl;
+
+    output_message.data[index_message++] = 1;
+
+    if (MESSAGE_BUFFER_SIZE - index_message < 4) {
+      connection_cl->send(output_message);
+      index_message = 0;
+    }
+
+    std::copy(reinterpret_cast<char*>(&id), reinterpret_cast<char*>(&id) + 4, &output_message.data[index_message]);
+    index_message += 4;
+
+    if (MESSAGE_BUFFER_SIZE - index_message < 4) {
+      connection_cl->send(output_message);
+      index_message = 0;
+    }
+
+    std::copy(reinterpret_cast<char*>(&size_text), reinterpret_cast<char*>(&size_text) + 4, &output_message.data[index_message]);
+    index_message += 4;
+
+    index_name = 0;
+    while(size_text - index_name >= MESSAGE_BUFFER_SIZE - index_message) {
+      std::copy(&name[index_name], &name[index_name] + MESSAGE_BUFFER_SIZE - index_message, &output_message.data[index_message]);
+      connection_cl->send(output_message);
+      index_name += MESSAGE_BUFFER_SIZE - index_message;
+      index_message = 0;
+      std::cout << "Big msg. Send in the new msg. \n" << std::endl;
+    }
+
+    std::copy(&name[index_name], &name[size_text], &output_message.data[index_message]);
+    index_message += size_text - index_name;
+    output_message.data[index_message] = 0;
+  }
+  
+  connection_cl->send(output_message);
+
+  output_message.header.id = static_cast<msg_type>(finish);
+  connection_cl->send(output_message);
+}
+
+void Server::GetDataUpdate(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& input_message) {
+  int userid, chatid, last_index_in_chat;
+  std::copy(&input_message.data[0], &input_message.data[4], reinterpret_cast<char*>(&userid));
+  std::copy(&input_message.data[4], &input_message.data[8], reinterpret_cast<char*>(&chatid));
+  std::copy(&input_message.data[8], &input_message.data[12], reinterpret_cast<char*>(&last_index_in_chat));
+
+  pqxx::result texts = db.GetDataUpdate(userid, chatid, last_index_in_chat);
+
+  SendManyMsg(connection_cl, static_cast<uint32_t>(msg_type::SendUnpdateMore), static_cast<uint32_t>(msg_type::SendUnpdateFinish), texts);
 }

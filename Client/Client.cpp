@@ -82,7 +82,7 @@ std::vector<std::pair<int, std::string>> Client::GetChats() {
 std::vector<std::string> Client::GetMessage() {
   RequestForMessages();
   std::vector<std::string> messages;
-  AcceptMessages(messages);
+  AcceptMessages(messages, static_cast<uint32_t>(msg_type::SendMsgMore), static_cast<uint32_t>(msg_type::SendMsgFinish));
   return messages;
 }
 
@@ -101,8 +101,8 @@ void Client::RequestForMessages() {
   std::this_thread::sleep_for(std::chrono::milliseconds(5)); // wait server
 }
 
-void Client::AcceptMessages(std::vector<std::string>& result) {
-  std::cout << "\n[Start AcceptMessages]" << std::endl;
+void Client::AcceptMessages(std::vector<std::string>& result, uint32_t enum_send_more, uint32_t finish) {
+  //std::cout << "\n[Start AcceptMessages]" << std::endl;
   /*
     Принимаем сообщения 2 подтипов:
       - [char 0|1, int id_msg, int size, std::string, char 0|1 ...]
@@ -113,6 +113,10 @@ void Client::AcceptMessages(std::vector<std::string>& result) {
   std::string input_text;
   int id_msg, index_in_input_text = 0;
   bool will_be_more_messages = true, is_next_message = false;
+
+  bool need_read_check = true;
+  bool need_read_id = true;
+  bool need_read_size = true;
   
   while (is_connected() && get_in_comming().empty()) {
     //std::cout << "wait messages\n" << std::endl;
@@ -122,32 +126,51 @@ void Client::AcceptMessages(std::vector<std::string>& result) {
     if (!get_in_comming().empty()) {
       auto input_message = get_in_comming().pop_front().msg;
       //std::cout << "I have msg by server. Index of msg.id = " << static_cast<uint>(input_message.header.id) << std::endl;
-      switch (input_message.header.id) {
-         case msg_type::NewMessage: {
-          std::cout << "[-----------New message----------]" << std::endl;
-          break;
-        }
-        case msg_type::SendMsgMore: {
+      if (static_cast<uint32_t>(input_message.header.id) == enum_send_more) {
+          std::cout << "Accept MSS" << std::endl;
           for (int index_in_message = 0; index_in_message < MESSAGE_BUFFER_SIZE; ) {
-            if (!is_next_message) {
+            if (need_read_check) {
               if (input_message.data[index_in_message++] == 0) {
                 break;
               }
-              std::copy(&input_message.data[index_in_message], &input_message.data[index_in_message] + 4, reinterpret_cast<char*>(&id_msg));
-              std::copy(&input_message.data[index_in_message] + 4, &input_message.data[index_in_message] + 8, reinterpret_cast<char*>(&size_msg_last_));
-              input_text.resize(size_msg_last_);
-              index_in_message += 8;
             }
-            if (size_msg_last_ < MESSAGE_BUFFER_SIZE - index_in_message) {
+
+            if (need_read_id) {
+              if (MESSAGE_BUFFER_SIZE - index_in_message < 4) {
+                need_read_check = false;
+                need_read_id = true;
+                need_read_size = true;
+                break;
+              }
+              std::copy(&input_message.data[index_in_message], &input_message.data[index_in_message] + 4, reinterpret_cast<char*>(&id_msg));
+              index_in_message += 4;
+            }
+
+            if (need_read_size) {
+              if (MESSAGE_BUFFER_SIZE - index_in_message < 4) {
+                need_read_check = false;
+                need_read_id = false;
+                need_read_size = true;
+                break;
+              }
+              std::copy(&input_message.data[index_in_message], &input_message.data[index_in_message] + 4, reinterpret_cast<char*>(&size_msg_last_));
+              input_text.resize(size_msg_last_);
+              index_in_message += 4;
+            }
+
+            if (size_msg_last_ <= MESSAGE_BUFFER_SIZE - index_in_message) {
               // принимаемый текст помещается в текущее сообщение
               std::copy(&input_message.data[index_in_message], &input_message.data[index_in_message + size_msg_last_], &input_text[index_in_input_text]);
               result.push_back(input_text);
+              std::cout << "[AC]: " << input_text << std::endl;
 
               index_in_message += size_msg_last_;
               size_msg_last_ = 0;
               index_in_input_text = 0;
 
-              is_next_message = false;
+              need_read_check = true;
+              need_read_id = true;
+              need_read_size = true;
             } else {
               // принимаемый текст не помещается в текущее сообщение
               std::copy(&input_message.data[index_in_message], &input_message.data[MESSAGE_BUFFER_SIZE], &input_text[index_in_input_text]);
@@ -156,18 +179,18 @@ void Client::AcceptMessages(std::vector<std::string>& result) {
               index_in_input_text += MESSAGE_BUFFER_SIZE - index_in_message;
               index_in_message = MESSAGE_BUFFER_SIZE;
 
-              is_next_message = true;
+              need_read_check = false;
+              need_read_id = false;
+              need_read_size = false;
             }
           }
-          break;
-        } case msg_type::SendMsgFinish: {
+        } else if (static_cast<uint32_t>(input_message.header.id) == finish) {
+          std::cout << "Finish" << std::endl;
           will_be_more_messages = false;
-          break;
-        }
-      } 
+        } 
     }
   }
-  std::cout << "[End AcceptMessages]\n" << std::endl;
+  //std::cout << "[End AcceptMessages]\n" << std::endl;
 }
 
 bool Client::Autorization(const std::string& login, const std::string& password, std::string& error_message) {
@@ -367,4 +390,98 @@ bool Client::CheckUniqueLogin(const std::string& login) {
     }
   }
   return size == 0;
+}
+
+bool Client::CheckChatName(const std::string& name, int& chatid) {
+  int size_name = name.size();
+  net::message<msg_type> output_message;
+  output_message.header.id = msg_type::CheckChatName;
+  std::copy(reinterpret_cast<char*>(&userid_),reinterpret_cast<char*>(&userid_) + 4, &output_message.data[0]);
+  std::copy(reinterpret_cast<char*>(&size_name),reinterpret_cast<char*>(&size_name) + 4, &output_message.data[4]);
+  std::copy(&name[0], &name[size_name], &output_message.data[8]);
+  send(output_message);
+
+  while (is_connected() && get_in_comming().empty()) {}
+
+  if (is_connected() && !get_in_comming().empty()) {
+    auto input_message = get_in_comming().pop_front().msg;
+    switch (input_message.header.id) {
+      case msg_type::CheckChatName: {
+        std::copy(&input_message.data[0], &input_message.data[4], reinterpret_cast<char*>(&chatid));
+        break;
+      }
+    }
+  }
+
+  return chatid != 0;
+}
+
+bool Client::CheckTetAtTetChat(const std::string& nick, int& chatid, std::string& name) {
+  int size_name = nick.size();
+  net::message<msg_type> output_message;
+  output_message.header.id = msg_type::CheckTetAtTetChat;
+  std::copy(reinterpret_cast<char*>(&userid_),reinterpret_cast<char*>(&userid_) + 4, &output_message.data[0]);
+  std::copy(reinterpret_cast<char*>(&size_name),reinterpret_cast<char*>(&size_name) + 4, &output_message.data[4]);
+  std::copy(&nick[0], &nick[size_name], &output_message.data[8]);
+  send(output_message);
+
+  while (is_connected() && get_in_comming().empty()) {}
+
+  if (is_connected() && !get_in_comming().empty()) {
+    auto input_message = get_in_comming().pop_front().msg;
+    switch (input_message.header.id) {
+      case msg_type::CheckTetAtTetChat: {
+        std::copy(&input_message.data[0], &input_message.data[4], reinterpret_cast<char*>(&chatid));
+        std::copy(&input_message.data[4], &input_message.data[8], reinterpret_cast<char*>(&size_name));
+        std::copy(&input_message.data[8], &input_message.data[8 + size_name], reinterpret_cast<char*>(&name[0]));
+        break;
+      }
+    }
+  }
+
+  return chatid != 0;
+}
+
+int Client::CreateNewChat(const std::string& name, std::string& namechat) {
+  int size_name = name.size(), chatid;
+  net::message<msg_type> output_message;
+  output_message.header.id = msg_type::CreateNewChat;
+  std::copy(reinterpret_cast<char*>(&userid_),reinterpret_cast<char*>(&userid_) + 4, &output_message.data[0]);
+  std::copy(reinterpret_cast<char*>(&size_name),reinterpret_cast<char*>(&size_name) + 4, &output_message.data[4]);
+  std::copy(&name[0], &name[size_name], &output_message.data[8]);
+  send(output_message);
+
+  while (is_connected() && get_in_comming().empty()) {}
+
+  if (is_connected() && !get_in_comming().empty()) {
+    auto input_message = get_in_comming().pop_front().msg;
+    switch (input_message.header.id) {
+      case msg_type::CreateNewChat: {
+        std::copy(&input_message.data[0], &input_message.data[4], reinterpret_cast<char*>(&chatid));
+        std::copy(&input_message.data[4], &input_message.data[8], reinterpret_cast<char*>(&size_name));
+        std::copy(&input_message.data[8], &input_message.data[8 + size_name], reinterpret_cast<char*>(&namechat[0]));
+        break;
+      }
+    }
+  }
+
+  return chatid;
+}
+
+
+std::vector<std::string> Client::GetDataUpdate() {
+  net::message<msg_type> output_message;
+  output_message.header.id = msg_type::GetDataUpdate;
+  //std::cout << "userid = " << userid_ << " chatid = " << chatid_ << "last_accept_message_id_in_chat_ = " << last_accept_message_id_in_chat_ << std::endl;
+  int l = 1;
+  std::copy(reinterpret_cast<char*>(&userid_),reinterpret_cast<char*>(&userid_) + 4, &output_message.data[0]);
+  std::copy(reinterpret_cast<char*>(&chatid_),reinterpret_cast<char*>(&chatid_) + 4, &output_message.data[4]);
+  std::copy(reinterpret_cast<char*>(&l),reinterpret_cast<char*>(&l) + 4, &output_message.data[8]);
+  send(output_message);
+
+  while (is_connected() && get_in_comming().empty()) {}
+
+  std::vector<std::string> messages;
+  AcceptMessages(messages, static_cast<uint32_t>(msg_type::SendUnpdateMore), static_cast<uint32_t>(msg_type::SendUnpdateMore));
+  return messages;
 }

@@ -18,6 +18,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -29,11 +30,6 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QWidget *layoutWidget;
-    QVBoxLayout *verticalLayout;
-    QFrame *frame;
-    QScrollArea *friendScrollArea;
-    QWidget *friendScrollAreaContext;
-    QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout_3;
     QFrame *frame_2;
     QScrollArea *messageScrollArea;
@@ -43,6 +39,17 @@ public:
     QHBoxLayout *horizontalLayout;
     QLineEdit *InputMsg;
     QPushButton *SendMsg;
+    QWidget *widget;
+    QVBoxLayout *verticalLayout;
+    QFrame *frame;
+    QHBoxLayout *horizontalLayout_2;
+    QPushButton *pushButton_2;
+    QSpacerItem *horizontalSpacer_2;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *findNick;
+    QLineEdit *inputNick;
+    QScrollArea *friendScrollArea;
+    QWidget *friendScrollAreaContext;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -55,36 +62,11 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         layoutWidget = new QWidget(centralwidget);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(20, 10, 251, 521));
-        verticalLayout = new QVBoxLayout(layoutWidget);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 0, 0, 0);
-        frame = new QFrame(layoutWidget);
-        frame->setObjectName(QString::fromUtf8("frame"));
-        frame->setMinimumSize(QSize(0, 45));
-        frame->setMaximumSize(QSize(16777215, 45));
-        frame->setFrameShape(QFrame::StyledPanel);
-        frame->setFrameShadow(QFrame::Raised);
-
-        verticalLayout->addWidget(frame);
-
-        friendScrollArea = new QScrollArea(layoutWidget);
-        friendScrollArea->setObjectName(QString::fromUtf8("friendScrollArea"));
-        friendScrollArea->setWidgetResizable(true);
-        friendScrollAreaContext = new QWidget();
-        friendScrollAreaContext->setObjectName(QString::fromUtf8("friendScrollAreaContext"));
-        friendScrollAreaContext->setGeometry(QRect(0, 0, 247, 68));
-        friendScrollArea->setWidget(friendScrollAreaContext);
-
-        verticalLayout->addWidget(friendScrollArea, 0, Qt::AlignTop);
-
-        layoutWidget1 = new QWidget(centralwidget);
-        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(280, 10, 491, 521));
-        verticalLayout_3 = new QVBoxLayout(layoutWidget1);
+        layoutWidget->setGeometry(QRect(280, 10, 491, 521));
+        verticalLayout_3 = new QVBoxLayout(layoutWidget);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
-        frame_2 = new QFrame(layoutWidget1);
+        frame_2 = new QFrame(layoutWidget);
         frame_2->setObjectName(QString::fromUtf8("frame_2"));
         frame_2->setMinimumSize(QSize(0, 45));
         frame_2->setMaximumSize(QSize(16777215, 45));
@@ -93,7 +75,7 @@ public:
 
         verticalLayout_3->addWidget(frame_2);
 
-        messageScrollArea = new QScrollArea(layoutWidget1);
+        messageScrollArea = new QScrollArea(layoutWidget);
         messageScrollArea->setObjectName(QString::fromUtf8("messageScrollArea"));
         messageScrollArea->setWidgetResizable(true);
         messageScrollAreaContext = new QWidget();
@@ -103,7 +85,7 @@ public:
 
         verticalLayout_3->addWidget(messageScrollArea);
 
-        frame_3 = new QFrame(layoutWidget1);
+        frame_3 = new QFrame(layoutWidget);
         frame_3->setObjectName(QString::fromUtf8("frame_3"));
         frame_3->setMinimumSize(QSize(0, 45));
         frame_3->setMaximumSize(QSize(16777215, 16777215));
@@ -134,6 +116,56 @@ public:
 
         verticalLayout_3->addWidget(frame_3, 0, Qt::AlignTop);
 
+        widget = new QWidget(centralwidget);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setGeometry(QRect(10, 10, 261, 511));
+        verticalLayout = new QVBoxLayout(widget);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        frame = new QFrame(widget);
+        frame->setObjectName(QString::fromUtf8("frame"));
+        frame->setMinimumSize(QSize(0, 45));
+        frame->setMaximumSize(QSize(16777215, 45));
+        frame->setFrameShape(QFrame::StyledPanel);
+        frame->setFrameShadow(QFrame::Raised);
+        horizontalLayout_2 = new QHBoxLayout(frame);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        pushButton_2 = new QPushButton(frame);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+
+        horizontalLayout_2->addWidget(pushButton_2);
+
+        horizontalSpacer_2 = new QSpacerItem(70, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer_2);
+
+        horizontalSpacer = new QSpacerItem(0, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer);
+
+        findNick = new QPushButton(frame);
+        findNick->setObjectName(QString::fromUtf8("findNick"));
+
+        horizontalLayout_2->addWidget(findNick);
+
+        inputNick = new QLineEdit(frame);
+        inputNick->setObjectName(QString::fromUtf8("inputNick"));
+
+        horizontalLayout_2->addWidget(inputNick);
+
+
+        verticalLayout->addWidget(frame);
+
+        friendScrollArea = new QScrollArea(widget);
+        friendScrollArea->setObjectName(QString::fromUtf8("friendScrollArea"));
+        friendScrollArea->setWidgetResizable(true);
+        friendScrollAreaContext = new QWidget();
+        friendScrollAreaContext->setObjectName(QString::fromUtf8("friendScrollAreaContext"));
+        friendScrollAreaContext->setGeometry(QRect(0, 0, 257, 456));
+        friendScrollArea->setWidget(friendScrollAreaContext);
+
+        verticalLayout->addWidget(friendScrollArea);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -152,6 +184,8 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         SendMsg->setText(QCoreApplication::translate("MainWindow", "\320\236\321\202\320\277\321\200\320\260\320\262\320\270\321\202\321\214", nullptr));
+        pushButton_2->setText(QString());
+        findNick->setText(QString());
     } // retranslateUi
 
 };

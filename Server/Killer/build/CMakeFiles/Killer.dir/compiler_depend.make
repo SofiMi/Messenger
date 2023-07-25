@@ -4,7 +4,7 @@
 CMakeFiles/Killer.dir/Killer.cpp.o: ../Killer.cpp \
   /usr/include/stdc-predef.h \
   /home/sofia/Algo/Messenger/Client/net_client.h \
-  /home/sofia/Algo/Messenger/NetWork/net_message.h \
+  /home/sofia/Algo/Messenger/NetWork/net_common.h \
   /usr/include/c++/11/memory \
   /usr/include/c++/11/bits/stl_algobase.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
@@ -1252,8 +1252,12 @@ CMakeFiles/Killer.dir/Killer.cpp.o: ../Killer.cpp \
   /usr/include/boost/asio/windows/stream_handle.hpp \
   /usr/include/boost/asio/write_at.hpp \
   /usr/include/boost/asio/impl/write_at.hpp \
+  /home/sofia/Algo/Messenger/NetWork/net_message.h \
+  /home/sofia/Algo/Messenger/NetWork/net_common.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
   /home/sofia/Algo/Messenger/NetWork/net_connection.h \
+  /home/sofia/Algo/Messenger/NetWork/net_queue.h \
+  /home/sofia/Algo/Messenger/NetWork/net_message.h \
   /home/sofia/Algo/Messenger/include.h
 
 
@@ -1562,6 +1566,12 @@ CMakeFiles/Killer.dir/Killer.cpp.o: ../Killer.cpp \
 /usr/include/boost/asio/detail/handler_invoke_helpers.hpp:
 
 /usr/include/boost/asio/ip/multicast.hpp:
+
+/home/sofia/Algo/Messenger/NetWork/net_message.h:
+
+/usr/include/boost/asio/detail/handler_type_requirements.hpp:
+
+/usr/include/boost/asio/detail/fenced_block.hpp:
 
 /usr/include/boost/asio/detail/impl/posix_event.ipp:
 
@@ -2019,6 +2029,10 @@ CMakeFiles/Killer.dir/Killer.cpp.o: ../Killer.cpp \
 
 /usr/include/c++/11/bits/localefwd.h:
 
+/home/sofia/Algo/Messenger/NetWork/net_common.h:
+
+/usr/include/c++/11/bits/nested_exception.h:
+
 /usr/include/boost/asio/detail/scheduler.hpp:
 
 /usr/include/boost/mpl/aux_/lambda_support.hpp:
@@ -2082,8 +2096,6 @@ CMakeFiles/Killer.dir/Killer.cpp.o: ../Killer.cpp \
 /usr/include/boost/predef/compiler/gcc.h:
 
 /usr/include/x86_64-linux-gnu/bits/semaphore.h:
-
-/usr/include/c++/11/bits/nested_exception.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h:
 
@@ -2245,19 +2257,51 @@ CMakeFiles/Killer.dir/Killer.cpp.o: ../Killer.cpp \
 
 /usr/include/boost/asio/detail/call_stack.hpp:
 
-/usr/include/boost/asio/detail/handler_type_requirements.hpp:
+/usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h:
 
-/usr/include/boost/asio/detail/fenced_block.hpp:
+/usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
 
-/home/sofia/Algo/Messenger/NetWork/net_message.h:
+/usr/include/c++/11/bits/charconv.h:
 
-/usr/include/boost/asio/detail/std_fenced_block.hpp:
+/usr/include/math.h:
 
-/usr/include/boost/mpl/aux_/static_cast.hpp:
+/usr/include/assert.h:
 
-/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
+/usr/include/boost/mpl/aux_/config/has_xxx.hpp:
 
-/usr/include/boost/numeric/conversion/detail/numeric_cast_traits.hpp:
+/usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
+
+/usr/include/boost/config/stdlib/libstdcpp3.hpp:
+
+/usr/include/c++/11/concepts:
+
+/usr/include/boost/system/detail/system_category_posix.hpp:
+
+/usr/include/boost/asio/io_context.hpp:
+
+/usr/include/boost/predef/architecture/sys370.h:
+
+/usr/include/c++/11/bits/cxxabi_forced.h:
+
+/usr/include/c++/11/bits/ranges_cmp.h:
+
+/usr/include/asm-generic/types.h:
+
+/usr/include/x86_64-linux-gnu/bits/ss_flags.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h:
+
+/usr/include/x86_64-linux-gnu/sys/eventfd.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
+
+/usr/include/c++/11/debug/assertions.h:
+
+/usr/include/errno.h:
+
+/usr/include/boost/asio/io_service_strand.hpp:
+
+/usr/include/linux/close_range.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h:
 
@@ -2267,19 +2311,7 @@ CMakeFiles/Killer.dir/Killer.cpp.o: ../Killer.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/getopt_core.h:
 
-/usr/include/asm-generic/types.h:
-
-/usr/include/c++/11/bits/ranges_cmp.h:
-
 /usr/include/asm-generic/bitsperlong.h:
-
-/usr/include/x86_64-linux-gnu/sys/eventfd.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/ss_flags.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h:
 
 /usr/include/c++/11/streambuf:
 
@@ -2299,6 +2331,12 @@ CMakeFiles/Killer.dir/Killer.cpp.o: ../Killer.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
 
+/usr/include/wchar.h:
+
+/usr/include/boost/asio/execution/impl/bad_executor.ipp:
+
+/usr/include/boost/is_placeholder.hpp:
+
 /usr/include/boost/regex/v4/match_flags.hpp:
 
 /usr/include/c++/11/initializer_list:
@@ -2308,6 +2346,10 @@ CMakeFiles/Killer.dir/Killer.cpp.o: ../Killer.cpp \
 /usr/include/x86_64-linux-gnu/bits/time64.h:
 
 /usr/include/c++/11/debug/debug.h:
+
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
+
+/usr/include/boost/numeric/conversion/detail/numeric_cast_traits.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
 
@@ -2321,14 +2363,6 @@ CMakeFiles/Killer.dir/Killer.cpp.o: ../Killer.cpp \
 
 /usr/include/boost/smart_ptr/detail/sp_nullptr_t.hpp:
 
-/usr/include/c++/11/debug/assertions.h:
-
-/usr/include/errno.h:
-
-/usr/include/boost/asio/io_service_strand.hpp:
-
-/usr/include/linux/close_range.h:
-
 /usr/include/x86_64-linux-gnu/bits/sigstack.h:
 
 /usr/include/boost/date_time/special_defs.hpp:
@@ -2340,14 +2374,6 @@ CMakeFiles/Killer.dir/Killer.cpp.o: ../Killer.cpp \
 /usr/include/features.h:
 
 /usr/include/c++/11/bits/iterator_concepts.h:
-
-/usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
-
-/usr/include/c++/11/bits/charconv.h:
-
-/usr/include/math.h:
 
 /usr/include/boost/preprocessor/list/detail/fold_right.hpp:
 
@@ -2386,30 +2412,6 @@ CMakeFiles/Killer.dir/Killer.cpp.o: ../Killer.cpp \
 /usr/include/boost/config.hpp:
 
 /usr/include/c++/11/bits/semaphore_base.h:
-
-/usr/include/assert.h:
-
-/usr/include/boost/mpl/aux_/config/has_xxx.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
-
-/usr/include/boost/config/stdlib/libstdcpp3.hpp:
-
-/usr/include/c++/11/concepts:
-
-/usr/include/wchar.h:
-
-/usr/include/boost/is_placeholder.hpp:
-
-/usr/include/boost/asio/execution/impl/bad_executor.ipp:
-
-/usr/include/boost/system/detail/system_category_posix.hpp:
-
-/usr/include/boost/asio/io_context.hpp:
-
-/usr/include/boost/predef/architecture/sys370.h:
-
-/usr/include/c++/11/bits/cxxabi_forced.h:
 
 /usr/include/ctype.h:
 
@@ -2494,6 +2496,10 @@ CMakeFiles/Killer.dir/Killer.cpp.o: ../Killer.cpp \
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
 
 /usr/include/boost/asio/detail/object_pool.hpp:
+
+/usr/include/boost/asio/detail/std_fenced_block.hpp:
+
+/usr/include/boost/mpl/aux_/static_cast.hpp:
 
 /usr/include/stdlib.h:
 

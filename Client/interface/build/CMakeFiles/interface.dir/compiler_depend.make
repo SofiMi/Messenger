@@ -1354,6 +1354,9 @@ CMakeFiles/interface.dir/autorization.cpp.o: ../autorization.cpp \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
   /home/sofia/Algo/Messenger/NetWork/net_message.h \
   /home/sofia/Algo/Messenger/include.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h \
   interface_autogen/include/ui_autorization.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/QVariant \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qvariant.h \
@@ -1392,8 +1395,6 @@ CMakeFiles/interface.dir/autorization.cpp.o: ../autorization.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qaction.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qactiongroup.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QStatusBar \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qstatusbar.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QVBoxLayout \
@@ -4028,6 +4029,9 @@ CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o: interface_aut
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
   /home/sofia/Algo/Messenger/NetWork/net_message.h \
   /home/sofia/Algo/Messenger/include.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h \
   interface_autogen/EWIEGA46WW/moc_mainwindow.cpp \
   ../mainwindow.h \
   interface_autogen/EWIEGA46WW/moc_registration.cpp \
@@ -5386,6 +5390,9 @@ CMakeFiles/interface.dir/main.cpp.o: ../main.cpp \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
   /home/sofia/Algo/Messenger/NetWork/net_message.h \
   /home/sofia/Algo/Messenger/include.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QApplication \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qapplication.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qcoreapplication.h \
@@ -6750,6 +6757,9 @@ CMakeFiles/interface.dir/mainwindow.cpp.o: ../mainwindow.cpp \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
   /home/sofia/Algo/Messenger/NetWork/net_message.h \
   /home/sofia/Algo/Messenger/include.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h \
   interface_autogen/include/ui_mainwindow.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/QVariant \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qvariant.h \
@@ -6786,11 +6796,11 @@ CMakeFiles/interface.dir/mainwindow.cpp.o: ../mainwindow.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qaction.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qactiongroup.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QScrollArea \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qscrollarea.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractscrollarea.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QSpacerItem \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlayoutitem.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QStatusBar \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qstatusbar.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QVBoxLayout \
@@ -6806,7 +6816,6 @@ CMakeFiles/interface.dir/mainwindow.cpp.o: ../mainwindow.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QMessageBox \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qmessagebox.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qdialog.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QScrollBar \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qscrollbar.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractslider.h \
@@ -8168,6 +8177,9 @@ CMakeFiles/interface.dir/registration.cpp.o: ../registration.cpp \
   /home/sofia/Algo/Messenger/NetWork/net_message.h \
   /home/sofia/Algo/Messenger/include.h \
   ../mainwindow.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h \
   interface_autogen/include/ui_registration.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/QVariant \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qvariant.h \
@@ -8206,8 +8218,6 @@ CMakeFiles/interface.dir/registration.cpp.o: ../registration.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qaction.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qactiongroup.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QStatusBar \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qstatusbar.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QVBoxLayout \
@@ -8263,14 +8273,6 @@ interface_autogen/mocs_compilation.cpp:
 
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QStatusBar:
 
-/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qscrollarea.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton:
-
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qactiongroup.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtGui/qtextoption.h:
@@ -8306,6 +8308,14 @@ interface_autogen/mocs_compilation.cpp:
 /usr/include/x86_64-linux-gnu/qt5/QtCore/QVariant:
 
 interface_autogen/include/ui_autorization.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qscrollarea.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton:
 
 /home/sofia/Algo/Messenger/include.h:
 
@@ -8960,6 +8970,8 @@ interface_autogen/include/ui_autorization.h:
 /usr/include/x86_64-linux-gnu/qt5/QtGui/qicon.h:
 
 /usr/include/boost/mpl/aux_/config/static_constant.hpp:
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/QSpacerItem:
 
 /usr/include/boost/asio/detail/mutex.hpp:
 

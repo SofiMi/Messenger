@@ -26,6 +26,13 @@ private:
   void AddNewUser(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message);
   void CheckUniqueNick(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message);
   void CheckUniqueLogin(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message);
+  void CheckChatName(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message);
+  void CreateNewChat(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message);
+  void CheckTetAtTetChat(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message);
+  void GetDataUpdate(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& input_message);
+
+  void SendManyMsg(std::shared_ptr<net::connection<msg_type>> connection_cl, uint32_t send_more, uint32_t finish, pqxx::result& texts);
 
   std::unordered_map<int, std::tuple<int, int, std::string, std::shared_ptr<net::connection<msg_type>>>> user_messages_memory_; // <userid, <chatid, size_message (оставшаяся), message>>
+  int MESSAGE_BUFFER_SIZE = 254;
 };

@@ -25,13 +25,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 63,
+				"line" : 59,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 69,
+				"line" : 65,
 				"parent" : 0
 			}
 		]
@@ -121,8 +121,7 @@
 				2,
 				6,
 				9,
-				12,
-				20
+				17
 			]
 		}
 	],
@@ -183,8 +182,7 @@
 				2,
 				6,
 				9,
-				12,
-				20
+				17
 			]
 		},
 		{
@@ -195,17 +193,15 @@
 				5,
 				8,
 				11,
+				12,
+				13,
 				14,
 				15,
 				16,
-				17,
 				18,
 				19,
-				21,
-				22,
-				23,
-				24,
-				25
+				20,
+				21
 			]
 		},
 		{
@@ -215,15 +211,14 @@
 				4,
 				7,
 				10,
-				13,
-				26
+				22
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				27
+				23
 			]
 		}
 	],
@@ -256,22 +251,6 @@
 		{
 			"backtrace" : 1,
 			"path" : "mainwindow.ui",
-			"sourceGroupIndex" : 2
-		},
-		{
-			"backtrace" : 1,
-			"path" : "autorisation.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "autorisation.cpp",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 1,
-			"path" : "autorisation.ui",
 			"sourceGroupIndex" : 2
 		},
 		{
@@ -351,12 +330,6 @@
 			"backtrace" : 0,
 			"isGenerated" : true,
 			"path" : "/home/sofia/Algo/Messenger/Client/build-interface-Desktop-Debug/interface_autogen/include/ui_mainwindow.h",
-			"sourceGroupIndex" : 1
-		},
-		{
-			"backtrace" : 0,
-			"isGenerated" : true,
-			"path" : "/home/sofia/Algo/Messenger/Client/build-interface-Desktop-Debug/interface_autogen/include/ui_autorisation.h",
 			"sourceGroupIndex" : 1
 		},
 		{

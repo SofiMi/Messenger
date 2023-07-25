@@ -72,6 +72,7 @@ void MainWindow::AddOtherFriends() {
 
   for (int i = 0; i < friend_name.size(); ++i) {
     QPushButton* button = new QPushButton(QString::fromStdString(friend_name[i].second));
+    chatid_map[friend_name[i].first] = button;
     QObject::connect(button, &QPushButton::clicked,
      [this, chatid = friend_name[i].first]() {
       client_->chatid_ = chatid;
@@ -90,6 +91,7 @@ void MainWindow::AddOtherFriends() {
 
 
 void MainWindow::on_SendMsg_clicked(bool checked) {
+  std::cout << "\n[on_SendMsg_clicked]" << std::endl;
   /* Отправление нового сообщения */
   QString qtext = ui->InputMsg->text();
 
@@ -109,6 +111,70 @@ void MainWindow::on_SendMsg_clicked(bool checked) {
     std::string text = qtext.toStdString();
     client_->SendNewMessage(text);
   } else {
-    QMessageBox::about(this, "Неправильный ввод", "Сообщение не может быть пустым");
+    QMessageBox::about(this, "Неправильный ввод", "Сообщение не может быть пустым.");
   }
+  std::cout << "[on_SendMsg_clicked]\n" << std::endl;
 }
+
+void MainWindow::timerEvent(QTimerEvent* event) {
+  //std::cout << "Timer" << std::endl;
+  //std::vector<std::string> res = client_->GetDataUpdate();
+  //for (int i = 0; i < res.size(); ++i) {
+    //std::cout << res[i] << " " << std::endl;
+  //}
+}
+
+void MainWindow::on_findNick_clicked() {
+  int chatid;
+  std::string namechat = "Chat";
+  std::string nick = ui->inputNick->text().toStdString();
+
+    if (nick[0] == '@') {
+      if (client_->CheckUniqueNickname(nick)) {
+        QMessageBox::about(this, "Неудачный поиск", "Такого пользователя не существует.");
+        return;
+      } else {
+        if (client_->CheckTetAtTetChat(nick, chatid, namechat)) {
+          if (chatid_map.find(chatid) != chatid_map.end()) {
+            delete chatid_map[chatid];
+          }
+        } else {
+          QMessageBox::StandardButton reply;
+          reply = QMessageBox::question(this, "", "Начать новый диалог",
+                                QMessageBox::Yes|QMessageBox::No);
+          if (reply == QMessageBox::Yes) {
+            chatid = client_->CreateNewChat(nick, namechat);
+          } else {
+            return;
+          }
+        }
+      }
+    }
+
+    if (nick[0] != '@') {
+      if (!client_->CheckChatName(nick, chatid)) {
+        QMessageBox::about(this, "Неудачный поиск", "Чата с таким именем не существует. Попробуйте искать через глобальный поиск(@...)");
+        return;
+      } else {
+        delete chatid_map[chatid];
+      }
+    }
+
+    QVBoxLayout* friend_box_layout =
+        dynamic_cast<QVBoxLayout *>(ui->friendScrollAreaContext->layout());
+
+    QPushButton* button = new QPushButton(QString::fromStdString(namechat));
+    QObject::connect(button, &QPushButton::clicked,
+     [this, chatid]() {
+      client_->chatid_ = chatid;
+      client_->GetLastIdMessage();
+      while (auto* item = ui->messageScrollAreaContext->layout()->takeAt(0)) {
+        delete item->widget();
+        delete item;
+      }
+      AddOldMessages();
+    });
+    // TO DO: formating button with long name !!!
+    friend_box_layout->insertWidget(0, button);
+}
+

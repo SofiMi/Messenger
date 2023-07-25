@@ -1237,6 +1237,9 @@ CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o: \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../../NetWork/net_queue.h \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../../NetWork/net_message.h \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../../include.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/moc_mainwindow.cpp \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../mainwindow.h \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/moc_registration.cpp \

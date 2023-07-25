@@ -12,7 +12,7 @@ class Killer : public net::client_interface<msg_type> {
 
 int main() {
   Killer killer;
-  killer.connect("127.0.0.1", 10020);
+  killer.connect("127.0.0.1", 10030);
   if (!killer.is_connected()) {
     std::cout << "No connection\n" << std::endl;
     throw;

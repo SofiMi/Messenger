@@ -30,6 +30,15 @@ enum class msg_type : uint32_t {
   // Добавление нового пользователя
   AddNewUser,
   CheckUniqueLogin,
-  CheckUniqueNick
+  CheckUniqueNick,
 
+  // Поиск 
+  CheckChatName,
+  CreateNewChat,
+  CheckTetAtTetChat,
+
+  // Обновление
+  GetDataUpdate,
+  SendUnpdateMore,
+  SendUnpdateFinish,
 };

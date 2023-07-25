@@ -150,6 +150,7 @@ namespace net {
                           // message at the front of the queue.
                           bool bWritingMessage = !__q_messages_out.empty();
                           try {
+                            //std::cout << "SEND MSG" << std::endl;
                             __q_messages_out.push_back(msg);
                           } catch (std::exception &e) {
                             std::cerr << "post exception: " << e.what() << '\n';

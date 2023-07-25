@@ -24,4 +24,8 @@ class WorkDB {
 
   pqxx::result GetUseridByChatitd(int chatid);
   int GetCountMsgInChat(int chat);
+  int ChatIdByNameAndUserid(int userid, const std::string& name);
+  std::pair<int, std::string> CreateNewChat(int userid, const std::string& name);
+  int CheckTetAtTetChat(int userid, const std::string& name);
+  pqxx::result GetDataUpdate(int userid, int chatid, int last_index_in_chat);
 };

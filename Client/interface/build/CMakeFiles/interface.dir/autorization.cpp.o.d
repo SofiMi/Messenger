@@ -1238,6 +1238,9 @@ CMakeFiles/interface.dir/autorization.cpp.o: \
  /home/sofia/Algo/Messenger/Client/interface/../../NetWork/net_queue.h \
  /home/sofia/Algo/Messenger/Client/interface/../../NetWork/net_message.h \
  /home/sofia/Algo/Messenger/Client/interface/../../include.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/include/ui_autorization.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QVariant \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qvariant.h \
@@ -1276,8 +1279,6 @@ CMakeFiles/interface.dir/autorization.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qaction.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qactiongroup.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
- /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
- /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QStatusBar \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qstatusbar.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QVBoxLayout \

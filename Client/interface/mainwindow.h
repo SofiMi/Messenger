@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include "../Client.h"
+#include <unordered_map>
+#include <QPushButton>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,8 +21,11 @@ public:
 private slots:
     void on_SendMsg_clicked(bool checked);
 
+    void on_findNick_clicked();
+
 private:
   void resizeEvent(QResizeEvent* event);
+  void timerEvent(QTimerEvent *event);
 
   void AddOldMessages();
   void AddNewMessage(const QString& qstr);
@@ -31,5 +36,7 @@ private:
 
   std::shared_ptr<Client> client_;
   size_t chat_id_ = 0;
+
+  std::unordered_map<int, QPushButton*> chatid_map;
 };
 #endif // MAINWINDOW_H
