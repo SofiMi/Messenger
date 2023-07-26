@@ -75,6 +75,11 @@ void Server::__on_message(std::shared_ptr<net::connection<msg_type>> connection_
       GetDataUpdate(connection_cl, message);
       break;
     }
+    
+    case msg_type::GetLastMsgId: {
+      GetLastMsgId(connection_cl, message);
+      break;
+    }
   }
 }
 
@@ -203,7 +208,7 @@ void Server::NewMessage(std::shared_ptr<net::connection<msg_type>> connection_cl
     output_message.header.id = msg_type::NewMessage;
     for (auto iter: res_userid) {
       if (iter[0].as<int>() != userid && user_messages_memory_.find(iter[0].as<int>()) != user_messages_memory_.end()) {
-        std::get<3>(user_messages_memory_[iter[0].as<int>()])->send(output_message);
+        //std::get<3>(user_messages_memory_[iter[0].as<int>()])->send(output_message);
       }
     }
   } else {
@@ -372,4 +377,13 @@ void Server::GetDataUpdate(std::shared_ptr<net::connection<msg_type>> connection
   pqxx::result texts = db.GetDataUpdate(userid, chatid, last_index_in_chat);
 
   SendManyMsg(connection_cl, static_cast<uint32_t>(msg_type::SendUnpdateMore), static_cast<uint32_t>(msg_type::SendUnpdateFinish), texts);
+}
+
+
+void Server::GetLastMsgId(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& input_message) {
+  int chatid;
+  std::copy(&input_message.data[0], &input_message.data[4], reinterpret_cast<char*>(&chatid));
+  int last_index_in_chat = db.GetLastMsgId(chatid);
+  std::copy(reinterpret_cast<char*>(&last_index_in_chat), reinterpret_cast<char*>(&last_index_in_chat) + 4, &input_message.data[0]);
+  connection_cl->send(input_message);
 }

@@ -1,0 +1,12 @@
+# ninja log v5
+1	984	1690314059376089182	interface_autogen/timestamp	c8e41cedd04c7a62
+1	984	1690314059376089182	interface_autogen/mocs_compilation.cpp	c8e41cedd04c7a62
+1	984	1690314059376089182	/home/sofia/Algo/Messenger/Client/build-interface-Desktop-Debug/interface_autogen/timestamp	c8e41cedd04c7a62
+1	984	1690314059376089182	/home/sofia/Algo/Messenger/Client/build-interface-Desktop-Debug/interface_autogen/mocs_compilation.cpp	c8e41cedd04c7a62
+984	12433	1690314070836089614	CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o	17719ff2329fc21b
+986	12487	1690314070888089616	CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o	1a803309fda09910
+985	12863	1690314071268089630	CMakeFiles/interface.dir/registration.cpp.o	85c608d25f1e4289
+985	12890	1690314071296089632	CMakeFiles/interface.dir/main.cpp.o	2bfbbd0885792353
+985	13626	1690314072032089659	CMakeFiles/interface.dir/mainwindow.cpp.o	6145149a0f036e84
+985	17221	1690314075620089795	CMakeFiles/interface.dir/autorization.cpp.o	3e77a253ffdf4798
+17221	18226	1690314076632089833	interface	491f6cb89442b94d

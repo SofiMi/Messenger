@@ -99,17 +99,30 @@ void MainWindow::on_SendMsg_clicked(bool checked) {
      ui->InputMsg->clear();
 
     // Добавляем сообщение в чат
-    QVBoxLayout* messages_box_layout =
-        dynamic_cast<QVBoxLayout *>(ui->messageScrollAreaContext->layout());
+    //QVBoxLayout* messages_box_layout =
+        //dynamic_cast<QVBoxLayout *>(ui->messageScrollAreaContext->layout());
     
-    QLabel* new_message = new QLabel(qtext);
-    new_message->setStyleSheet("QLabel { background-color : white }");
-    new_message->setWordWrap(true);
-    messages_box_layout->addWidget(new_message);
+    //QLabel* new_message = new QLabel(qtext);
+    // new_message->setStyleSheet("QLabel { background-color : white }");
+    //new_message->setWordWrap(true);
+    //messages_box_layout->addWidget(new_message);
 
     // Передача сообщения серверу
     std::string text = qtext.toStdString();
     client_->SendNewMessage(text);
+
+    std::vector<std::string> res = client_->GetDataUpdate();
+
+    QVBoxLayout* messages_box_layout =
+          dynamic_cast<QVBoxLayout *>(ui->messageScrollAreaContext->layout());
+
+    for (int i = 0; i < res.size(); ++i) {
+      std::cout << res[i] << " " << std::endl;
+      QLabel* new_message = new QLabel(res[i].c_str());
+      new_message->setStyleSheet("QLabel { background-color : white }");
+      new_message->setWordWrap(true);
+      messages_box_layout->addWidget(new_message);
+    }
   } else {
     QMessageBox::about(this, "Неправильный ввод", "Сообщение не может быть пустым.");
   }
@@ -117,11 +130,19 @@ void MainWindow::on_SendMsg_clicked(bool checked) {
 }
 
 void MainWindow::timerEvent(QTimerEvent* event) {
-  //std::cout << "Timer" << std::endl;
-  //std::vector<std::string> res = client_->GetDataUpdate();
-  //for (int i = 0; i < res.size(); ++i) {
-    //std::cout << res[i] << " " << std::endl;
-  //}
+  std::cout << "Timer" << std::endl;
+  std::vector<std::string> res = client_->GetDataUpdate();
+
+  QVBoxLayout* messages_box_layout =
+        dynamic_cast<QVBoxLayout *>(ui->messageScrollAreaContext->layout());
+
+  for (int i = 0; i < res.size(); ++i) {
+    std::cout << res[i] << " " << std::endl;
+    QLabel* new_message = new QLabel(res[i].c_str());
+    new_message->setStyleSheet("QLabel { background-color : white }");
+    new_message->setWordWrap(true);
+    messages_box_layout->addWidget(new_message);
+  }
 }
 
 void MainWindow::on_findNick_clicked() {

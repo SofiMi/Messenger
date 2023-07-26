@@ -127,7 +127,7 @@ void Client::AcceptMessages(std::vector<std::string>& result, uint32_t enum_send
       auto input_message = get_in_comming().pop_front().msg;
       //std::cout << "I have msg by server. Index of msg.id = " << static_cast<uint>(input_message.header.id) << std::endl;
       if (static_cast<uint32_t>(input_message.header.id) == enum_send_more) {
-          std::cout << "Accept MSS" << std::endl;
+          //std::cout << "Accept MSS" << std::endl;
           for (int index_in_message = 0; index_in_message < MESSAGE_BUFFER_SIZE; ) {
             if (need_read_check) {
               if (input_message.data[index_in_message++] == 0) {
@@ -162,7 +162,7 @@ void Client::AcceptMessages(std::vector<std::string>& result, uint32_t enum_send
               // принимаемый текст помещается в текущее сообщение
               std::copy(&input_message.data[index_in_message], &input_message.data[index_in_message + size_msg_last_], &input_text[index_in_input_text]);
               result.push_back(input_text);
-              std::cout << "[AC]: " << input_text << std::endl;
+              //std::cout << "[AC]: " << input_text << std::endl;
 
               index_in_message += size_msg_last_;
               size_msg_last_ = 0;
@@ -185,7 +185,7 @@ void Client::AcceptMessages(std::vector<std::string>& result, uint32_t enum_send
             }
           }
         } else if (static_cast<uint32_t>(input_message.header.id) == finish) {
-          std::cout << "Finish" << std::endl;
+          //std::cout << "Finish" << std::endl;
           will_be_more_messages = false;
         } 
     }
@@ -266,6 +266,7 @@ void Client::GetLastIdMessage() {
       }
       case msg_type::LastMessageId: {
         std::copy(&message_result.data[0], &message_result.data[0] + 4, reinterpret_cast<char*>(&last_accept_message_id_in_chat_));
+        last_index_in_chat_ = last_accept_message_id_in_chat_ - 1;
         break;
       }
     }
@@ -470,18 +471,46 @@ int Client::CreateNewChat(const std::string& name, std::string& namechat) {
 
 
 std::vector<std::string> Client::GetDataUpdate() {
+  int last_msg_id;
   net::message<msg_type> output_message;
+
+  output_message.header.id = msg_type::GetLastMsgId;
+  std::copy(reinterpret_cast<char*>(&chatid_),reinterpret_cast<char*>(&chatid_) + 4, &output_message.data[0]);
+  send(output_message);
+  while (is_connected() && get_in_comming().empty()) {
+  }
+  if (is_connected() && !get_in_comming().empty()) {
+    auto input_message = get_in_comming().pop_front().msg;
+    switch (input_message.header.id) {
+      case msg_type::GetLastMsgId: {
+        std::cout << "GetLastMsgId" << std::endl;
+        std::copy(&input_message.data[0], &input_message.data[4], reinterpret_cast<char*>(&last_msg_id));
+        break;
+      }
+      default: {
+        std::cout << "Id = " << static_cast<uint32_t>(input_message.header.id) << std::endl;
+      }
+    }
+  }
+
+  std::cout << "last_msg_id = " << last_msg_id << ". last_index_in_chat_  = " << last_index_in_chat_ << std::endl; 
+
+  if (last_msg_id == last_index_in_chat_) {
+    return {};
+  }
+
   output_message.header.id = msg_type::GetDataUpdate;
   //std::cout << "userid = " << userid_ << " chatid = " << chatid_ << "last_accept_message_id_in_chat_ = " << last_accept_message_id_in_chat_ << std::endl;
-  int l = 1;
+  int l = 5;
   std::copy(reinterpret_cast<char*>(&userid_),reinterpret_cast<char*>(&userid_) + 4, &output_message.data[0]);
   std::copy(reinterpret_cast<char*>(&chatid_),reinterpret_cast<char*>(&chatid_) + 4, &output_message.data[4]);
-  std::copy(reinterpret_cast<char*>(&l),reinterpret_cast<char*>(&l) + 4, &output_message.data[8]);
+  std::copy(reinterpret_cast<char*>(&last_index_in_chat_),reinterpret_cast<char*>(&last_index_in_chat_) + 4, &output_message.data[8]);
   send(output_message);
 
   while (is_connected() && get_in_comming().empty()) {}
 
   std::vector<std::string> messages;
-  AcceptMessages(messages, static_cast<uint32_t>(msg_type::SendUnpdateMore), static_cast<uint32_t>(msg_type::SendUnpdateMore));
+  AcceptMessages(messages, static_cast<uint32_t>(msg_type::SendUnpdateMore), static_cast<uint32_t>(msg_type::SendUnpdateFinish));
+  last_index_in_chat_ = last_msg_id;
   return messages;
 }

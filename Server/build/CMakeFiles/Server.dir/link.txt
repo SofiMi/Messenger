@@ -1,0 +1,1 @@
+/usr/bin/g++  -std=c++20 -lpqxx -lpq CMakeFiles/Server.dir/home/sofia/Algo/Messenger/DBWork/data_base.cpp.o CMakeFiles/Server.dir/Server.cpp.o CMakeFiles/Server.dir/main.cpp.o -o Server  /usr/lib/x86_64-linux-gnu/libpqxx.so /usr/lib/x86_64-linux-gnu/libpq.so 

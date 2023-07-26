@@ -268,3 +268,12 @@ pqxx::result WorkDB::GetDataUpdate(int userid, int chatid, int last_index_in_cha
   pqxx::work W(*connection);
   return W.exec((char*)req.c_str());
 }
+
+int WorkDB::GetLastMsgId(int chatid) {
+  std::string req = "select max(index_in_char) from server.message\n"
+                    "where chatid = ";
+  req += std::to_string(chatid);
+  pqxx::work W(*connection);
+  auto res =  W.exec((char*)req.c_str());
+  return res.begin()[0].as<int>();
+}
