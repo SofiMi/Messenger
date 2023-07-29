@@ -28,6 +28,8 @@ private:
     Ui::autorization *ui;
     MainWindow* main_window;
     std::shared_ptr<Client> client_;
+
+    void add_style();
 };
 
 #endif // AUTORIZATION_H

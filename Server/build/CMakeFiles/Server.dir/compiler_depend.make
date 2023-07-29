@@ -200,7 +200,7 @@ CMakeFiles/Server.dir/Server.cpp.o: ../Server.cpp \
   ../Server.h \
   /home/sofia/Algo/Messenger/include.h \
   ../net_server.h \
-  /home/sofia/Algo/Messenger/NetWork/net_common.h \
+  /home/sofia/Algo/Messenger/NetWork/net_message.h \
   /usr/include/c++/11/memory \
   /usr/include/c++/11/bits/stl_uninitialized.h \
   /usr/include/c++/11/bits/stl_raw_storage_iter.h \
@@ -1259,8 +1259,6 @@ CMakeFiles/Server.dir/Server.cpp.o: ../Server.cpp \
   /usr/include/boost/asio/windows/stream_handle.hpp \
   /usr/include/boost/asio/write_at.hpp \
   /usr/include/boost/asio/impl/write_at.hpp \
-  /home/sofia/Algo/Messenger/NetWork/net_message.h \
-  /home/sofia/Algo/Messenger/NetWork/net_common.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
   /home/sofia/Algo/Messenger/NetWork/net_connection.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
@@ -1699,7 +1697,7 @@ CMakeFiles/Server.dir/main.cpp.o: ../main.cpp \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
   ../net_server.h \
-  /home/sofia/Algo/Messenger/NetWork/net_common.h \
+  /home/sofia/Algo/Messenger/NetWork/net_message.h \
   /usr/include/c++/11/memory \
   /usr/include/c++/11/bits/stl_algobase.h \
   /usr/include/c++/11/bits/functexcept.h \
@@ -2925,8 +2923,6 @@ CMakeFiles/Server.dir/main.cpp.o: ../main.cpp \
   /usr/include/boost/asio/windows/stream_handle.hpp \
   /usr/include/boost/asio/write_at.hpp \
   /usr/include/boost/asio/impl/write_at.hpp \
-  /home/sofia/Algo/Messenger/NetWork/net_message.h \
-  /home/sofia/Algo/Messenger/NetWork/net_common.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
   /home/sofia/Algo/Messenger/NetWork/net_connection.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
@@ -3406,12 +3402,6 @@ CMakeFiles/Server.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/boost/asio/ip/multicast.hpp:
 
-/home/sofia/Algo/Messenger/NetWork/net_message.h:
-
-/usr/include/boost/asio/detail/handler_type_requirements.hpp:
-
-/usr/include/boost/asio/detail/fenced_block.hpp:
-
 /usr/include/boost/asio/detail/impl/posix_event.ipp:
 
 /usr/include/c++/11/bits/enable_special_members.h:
@@ -3808,6 +3798,12 @@ CMakeFiles/Server.dir/main.cpp.o: ../main.cpp \
 
 /usr/include/boost/asio/detail/std_fenced_block.hpp:
 
+/usr/include/boost/asio/detail/handler_type_requirements.hpp:
+
+/usr/include/boost/asio/detail/fenced_block.hpp:
+
+/home/sofia/Algo/Messenger/NetWork/net_message.h:
+
 /usr/include/boost/mpl/aux_/static_cast.hpp:
 
 /usr/include/stdlib.h:
@@ -3949,10 +3945,6 @@ CMakeFiles/Server.dir/main.cpp.o: ../main.cpp \
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
 
 /usr/include/c++/11/bits/localefwd.h:
-
-/home/sofia/Algo/Messenger/NetWork/net_common.h:
-
-/usr/include/c++/11/bits/nested_exception.h:
 
 /usr/include/x86_64-linux-gnu/sys/select.h:
 
@@ -4225,6 +4217,8 @@ CMakeFiles/Server.dir/main.cpp.o: ../main.cpp \
 /usr/include/x86_64-linux-gnu/bits/statx.h:
 
 /usr/include/c++/11/bits/stl_algobase.h:
+
+/usr/include/c++/11/bits/nested_exception.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
 

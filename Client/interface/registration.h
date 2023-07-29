@@ -22,6 +22,7 @@ private slots:
 private:
     Ui::Registration* ui;
     std::shared_ptr<Client> client_;
+    void add_style();
 };
 
 #endif // REGISTRATION_H

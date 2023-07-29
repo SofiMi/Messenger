@@ -80,6 +80,9 @@ std::vector<std::pair<int, std::string>> Client::GetChats() {
 }
 
 std::vector<std::string> Client::GetMessage() {
+  if (last_accept_message_id_in_chat_ <= 0) {
+    return {};
+  }
   RequestForMessages();
   std::vector<std::string> messages;
   AcceptMessages(messages, static_cast<uint32_t>(msg_type::SendMsgMore), static_cast<uint32_t>(msg_type::SendMsgFinish));
@@ -92,6 +95,7 @@ void Client::RequestForMessages() {
     Передаем id текущего чата и последнеe доставленное id сообщения в чате.
   */
   //std::cout << "RequestForMessages()" << std::endl;
+  //std::cout << "[Request] " << last_accept_message_id_in_chat_ << std::endl;
   net::message<msg_type> message;
   message.header.id = msg_type::GetMessages;
   std::copy(reinterpret_cast<char*>(&chatid_), reinterpret_cast<char*>(&chatid_) + 4, &message.data[0]);
@@ -483,17 +487,17 @@ std::vector<std::string> Client::GetDataUpdate() {
     auto input_message = get_in_comming().pop_front().msg;
     switch (input_message.header.id) {
       case msg_type::GetLastMsgId: {
-        std::cout << "GetLastMsgId" << std::endl;
+        //std::cout << "GetLastMsgId" << std::endl;
         std::copy(&input_message.data[0], &input_message.data[4], reinterpret_cast<char*>(&last_msg_id));
         break;
       }
       default: {
-        std::cout << "Id = " << static_cast<uint32_t>(input_message.header.id) << std::endl;
+        //std::cout << "Id = " << static_cast<uint32_t>(input_message.header.id) << std::endl;
       }
     }
   }
 
-  std::cout << "last_msg_id = " << last_msg_id << ". last_index_in_chat_  = " << last_index_in_chat_ << std::endl; 
+  //std::cout << "last_msg_id = " << last_msg_id << ". last_index_in_chat_  = " << last_index_in_chat_ << std::endl; 
 
   if (last_msg_id == last_index_in_chat_) {
     return {};

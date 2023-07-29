@@ -102,7 +102,7 @@ pqxx::result WorkDB::GetMessages(int chatid, int count_before) {
 			              "where chatid = ";
   req += std::to_string(chatid) + ")\n"
                                   "select index_in_char, text from mess\n"
-                                  "where index_in_char is not NULL and text is not NULL and index_in_char >= " + std::to_string(count_before  - 20) + " and index_in_char < " + std::to_string(count_before);
+                                  "where index_in_char is not NULL and text is not NULL and index_in_char >= " + std::to_string(count_before  - 100) + " and index_in_char < " + std::to_string(count_before);
   
   pqxx::nontransaction N(*connection);
   return N.exec((char*)req.c_str());

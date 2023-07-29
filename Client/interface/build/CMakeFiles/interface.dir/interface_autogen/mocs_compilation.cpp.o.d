@@ -314,7 +314,7 @@ CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o: \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../mainwindow.h \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../Client.h \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../net_client.h \
- /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../../NetWork/net_common.h \
+ /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../../NetWork/net_message.h \
  /usr/include/c++/11/thread /usr/include/c++/11/stop_token \
  /usr/include/c++/11/bits/std_thread.h /usr/include/c++/11/semaphore \
  /usr/include/c++/11/bits/semaphore_base.h \
@@ -1230,8 +1230,6 @@ CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o: \
  /usr/include/boost/asio/windows/stream_handle.hpp \
  /usr/include/boost/asio/write_at.hpp \
  /usr/include/boost/asio/impl/write_at.hpp \
- /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../../NetWork/net_message.h \
- /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../../NetWork/net_common.h \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../../NetWork/net_queue.h \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../../NetWork/net_connection.h \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../../NetWork/net_queue.h \

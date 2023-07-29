@@ -1,14 +1,25 @@
 #ifndef NET_MESSAGE
 #define NET_MESSAGE
 
-#include "net_common.h"
+#include <memory>
+#include <thread>
+#include <mutex>
+#include <deque>
+#include <string>
+#include <iostream>
+#include <chrono>
+#include <limits>
+#include <array>
+
+#define ASIO_STANDALONE
+#include <boost/asio.hpp>
 
 namespace net {
 
   template <typename T>
   struct message_header {
-    T id{};    // for what type the message is
-    std::array<char, 256> name{};    // who pass this massage
+    T id{};
+    std::array<char, 256> name{};
 		int userid;
   };
 
@@ -18,11 +29,8 @@ namespace net {
     std::array<char, 256> data{};    // message content
     std::chrono::system_clock::time_point time = std::chrono::system_clock::now();
   };
-  // An "owned" message is identical to a regular message, but it is associated with
-  // a connection. On a server, the owner would be the client that sent the message,
-  // on a client the owner would be the server.
 
-  // Forward declare the connection
+
   template <typename T>
   class connection;
 
@@ -31,7 +39,6 @@ namespace net {
     std::shared_ptr<connection<T>> remote = nullptr;
     message<T> msg;
 
-    // Again, a friendly string maker
     friend std::ostream &operator<<(std::ostream &os, const owned_message<T> &msg)
     {
       os << msg.msg;

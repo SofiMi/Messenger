@@ -371,7 +371,7 @@ CMakeFiles/interface.dir/autorization.cpp.o: ../autorization.cpp \
   ../mainwindow.h \
   /home/sofia/Algo/Messenger/Client/Client.h \
   /home/sofia/Algo/Messenger/Client/net_client.h \
-  /home/sofia/Algo/Messenger/NetWork/net_common.h \
+  /home/sofia/Algo/Messenger/NetWork/net_message.h \
   /usr/include/c++/11/thread \
   /usr/include/c++/11/stop_token \
   /usr/include/c++/11/bits/std_thread.h \
@@ -1347,8 +1347,6 @@ CMakeFiles/interface.dir/autorization.cpp.o: ../autorization.cpp \
   /usr/include/boost/asio/windows/stream_handle.hpp \
   /usr/include/boost/asio/write_at.hpp \
   /usr/include/boost/asio/impl/write_at.hpp \
-  /home/sofia/Algo/Messenger/NetWork/net_message.h \
-  /home/sofia/Algo/Messenger/NetWork/net_common.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
   /home/sofia/Algo/Messenger/NetWork/net_connection.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
@@ -1371,17 +1369,11 @@ CMakeFiles/interface.dir/autorization.cpp.o: ../autorization.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qinputmethod.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qlocale.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qvariant.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QGroupBox \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgroupbox.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QFrame \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qframe.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QHBoxLayout \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qboxlayout.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlayout.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlayoutitem.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qboxlayout.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgridlayout.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QLabel \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlabel.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qframe.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QLineEdit \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlineedit.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qtextcursor.h \
@@ -1398,6 +1390,11 @@ CMakeFiles/interface.dir/autorization.cpp.o: ../autorization.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QStatusBar \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qstatusbar.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QVBoxLayout \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qboxlayout.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlayout.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlayoutitem.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qboxlayout.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgridlayout.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QWidget \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qwidget.h \
   ../registration.h \
@@ -1408,13 +1405,20 @@ CMakeFiles/interface.dir/autorization.cpp.o: ../autorization.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qcontiguouscache.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QMessageBox \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qmessagebox.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qdialog.h
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qdialog.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/QFile \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qfile.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qfiledevice.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtGui/QPixmap \
+  /usr/include/x86_64-linux-gnu/qt5/QtGui/qpixmap.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtGui/QPalette \
+  /usr/include/x86_64-linux-gnu/qt5/QtGui/qpalette.h
 
 CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o: /home/sofia/Algo/Messenger/Client/Client.cpp \
   /usr/include/stdc-predef.h \
   /home/sofia/Algo/Messenger/Client/Client.h \
   /home/sofia/Algo/Messenger/Client/net_client.h \
-  /home/sofia/Algo/Messenger/NetWork/net_common.h \
+  /home/sofia/Algo/Messenger/NetWork/net_message.h \
   /usr/include/c++/11/memory \
   /usr/include/c++/11/bits/stl_algobase.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
@@ -2662,8 +2666,6 @@ CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o: /home/so
   /usr/include/boost/asio/windows/stream_handle.hpp \
   /usr/include/boost/asio/write_at.hpp \
   /usr/include/boost/asio/impl/write_at.hpp \
-  /home/sofia/Algo/Messenger/NetWork/net_message.h \
-  /home/sofia/Algo/Messenger/NetWork/net_common.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
   /home/sofia/Algo/Messenger/NetWork/net_connection.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
@@ -3046,7 +3048,7 @@ CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o: interface_aut
   ../mainwindow.h \
   /home/sofia/Algo/Messenger/Client/Client.h \
   /home/sofia/Algo/Messenger/Client/net_client.h \
-  /home/sofia/Algo/Messenger/NetWork/net_common.h \
+  /home/sofia/Algo/Messenger/NetWork/net_message.h \
   /usr/include/c++/11/thread \
   /usr/include/c++/11/stop_token \
   /usr/include/c++/11/bits/std_thread.h \
@@ -4022,8 +4024,6 @@ CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o: interface_aut
   /usr/include/boost/asio/windows/stream_handle.hpp \
   /usr/include/boost/asio/write_at.hpp \
   /usr/include/boost/asio/impl/write_at.hpp \
-  /home/sofia/Algo/Messenger/NetWork/net_message.h \
-  /home/sofia/Algo/Messenger/NetWork/net_common.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
   /home/sofia/Algo/Messenger/NetWork/net_connection.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
@@ -4407,7 +4407,7 @@ CMakeFiles/interface.dir/main.cpp.o: ../main.cpp \
   ../mainwindow.h \
   /home/sofia/Algo/Messenger/Client/Client.h \
   /home/sofia/Algo/Messenger/Client/net_client.h \
-  /home/sofia/Algo/Messenger/NetWork/net_common.h \
+  /home/sofia/Algo/Messenger/NetWork/net_message.h \
   /usr/include/c++/11/thread \
   /usr/include/c++/11/stop_token \
   /usr/include/c++/11/bits/std_thread.h \
@@ -5383,8 +5383,6 @@ CMakeFiles/interface.dir/main.cpp.o: ../main.cpp \
   /usr/include/boost/asio/windows/stream_handle.hpp \
   /usr/include/boost/asio/write_at.hpp \
   /usr/include/boost/asio/impl/write_at.hpp \
-  /home/sofia/Algo/Messenger/NetWork/net_message.h \
-  /home/sofia/Algo/Messenger/NetWork/net_common.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
   /home/sofia/Algo/Messenger/NetWork/net_connection.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
@@ -5774,7 +5772,7 @@ CMakeFiles/interface.dir/mainwindow.cpp.o: ../mainwindow.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qicon.h \
   /home/sofia/Algo/Messenger/Client/Client.h \
   /home/sofia/Algo/Messenger/Client/net_client.h \
-  /home/sofia/Algo/Messenger/NetWork/net_common.h \
+  /home/sofia/Algo/Messenger/NetWork/net_message.h \
   /usr/include/c++/11/thread \
   /usr/include/c++/11/stop_token \
   /usr/include/c++/11/bits/std_thread.h \
@@ -6750,8 +6748,6 @@ CMakeFiles/interface.dir/mainwindow.cpp.o: ../mainwindow.cpp \
   /usr/include/boost/asio/windows/stream_handle.hpp \
   /usr/include/boost/asio/write_at.hpp \
   /usr/include/boost/asio/impl/write_at.hpp \
-  /home/sofia/Algo/Messenger/NetWork/net_message.h \
-  /home/sofia/Algo/Messenger/NetWork/net_common.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
   /home/sofia/Algo/Messenger/NetWork/net_connection.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
@@ -7193,7 +7189,7 @@ CMakeFiles/interface.dir/registration.cpp.o: ../registration.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qicon.h \
   /home/sofia/Algo/Messenger/Client/Client.h \
   /home/sofia/Algo/Messenger/Client/net_client.h \
-  /home/sofia/Algo/Messenger/NetWork/net_common.h \
+  /home/sofia/Algo/Messenger/NetWork/net_message.h \
   /usr/include/c++/11/thread \
   /usr/include/c++/11/stop_token \
   /usr/include/c++/11/bits/std_thread.h \
@@ -8169,8 +8165,6 @@ CMakeFiles/interface.dir/registration.cpp.o: ../registration.cpp \
   /usr/include/boost/asio/windows/stream_handle.hpp \
   /usr/include/boost/asio/write_at.hpp \
   /usr/include/boost/asio/impl/write_at.hpp \
-  /home/sofia/Algo/Messenger/NetWork/net_message.h \
-  /home/sofia/Algo/Messenger/NetWork/net_common.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
   /home/sofia/Algo/Messenger/NetWork/net_connection.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
@@ -8194,17 +8188,11 @@ CMakeFiles/interface.dir/registration.cpp.o: ../registration.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qinputmethod.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qlocale.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qvariant.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QGroupBox \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgroupbox.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QFrame \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qframe.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QHBoxLayout \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qboxlayout.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlayout.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlayoutitem.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qboxlayout.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgridlayout.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QLabel \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlabel.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qframe.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QLineEdit \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlineedit.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qtextcursor.h \
@@ -8221,6 +8209,11 @@ CMakeFiles/interface.dir/registration.cpp.o: ../registration.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QStatusBar \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qstatusbar.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QVBoxLayout \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qboxlayout.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlayout.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlayoutitem.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qboxlayout.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgridlayout.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QWidget \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qwidget.h \
   ../autorization.h \
@@ -8236,8 +8229,6 @@ CMakeFiles/interface.dir/registration.cpp.o: ../registration.cpp \
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractscrollarea.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QScrollArea:
-
-/usr/include/x86_64-linux-gnu/qt5/QtWidgets/QFrame:
 
 ../main.cpp:
 
@@ -8257,6 +8248,16 @@ interface_autogen/mocs_compilation.cpp:
 
 /home/sofia/Algo/Messenger/Client/Client.cpp:
 
+/usr/include/x86_64-linux-gnu/qt5/QtGui/QPalette:
+
+/usr/include/x86_64-linux-gnu/qt5/QtGui/QPixmap:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qfiledevice.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qfile.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/QFile:
+
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qdialog.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qmessagebox.h:
@@ -8271,6 +8272,14 @@ interface_autogen/mocs_compilation.cpp:
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/QDebug:
 
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgridlayout.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlayoutitem.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlayout.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qboxlayout.h:
+
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QStatusBar:
 
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qactiongroup.h:
@@ -8283,15 +8292,7 @@ interface_autogen/mocs_compilation.cpp:
 
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QLineEdit:
 
-/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgridlayout.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlayoutitem.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlayout.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qboxlayout.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgroupbox.h:
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/QFrame:
 
 /usr/include/x86_64-linux-gnu/qt5/QtGui/qguiapplication.h:
 
@@ -8597,8 +8598,6 @@ interface_autogen/include/ui_autorization.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QMenuBar:
 
-/usr/include/x86_64-linux-gnu/qt5/QtWidgets/QGroupBox:
-
 /usr/include/c++/11/condition_variable:
 
 /usr/include/boost/predef/compiler/metrowerks.h:
@@ -8899,9 +8898,7 @@ interface_autogen/include/ui_autorization.h:
 
 /usr/include/linux/ioctl.h:
 
-/home/sofia/Algo/Messenger/NetWork/net_common.h:
-
-/usr/include/c++/11/bits/nested_exception.h:
+/usr/include/boost/asio/detail/std_fenced_block.hpp:
 
 /home/sofia/Algo/Messenger/Client/net_client.h:
 
@@ -9289,6 +9286,10 @@ interface_autogen/include/ui_autorization.h:
 
 /usr/include/x86_64-linux-gnu/bits/time64.h:
 
+/usr/include/boost/mpl/aux_/static_cast.hpp:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qdatastream.h:
+
 /usr/include/c++/11/ext/aligned_buffer.h:
 
 /usr/include/c++/11/bits/cxxabi_init_exception.h:
@@ -9549,9 +9550,9 @@ interface_autogen/include/ui_autorization.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qtcore-config.h:
 
-/home/sofia/Algo/Messenger/NetWork/net_message.h:
-
 /usr/include/boost/asio/detail/fenced_block.hpp:
+
+/home/sofia/Algo/Messenger/NetWork/net_message.h:
 
 /usr/include/boost/asio/detail/handler_type_requirements.hpp:
 
@@ -9925,6 +9926,8 @@ interface_autogen/EWIEGA46WW/moc_autorization.cpp:
 
 /usr/include/c++/11/typeinfo:
 
+/usr/include/c++/11/bits/nested_exception.h:
+
 /usr/include/boost/asio/traits/equality_comparable.hpp:
 
 /usr/include/string.h:
@@ -10106,12 +10109,6 @@ interface_autogen/include/ui_registration.h:
 /usr/include/c++/11/stop_token:
 
 /usr/include/boost/mpl/aux_/value_wknd.hpp:
-
-/usr/include/boost/asio/detail/std_fenced_block.hpp:
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qdatastream.h:
-
-/usr/include/boost/mpl/aux_/static_cast.hpp:
 
 /usr/include/boost/asio/detail/handler_invoke_helpers.hpp:
 

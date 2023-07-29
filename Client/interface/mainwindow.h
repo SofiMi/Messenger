@@ -24,10 +24,9 @@ private slots:
     void on_findNick_clicked();
 
 private:
-  void resizeEvent(QResizeEvent* event);
   void timerEvent(QTimerEvent *event);
 
-  void AddOldMessages();
+  void AddOldMessages(bool maximum_scrollbar = false);
   void AddNewMessage(const QString& qstr);
   void AddOtherFriends();
 
@@ -38,5 +37,8 @@ private:
   size_t chat_id_ = 0;
 
   std::unordered_map<int, QPushButton*> chatid_map;
+  void scrollToBottom(int min, int max);
+  void handleButton();
+  int scrollBarMax = 0;
 };
 #endif // MAINWINDOW_H

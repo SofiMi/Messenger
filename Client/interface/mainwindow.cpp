@@ -10,46 +10,48 @@
 #include <string>
 #include <vector>
 
-static int i = 0;
-
-void updateCompass() { std::cout << (i++) << std::endl; }
-
 MainWindow::MainWindow(QWidget *parent, std::shared_ptr<Client> &client)
-    : QMainWindow(parent), ui(new Ui::MainWindow), client_(client) {
+    : QMainWindow(parent),
+      ui(new Ui::MainWindow),
+      client_(client) {
   ui->setupUi(this);
 
-  QVBoxLayout *lay = new QVBoxLayout(this);
-  ui->friendScrollAreaContext->setLayout(lay);
+  // область с чатами
+  QVBoxLayout* friend_box_layout = new QVBoxLayout(this);
+  ui->friendScrollAreaContext->setLayout(friend_box_layout);
   AddOtherFriends();
 
-  QVBoxLayout *messages_box_layout = new QVBoxLayout(this);
+  // область с сообщениями
+  QVBoxLayout* messages_box_layout = new QVBoxLayout(this);
   ui->messageScrollAreaContext->setLayout(messages_box_layout);
 
+  // устанавливаем обновление каждую секунду
   timerId = startTimer(1000);
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
+MainWindow::~MainWindow() { delete ui; }
 
-void MainWindow::resizeEvent(QResizeEvent* event) {
-  /* Обновление размера экрана */
-  QMainWindow::resizeEvent(event);
-  size_t width = this->size().width();
-  size_t height = this->size().height();
-}
-
-void MainWindow::AddOldMessages() {
+void MainWindow::AddOldMessages(bool maximum_scrollbar) {
   /* Добавление в messageScrollArea старых сообщений. */
   std::vector<std::string> messages = client_->GetMessage();
   QVBoxLayout* messages_box_layout =
       dynamic_cast<QVBoxLayout *>(ui->messageScrollAreaContext->layout());
 
+  QLabel* message;
   for (int i = messages.size() - 1; i > -1; --i) {
-    QLabel* message = new QLabel(QString::fromStdString(messages[i]));
+    //widget = new QWidget();
+    message = new QLabel(QString::fromStdString(messages[i]));
     message->setStyleSheet("QLabel { background-color : white }");
     message->setWordWrap(true);
+    if (maximum_scrollbar) {
+      QPushButton* butt = new QPushButton(message);
+      connect(butt, &QPushButton::released, this, &MainWindow::handleButton);
+      butt->hide();
+
+      messages_box_layout->insertWidget(0, message);
+      butt->animateClick();
+      ui->messageScrollArea->verticalScrollBar()->triggerAction(QAbstractSlider::SliderToMaximum);
+    }
     messages_box_layout->insertWidget(0, message);
   }
 }
@@ -58,10 +60,17 @@ void MainWindow::AddNewMessage(const QString& qstr) {
   /* Добавление в messageScrollArea новое сообщение. */
   QVBoxLayout* messages_box_layout =
       dynamic_cast<QVBoxLayout *>(ui->messageScrollAreaContext->layout());
+
+  QWidget* widget = new QWidget();
   QLabel* message = new QLabel(qstr);
   message->setStyleSheet("background-color: yellow");
   message->setWordWrap(true);
+
+  QPushButton* butt = new QPushButton(message);
+  connect(butt, &QPushButton::released, this, &MainWindow::handleButton);
   messages_box_layout->addWidget(message);
+  butt->animateClick();
+  ui->messageScrollArea->verticalScrollBar()->triggerAction(QAbstractSlider::SliderToMaximum);
 }
 
 void MainWindow::AddOtherFriends() {
@@ -77,12 +86,11 @@ void MainWindow::AddOtherFriends() {
      [this, chatid = friend_name[i].first]() {
       client_->chatid_ = chatid;
       client_->GetLastIdMessage();
-      //std::cout << "chatid " << client_->chatid_ << " last_accept_message_id_in_chat_ " << client_->last_accept_message_id_in_chat_ << std::endl;
       while (auto* item = ui->messageScrollAreaContext->layout()->takeAt(0)) {
         delete item->widget();
         delete item;
       }
-      AddOldMessages();
+      AddOldMessages(true);
     });
     // TO DO: formating button with long name !!!
     friend_box_layout->addWidget(button);
@@ -98,15 +106,6 @@ void MainWindow::on_SendMsg_clicked(bool checked) {
   if (qtext.toStdString().size() > 0) {
      ui->InputMsg->clear();
 
-    // Добавляем сообщение в чат
-    //QVBoxLayout* messages_box_layout =
-        //dynamic_cast<QVBoxLayout *>(ui->messageScrollAreaContext->layout());
-    
-    //QLabel* new_message = new QLabel(qtext);
-    // new_message->setStyleSheet("QLabel { background-color : white }");
-    //new_message->setWordWrap(true);
-    //messages_box_layout->addWidget(new_message);
-
     // Передача сообщения серверу
     std::string text = qtext.toStdString();
     client_->SendNewMessage(text);
@@ -121,7 +120,13 @@ void MainWindow::on_SendMsg_clicked(bool checked) {
       QLabel* new_message = new QLabel(res[i].c_str());
       new_message->setStyleSheet("QLabel { background-color : white }");
       new_message->setWordWrap(true);
+
+      QPushButton* butt = new QPushButton(new_message);
+      connect(butt, &QPushButton::released, this, &MainWindow::handleButton);
       messages_box_layout->addWidget(new_message);
+      butt->animateClick();
+      butt->hide();
+      ui->messageScrollArea->verticalScrollBar()->triggerAction(QAbstractSlider::SliderToMaximum);
     }
   } else {
     QMessageBox::about(this, "Неправильный ввод", "Сообщение не может быть пустым.");
@@ -130,18 +135,39 @@ void MainWindow::on_SendMsg_clicked(bool checked) {
 }
 
 void MainWindow::timerEvent(QTimerEvent* event) {
-  std::cout << "Timer" << std::endl;
+  //std::cout << "Timer" << std::endl;
+
+  auto scrollBarMess = ui->messageScrollArea->verticalScrollBar();
+  auto scrollBarFr = ui->friendScrollArea->verticalScrollBar();
+
+  if (static_cast<double>(scrollBarMess->value()) / static_cast<double>(scrollBarMess->maximum()) < 0.2) {
+    AddOldMessages();
+  }
+
+  if (static_cast<double>(scrollBarMess->value()) / static_cast<double>(scrollBarMess->maximum()) < 0.2) {
+    AddOtherFriends();
+  }
+
   std::vector<std::string> res = client_->GetDataUpdate();
 
   QVBoxLayout* messages_box_layout =
         dynamic_cast<QVBoxLayout *>(ui->messageScrollAreaContext->layout());
 
+  QWidget* widget = new QWidget();
   for (int i = 0; i < res.size(); ++i) {
-    std::cout << res[i] << " " << std::endl;
-    QLabel* new_message = new QLabel(res[i].c_str());
+    QLabel* new_message = new QLabel(res[i].c_str(), widget);
     new_message->setStyleSheet("QLabel { background-color : white }");
     new_message->setWordWrap(true);
-    messages_box_layout->addWidget(new_message);
+    if (i != res.size() - 1)
+      messages_box_layout->addWidget(widget);
+  }
+
+  if (res.size() > 0) {
+    QPushButton* butt = new QPushButton(widget);
+    connect(butt, &QPushButton::released, this, &MainWindow::handleButton);
+    messages_box_layout->addWidget(widget);
+    butt->animateClick();
+    ui->messageScrollArea->verticalScrollBar()->triggerAction(QAbstractSlider::SliderToMaximum);
   }
 }
 
@@ -197,5 +223,15 @@ void MainWindow::on_findNick_clicked() {
     });
     // TO DO: formating button with long name !!!
     friend_box_layout->insertWidget(0, button);
+}
+
+void MainWindow::scrollToBottom(int min, int max) {
+  (void) min;
+  if (max > scrollBarMax) ui->messageScrollArea->verticalScrollBar()->setValue(max);
+  scrollBarMax = max;
+}
+
+void MainWindow::handleButton() {
+  ui->messageScrollArea->verticalScrollBar()->triggerAction(QAbstractSlider::SliderToMaximum);
 }
 

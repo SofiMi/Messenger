@@ -162,7 +162,7 @@ CMakeFiles/Server.dir/Server.cpp.o: \
  /home/sofia/Algo/Messenger/Server/Server.h \
  /home/sofia/Algo/Messenger/Server/../include.h \
  /home/sofia/Algo/Messenger/Server/net_server.h \
- /home/sofia/Algo/Messenger/Server/../NetWork/net_common.h \
+ /home/sofia/Algo/Messenger/Server/../NetWork/net_message.h \
  /usr/include/c++/11/memory /usr/include/c++/11/bits/stl_uninitialized.h \
  /usr/include/c++/11/bits/stl_raw_storage_iter.h \
  /usr/include/c++/11/bits/align.h /usr/include/c++/11/bit \
@@ -1140,8 +1140,6 @@ CMakeFiles/Server.dir/Server.cpp.o: \
  /usr/include/boost/asio/windows/stream_handle.hpp \
  /usr/include/boost/asio/write_at.hpp \
  /usr/include/boost/asio/impl/write_at.hpp \
- /home/sofia/Algo/Messenger/Server/../NetWork/net_message.h \
- /home/sofia/Algo/Messenger/Server/../NetWork/net_common.h \
  /home/sofia/Algo/Messenger/Server/../NetWork/net_queue.h \
  /home/sofia/Algo/Messenger/Server/../NetWork/net_connection.h \
  /home/sofia/Algo/Messenger/Server/../NetWork/net_queue.h \

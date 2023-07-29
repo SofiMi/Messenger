@@ -29,10 +29,8 @@ set(PROJECT_SOURCES
         autorization.ui
 
         ../../NetWork/net_message.h
-        ../../NetWork/net_common.h
         ../../NetWork/net_queue.h
         ../../NetWork/net_connection.h
-        ../../NetWork/net.h
         ../net_client.h
 
         ../Client.cpp

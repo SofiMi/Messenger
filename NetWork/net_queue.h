@@ -1,7 +1,18 @@
 #ifndef NET_QUEUE
 #define NET_QUEUE
 
-#include "net_common.h"
+#include <memory>
+#include <thread>
+#include <mutex>
+#include <deque>
+#include <string>
+#include <iostream>
+#include <chrono>
+#include <limits>
+#include <array>
+
+#define ASIO_STANDALONE
+#include <boost/asio.hpp>
 
 namespace net {
 
@@ -13,21 +24,18 @@ namespace net {
     virtual ~ts_queue() { clear(); }
 
   public:
-    // Returns and maintains item at front of Queue
-    const T &front()
-    {
+    const T &front() {
       std::scoped_lock lock(mux_queue);
       return deqQueue.front();
     }
 
-    // Returns and maintains item at back of Queue
     const T &back()
     {
       std::scoped_lock lock(mux_queue);
       return deqQueue.back();
     }
 
-    // Removes and returns item from front of Queue
+
     T pop_front()
     {
       std::scoped_lock lock(mux_queue);
@@ -36,7 +44,7 @@ namespace net {
       return t;
     }
 
-    // Removes and returns item from back of Queue
+
     T pop_back()
     {
       std::scoped_lock lock(mux_queue);
@@ -45,7 +53,7 @@ namespace net {
       return t;
     }
 
-    // Adds an item to back of Queue
+
     void push_back(const T &item)
     {
       std::scoped_lock lock(mux_queue);
@@ -55,7 +63,7 @@ namespace net {
       cvBlocking.notify_one();
     }
 
-    // Adds an item to front of Queue
+
     void push_front(const T &item)
     {
       std::scoped_lock lock(mux_queue);
@@ -65,21 +73,21 @@ namespace net {
       cvBlocking.notify_one();
     }
 
-    // Returns true if Queue has no items
+
     bool empty()
     {
       std::scoped_lock lock(mux_queue);
       return deqQueue.empty();
     }
 
-    // Returns number of items in Queue
+
     size_t count()
     {
       std::scoped_lock lock(mux_queue);
       return deqQueue.size();
     }
 
-    // Clears Queue
+  
     void clear()
     {
       std::scoped_lock lock(mux_queue);

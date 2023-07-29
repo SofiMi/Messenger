@@ -2,7 +2,7 @@ CMakeFiles/Killer.dir/Killer.cpp.o: \
  /home/sofia/Algo/Messenger/Server/Killer/Killer.cpp \
  /usr/include/stdc-predef.h \
  /home/sofia/Algo/Messenger/Server/Killer/../../Client/net_client.h \
- /home/sofia/Algo/Messenger/Server/Killer/../../Client/../NetWork/net_common.h \
+ /home/sofia/Algo/Messenger/Server/Killer/../../Client/../NetWork/net_message.h \
  /usr/include/c++/11/memory /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -1134,8 +1134,6 @@ CMakeFiles/Killer.dir/Killer.cpp.o: \
  /usr/include/boost/asio/windows/stream_handle.hpp \
  /usr/include/boost/asio/write_at.hpp \
  /usr/include/boost/asio/impl/write_at.hpp \
- /home/sofia/Algo/Messenger/Server/Killer/../../Client/../NetWork/net_message.h \
- /home/sofia/Algo/Messenger/Server/Killer/../../Client/../NetWork/net_common.h \
  /home/sofia/Algo/Messenger/Server/Killer/../../Client/../NetWork/net_queue.h \
  /home/sofia/Algo/Messenger/Server/Killer/../../Client/../NetWork/net_connection.h \
  /home/sofia/Algo/Messenger/Server/Killer/../../Client/../NetWork/net_queue.h \

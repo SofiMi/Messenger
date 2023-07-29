@@ -13,11 +13,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
 
 add_executable(Server
   ../NetWork/net_message.h
-  ../NetWork/net_common.h
   net_server.h
   ../NetWork/net_queue.h
   ../NetWork/net_connection.h
-  ../NetWork/net.h
 
   ../DBWork/data_base.cpp
   ../DBWork/data_base.h

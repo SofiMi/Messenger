@@ -23,7 +23,7 @@ CMakeFiles/Server.dir/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /home/sofia/Algo/Messenger/Server/net_server.h \
- /home/sofia/Algo/Messenger/Server/../NetWork/net_common.h \
+ /home/sofia/Algo/Messenger/Server/../NetWork/net_message.h \
  /usr/include/c++/11/memory /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/c++/11/bits/functexcept.h \
  /usr/include/c++/11/bits/exception_defines.h \
@@ -1136,8 +1136,6 @@ CMakeFiles/Server.dir/main.cpp.o: \
  /usr/include/boost/asio/windows/stream_handle.hpp \
  /usr/include/boost/asio/write_at.hpp \
  /usr/include/boost/asio/impl/write_at.hpp \
- /home/sofia/Algo/Messenger/Server/../NetWork/net_message.h \
- /home/sofia/Algo/Messenger/Server/../NetWork/net_common.h \
  /home/sofia/Algo/Messenger/Server/../NetWork/net_queue.h \
  /home/sofia/Algo/Messenger/Server/../NetWork/net_connection.h \
  /home/sofia/Algo/Messenger/Server/../NetWork/net_queue.h \
