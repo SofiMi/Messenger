@@ -5,3 +5,9 @@
   - Для хранения пользовательской информации используется база данных PostrgresSQL. 
   - Ассинхронная передача данных между клиентом и сервером.
 
+
+
+![Иллюстрация к проекту](https://github.com/SofiHaku/Messenger/Asserts/img1)
+
+![Иллюстрация к проекту](https://github.com/SofiHaku/Messenger/Asserts/img2)
+
