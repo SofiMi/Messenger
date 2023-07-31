@@ -314,7 +314,7 @@ CMakeFiles/interface.dir/autorization.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qicon.h \
  /home/sofia/Algo/Messenger/Client/interface/mainwindow.h \
  /home/sofia/Algo/Messenger/Client/interface/../Client.h \
- /home/sofia/Algo/Messenger/Client/interface/../net_client.h \
+ /home/sofia/Algo/Messenger/Client/interface/../../include.h \
  /home/sofia/Algo/Messenger/Client/interface/../../NetWork/net_message.h \
  /usr/include/c++/11/thread /usr/include/c++/11/stop_token \
  /usr/include/c++/11/bits/std_thread.h /usr/include/c++/11/semaphore \
@@ -1235,7 +1235,6 @@ CMakeFiles/interface.dir/autorization.cpp.o: \
  /home/sofia/Algo/Messenger/Client/interface/../../NetWork/net_connection.h \
  /home/sofia/Algo/Messenger/Client/interface/../../NetWork/net_queue.h \
  /home/sofia/Algo/Messenger/Client/interface/../../NetWork/net_message.h \
- /home/sofia/Algo/Messenger/Client/interface/../../include.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h \

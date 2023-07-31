@@ -14,7 +14,7 @@ autorization::autorization(QWidget *parent) :
     ui->setupUi(this);
 
     client_ = std::make_shared<Client>();
-    client_->connect("127.0.0.1", 10000);
+    client_->connect("127.0.0.1", 20000);
 
     if (!client_->is_connected()) {
       std::cout << "No connection\n" << std::endl;
@@ -45,6 +45,7 @@ void autorization::on_to_main_clicked() {
     std::string error_message;
 
     if (client_->Autorization(login_w, password_w, error_message)) {
+      std::cout << "auto" << std::endl;
       hide();
       main_window = new MainWindow(this, client_);
       main_window->show();

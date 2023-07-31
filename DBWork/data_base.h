@@ -29,4 +29,5 @@ class WorkDB {
   int CheckTetAtTetChat(int userid, const std::string& name);
   pqxx::result GetDataUpdate(int userid, int chatid, int last_index_in_chat);
   int GetLastMsgId(int chatid);
+  std::string GetName(int userid);
 };

@@ -7,6 +7,7 @@
 #include <QScrollBar>
 #include <QTimer>
 #include <QVBoxLayout>
+#include <QGridLayout>
 #include <string>
 #include <vector>
 
@@ -39,10 +40,10 @@ void MainWindow::AddOldMessages(bool maximum_scrollbar) {
 
   QLabel* message;
   for (int i = messages.size() - 1; i > -1; --i) {
-    //widget = new QWidget();
     message = new QLabel(QString::fromStdString(messages[i]));
     message->setStyleSheet("QLabel { background-color : white }");
     message->setWordWrap(true);
+
     if (maximum_scrollbar) {
       QPushButton* butt = new QPushButton(message);
       connect(butt, &QPushButton::released, this, &MainWindow::handleButton);
@@ -61,8 +62,7 @@ void MainWindow::AddNewMessage(const QString& qstr) {
   QVBoxLayout* messages_box_layout =
       dynamic_cast<QVBoxLayout *>(ui->messageScrollAreaContext->layout());
 
-  QWidget* widget = new QWidget();
-  QLabel* message = new QLabel(qstr);
+  QLabel* message = new QLabel();
   message->setStyleSheet("background-color: yellow");
   message->setWordWrap(true);
 
@@ -169,6 +169,7 @@ void MainWindow::timerEvent(QTimerEvent* event) {
     butt->animateClick();
     ui->messageScrollArea->verticalScrollBar()->triggerAction(QAbstractSlider::SliderToMaximum);
   }
+  
 }
 
 void MainWindow::on_findNick_clicked() {

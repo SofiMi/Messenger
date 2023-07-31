@@ -16,8 +16,8 @@ class Registration : public QMainWindow {
     ~Registration();
 
 private slots:
-    void on_pushButton_clicked();
     void on_to_autorization_clicked();
+    void on_registration_clicked();
 
 private:
     Ui::Registration* ui;

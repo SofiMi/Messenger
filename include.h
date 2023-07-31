@@ -42,4 +42,6 @@ enum class msg_type : uint32_t {
   SendUnpdateMore,
   SendUnpdateFinish,
   GetLastMsgId,
+
+  GetName
 };

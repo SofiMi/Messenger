@@ -1,4 +1,4 @@
-int SERVER_PORT = 10000;
+int SERVER_PORT = 20000;
 #include "Server.h"
 
 int main() {

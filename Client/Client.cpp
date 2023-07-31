@@ -1,6 +1,7 @@
 #include "Client.h"
 #include "../include.h"
 #include "fstream"
+#include <unordered_map>
 
 void Client::CheckLogin(const std::string& login) {
   /* Проверка логина */
@@ -94,7 +95,7 @@ void Client::RequestForMessages() {
     Отправляет запрос на сервер с новой порцией старых сообщений.
     Передаем id текущего чата и последнеe доставленное id сообщения в чате.
   */
-  //std::cout << "RequestForMessages()" << std::endl;
+  std::cout << "RequestForMessages()" << std::endl;
   //std::cout << "[Request] " << last_accept_message_id_in_chat_ << std::endl;
   net::message<msg_type> message;
   message.header.id = msg_type::GetMessages;
@@ -106,7 +107,7 @@ void Client::RequestForMessages() {
 }
 
 void Client::AcceptMessages(std::vector<std::string>& result, uint32_t enum_send_more, uint32_t finish) {
-  //std::cout << "\n[Start AcceptMessages]" << std::endl;
+  std::cout << "\n[Start AcceptMessages]" << std::endl;
   /*
     Принимаем сообщения 2 подтипов:
       - [char 0|1, int id_msg, int size, std::string, char 0|1 ...]
@@ -121,6 +122,9 @@ void Client::AcceptMessages(std::vector<std::string>& result, uint32_t enum_send
   bool need_read_check = true;
   bool need_read_id = true;
   bool need_read_size = true;
+
+  std::vector<int> userids;
+  std::unordered_map<int, std::string> name_by_id;
   
   while (is_connected() && get_in_comming().empty()) {
     //std::cout << "wait messages\n" << std::endl;
@@ -166,6 +170,7 @@ void Client::AcceptMessages(std::vector<std::string>& result, uint32_t enum_send
               // принимаемый текст помещается в текущее сообщение
               std::copy(&input_message.data[index_in_message], &input_message.data[index_in_message + size_msg_last_], &input_text[index_in_input_text]);
               result.push_back(input_text);
+              userids.push_back(id_msg);
               //std::cout << "[AC]: " << input_text << std::endl;
 
               index_in_message += size_msg_last_;
@@ -195,6 +200,13 @@ void Client::AcceptMessages(std::vector<std::string>& result, uint32_t enum_send
     }
   }
   //std::cout << "[End AcceptMessages]\n" << std::endl;
+
+  for (int i = 0; i < result.size(); ++i) {
+    if (name_by_id.find(userids[i]) == name_by_id.end()) {
+      name_by_id[userids[i]] = GetName(userids[i]);
+    }
+    result[i] = std::string("<b>") + name_by_id[userids[i]] + "</b> <br>" + result[i];
+  }
 }
 
 bool Client::Autorization(const std::string& login, const std::string& password, std::string& error_message) {
@@ -517,4 +529,72 @@ std::vector<std::string> Client::GetDataUpdate() {
   AcceptMessages(messages, static_cast<uint32_t>(msg_type::SendUnpdateMore), static_cast<uint32_t>(msg_type::SendUnpdateFinish));
   last_index_in_chat_ = last_msg_id;
   return messages;
+}
+
+Client::~Client() { disconnect(); }
+
+bool Client::connect(const std::string& host, const uint16_t port) {
+  try {
+    boost::asio::ip::tcp::resolver resolver(asio_context);
+    boost::asio::ip::tcp::resolver::results_type endpoints = resolver.resolve(host, std::to_string(port));
+
+    server_connection = std::make_unique<net::connection<msg_type>>(net::connection<msg_type>::owner::client, asio_context,
+                                                                    boost::asio::ip::tcp::socket(asio_context), message_queue);
+    server_connection->connect_to_server(endpoints);
+
+    thr = std::thread([this]() { asio_context.run(); });
+  } catch (std::exception &ex) {
+    std::cerr << "Client Exception: " << ex.what() << '\n';
+    return false;
+  }
+  return true;
+}
+
+void Client::disconnect() {
+  if (is_connected()) {
+    server_connection->disconnect();
+  }
+
+  asio_context.stop();
+  if (thr.joinable())
+    thr.join();
+
+  server_connection.release();
+}
+
+bool Client::is_connected() {
+  return server_connection ? server_connection->is_connected() : false;
+}
+
+void Client::send(const net::message<msg_type>& message) {
+  if (is_connected()) {
+    server_connection->send(message);
+  }
+}
+
+net::ts_queue<net::owned_message<msg_type>>& Client::get_in_comming() { return message_queue; }
+
+std::string Client::GetName(int id) {
+  std::cout << "GetName" << std::endl;
+  net::message<msg_type> message;
+  message.header.id = msg_type::GetName;
+  std::copy(reinterpret_cast<char*>(&id), reinterpret_cast<char*>(&id) + 4, &message.data[0]);
+  send(message);
+
+  while (is_connected() && get_in_comming().empty()) {}
+
+  int size;
+  std::string name;
+  if (is_connected() && !get_in_comming().empty()) {
+    auto input_message = get_in_comming().pop_front().msg;
+    switch (input_message.header.id) {
+      case msg_type::GetName: {
+        std::copy(&input_message.data[0], &input_message.data[4], reinterpret_cast<char*>(&size));
+        name.resize(size);
+        std::copy(&input_message.data[4], &input_message.data[4 + size], &name[0]);
+        break;
+      }
+    }
+  }
+  return name;
 }

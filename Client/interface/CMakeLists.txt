@@ -31,7 +31,6 @@ set(PROJECT_SOURCES
         ../../NetWork/net_message.h
         ../../NetWork/net_queue.h
         ../../NetWork/net_connection.h
-        ../net_client.h
 
         ../Client.cpp
         ../Client.h

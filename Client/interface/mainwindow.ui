@@ -19,8 +19,8 @@
      <rect>
       <x>280</x>
       <y>10</y>
-      <width>491</width>
-      <height>521</height>
+      <width>511</width>
+      <height>541</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -44,6 +44,15 @@
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QLabel" name="chatname">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </item>
      <item>
@@ -56,14 +65,14 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>487</width>
-          <height>413</height>
+          <width>507</width>
+          <height>433</height>
          </rect>
         </property>
        </widget>
       </widget>
      </item>
-     <item alignment="Qt::AlignTop">
+     <item alignment="Qt::AlignBottom">
       <widget class="QFrame" name="frame_3">
        <property name="minimumSize">
         <size>
@@ -110,13 +119,13 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>10</y>
       <width>261</width>
-      <height>511</height>
+      <height>541</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -187,7 +196,7 @@
        </layout>
       </widget>
      </item>
-     <item>
+     <item alignment="Qt::AlignTop">
       <widget class="QScrollArea" name="friendScrollArea">
        <property name="widgetResizable">
         <bool>true</bool>
@@ -198,7 +207,7 @@
           <x>0</x>
           <y>0</y>
           <width>257</width>
-          <height>456</height>
+          <height>68</height>
          </rect>
         </property>
        </widget>

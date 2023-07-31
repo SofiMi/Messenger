@@ -13,7 +13,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
 
 add_executable(Killer
   ../../NetWork/net_message.h
-  ../../Client/net_client.h
   ../../NetWork/net_queue.h
   ../../NetWork/net_connection.h
 

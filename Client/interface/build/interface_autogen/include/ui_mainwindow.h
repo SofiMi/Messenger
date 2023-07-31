@@ -13,6 +13,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
@@ -32,6 +33,8 @@ public:
     QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_3;
     QFrame *frame_2;
+    QVBoxLayout *verticalLayout_4;
+    QLabel *chatname;
     QScrollArea *messageScrollArea;
     QWidget *messageScrollAreaContext;
     QFrame *frame_3;
@@ -39,7 +42,7 @@ public:
     QHBoxLayout *horizontalLayout;
     QLineEdit *InputMsg;
     QPushButton *SendMsg;
-    QWidget *widget;
+    QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout;
     QFrame *frame;
     QHBoxLayout *horizontalLayout_2;
@@ -62,7 +65,7 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         layoutWidget = new QWidget(centralwidget);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(280, 10, 491, 521));
+        layoutWidget->setGeometry(QRect(280, 10, 511, 541));
         verticalLayout_3 = new QVBoxLayout(layoutWidget);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         verticalLayout_3->setContentsMargins(0, 0, 0, 0);
@@ -72,6 +75,13 @@ public:
         frame_2->setMaximumSize(QSize(16777215, 45));
         frame_2->setFrameShape(QFrame::StyledPanel);
         frame_2->setFrameShadow(QFrame::Raised);
+        verticalLayout_4 = new QVBoxLayout(frame_2);
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        chatname = new QLabel(frame_2);
+        chatname->setObjectName(QString::fromUtf8("chatname"));
+
+        verticalLayout_4->addWidget(chatname);
+
 
         verticalLayout_3->addWidget(frame_2);
 
@@ -80,7 +90,7 @@ public:
         messageScrollArea->setWidgetResizable(true);
         messageScrollAreaContext = new QWidget();
         messageScrollAreaContext->setObjectName(QString::fromUtf8("messageScrollAreaContext"));
-        messageScrollAreaContext->setGeometry(QRect(0, 0, 487, 413));
+        messageScrollAreaContext->setGeometry(QRect(0, 0, 507, 433));
         messageScrollArea->setWidget(messageScrollAreaContext);
 
         verticalLayout_3->addWidget(messageScrollArea);
@@ -114,15 +124,15 @@ public:
         verticalLayout_2->addLayout(horizontalLayout);
 
 
-        verticalLayout_3->addWidget(frame_3, 0, Qt::AlignTop);
+        verticalLayout_3->addWidget(frame_3, 0, Qt::AlignBottom);
 
-        widget = new QWidget(centralwidget);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(10, 10, 261, 511));
-        verticalLayout = new QVBoxLayout(widget);
+        layoutWidget1 = new QWidget(centralwidget);
+        layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(10, 10, 261, 541));
+        verticalLayout = new QVBoxLayout(layoutWidget1);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        frame = new QFrame(widget);
+        frame = new QFrame(layoutWidget1);
         frame->setObjectName(QString::fromUtf8("frame"));
         frame->setMinimumSize(QSize(0, 45));
         frame->setMaximumSize(QSize(16777215, 45));
@@ -156,15 +166,15 @@ public:
 
         verticalLayout->addWidget(frame);
 
-        friendScrollArea = new QScrollArea(widget);
+        friendScrollArea = new QScrollArea(layoutWidget1);
         friendScrollArea->setObjectName(QString::fromUtf8("friendScrollArea"));
         friendScrollArea->setWidgetResizable(true);
         friendScrollAreaContext = new QWidget();
         friendScrollAreaContext->setObjectName(QString::fromUtf8("friendScrollAreaContext"));
-        friendScrollAreaContext->setGeometry(QRect(0, 0, 257, 456));
+        friendScrollAreaContext->setGeometry(QRect(0, 0, 257, 68));
         friendScrollArea->setWidget(friendScrollAreaContext);
 
-        verticalLayout->addWidget(friendScrollArea);
+        verticalLayout->addWidget(friendScrollArea, 0, Qt::AlignTop);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
@@ -183,6 +193,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        chatname->setText(QString());
         SendMsg->setText(QCoreApplication::translate("MainWindow", "\320\236\321\202\320\277\321\200\320\260\320\262\320\270\321\202\321\214", nullptr));
         pushButton_2->setText(QString());
         findNick->setText(QString());

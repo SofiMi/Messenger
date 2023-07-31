@@ -370,7 +370,7 @@ CMakeFiles/interface.dir/autorization.cpp.o: ../autorization.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qicon.h \
   ../mainwindow.h \
   /home/sofia/Algo/Messenger/Client/Client.h \
-  /home/sofia/Algo/Messenger/Client/net_client.h \
+  /home/sofia/Algo/Messenger/include.h \
   /home/sofia/Algo/Messenger/NetWork/net_message.h \
   /usr/include/c++/11/thread \
   /usr/include/c++/11/stop_token \
@@ -1351,7 +1351,6 @@ CMakeFiles/interface.dir/autorization.cpp.o: ../autorization.cpp \
   /home/sofia/Algo/Messenger/NetWork/net_connection.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
   /home/sofia/Algo/Messenger/NetWork/net_message.h \
-  /home/sofia/Algo/Messenger/include.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h \
@@ -1417,10 +1416,8 @@ CMakeFiles/interface.dir/autorization.cpp.o: ../autorization.cpp \
 CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o: /home/sofia/Algo/Messenger/Client/Client.cpp \
   /usr/include/stdc-predef.h \
   /home/sofia/Algo/Messenger/Client/Client.h \
-  /home/sofia/Algo/Messenger/Client/net_client.h \
-  /home/sofia/Algo/Messenger/NetWork/net_message.h \
-  /usr/include/c++/11/memory \
-  /usr/include/c++/11/bits/stl_algobase.h \
+  /home/sofia/Algo/Messenger/include.h \
+  /usr/include/c++/11/cstdint \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
   /usr/include/features.h \
@@ -1433,6 +1430,18 @@ CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o: /home/so
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/cpu_defines.h \
   /usr/include/c++/11/pstl/pstl_config.h \
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h \
+  /usr/include/stdint.h \
+  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
+  /usr/include/x86_64-linux-gnu/bits/types.h \
+  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
+  /usr/include/x86_64-linux-gnu/bits/time64.h \
+  /usr/include/x86_64-linux-gnu/bits/wchar.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
+  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+  /home/sofia/Algo/Messenger/NetWork/net_message.h \
+  /usr/include/c++/11/memory \
+  /usr/include/c++/11/bits/stl_algobase.h \
   /usr/include/c++/11/bits/functexcept.h \
   /usr/include/c++/11/bits/exception_defines.h \
   /usr/include/c++/11/bits/cpp_type_traits.h \
@@ -1467,15 +1476,6 @@ CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o: /home/so
   /usr/include/c++/11/bits/stl_raw_storage_iter.h \
   /usr/include/c++/11/bits/align.h \
   /usr/include/c++/11/bit \
-  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h \
-  /usr/include/stdint.h \
-  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
-  /usr/include/x86_64-linux-gnu/bits/types.h \
-  /usr/include/x86_64-linux-gnu/bits/typesizes.h \
-  /usr/include/x86_64-linux-gnu/bits/time64.h \
-  /usr/include/x86_64-linux-gnu/bits/wchar.h \
-  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
-  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
   /usr/include/c++/11/bits/uses_allocator.h \
   /usr/include/c++/11/bits/unique_ptr.h \
   /usr/include/c++/11/utility \
@@ -1513,7 +1513,6 @@ CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o: /home/so
   /usr/include/c++/11/typeinfo \
   /usr/include/c++/11/bits/nested_exception.h \
   /usr/include/c++/11/bits/char_traits.h \
-  /usr/include/c++/11/cstdint \
   /usr/include/c++/11/bits/localefwd.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++locale.h \
   /usr/include/c++/11/clocale \
@@ -2670,7 +2669,6 @@ CMakeFiles/interface.dir/home/sofia/Algo/Messenger/Client/Client.cpp.o: /home/so
   /home/sofia/Algo/Messenger/NetWork/net_connection.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
   /home/sofia/Algo/Messenger/NetWork/net_message.h \
-  /home/sofia/Algo/Messenger/include.h \
   /usr/include/c++/11/fstream \
   /usr/include/c++/11/bits/codecvt.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
@@ -3047,7 +3045,7 @@ CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o: interface_aut
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qicon.h \
   ../mainwindow.h \
   /home/sofia/Algo/Messenger/Client/Client.h \
-  /home/sofia/Algo/Messenger/Client/net_client.h \
+  /home/sofia/Algo/Messenger/include.h \
   /home/sofia/Algo/Messenger/NetWork/net_message.h \
   /usr/include/c++/11/thread \
   /usr/include/c++/11/stop_token \
@@ -4028,7 +4026,6 @@ CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o: interface_aut
   /home/sofia/Algo/Messenger/NetWork/net_connection.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
   /home/sofia/Algo/Messenger/NetWork/net_message.h \
-  /home/sofia/Algo/Messenger/include.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h \
@@ -4406,7 +4403,7 @@ CMakeFiles/interface.dir/main.cpp.o: ../main.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qicon.h \
   ../mainwindow.h \
   /home/sofia/Algo/Messenger/Client/Client.h \
-  /home/sofia/Algo/Messenger/Client/net_client.h \
+  /home/sofia/Algo/Messenger/include.h \
   /home/sofia/Algo/Messenger/NetWork/net_message.h \
   /usr/include/c++/11/thread \
   /usr/include/c++/11/stop_token \
@@ -5387,7 +5384,6 @@ CMakeFiles/interface.dir/main.cpp.o: ../main.cpp \
   /home/sofia/Algo/Messenger/NetWork/net_connection.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
   /home/sofia/Algo/Messenger/NetWork/net_message.h \
-  /home/sofia/Algo/Messenger/include.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h \
@@ -5771,7 +5767,7 @@ CMakeFiles/interface.dir/mainwindow.cpp.o: ../mainwindow.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtabwidget.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qicon.h \
   /home/sofia/Algo/Messenger/Client/Client.h \
-  /home/sofia/Algo/Messenger/Client/net_client.h \
+  /home/sofia/Algo/Messenger/include.h \
   /home/sofia/Algo/Messenger/NetWork/net_message.h \
   /usr/include/c++/11/thread \
   /usr/include/c++/11/stop_token \
@@ -6752,7 +6748,6 @@ CMakeFiles/interface.dir/mainwindow.cpp.o: ../mainwindow.cpp \
   /home/sofia/Algo/Messenger/NetWork/net_connection.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
   /home/sofia/Algo/Messenger/NetWork/net_message.h \
-  /home/sofia/Algo/Messenger/include.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h \
@@ -6778,9 +6773,11 @@ CMakeFiles/interface.dir/mainwindow.cpp.o: ../mainwindow.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlayoutitem.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qboxlayout.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgridlayout.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QLabel \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlabel.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qframe.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QLineEdit \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlineedit.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qframe.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qtextcursor.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qtextformat.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qpen.h \
@@ -6808,7 +6805,6 @@ CMakeFiles/interface.dir/mainwindow.cpp.o: ../mainwindow.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qset.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qcontiguouscache.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QLabel \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlabel.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QMessageBox \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qmessagebox.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qdialog.h \
@@ -6818,7 +6814,9 @@ CMakeFiles/interface.dir/mainwindow.cpp.o: ../mainwindow.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/QTimer \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qtimer.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qbasictimer.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QVBoxLayout
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QVBoxLayout \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QGridLayout \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgridlayout.h
 
 CMakeFiles/interface.dir/registration.cpp.o: ../registration.cpp \
   /usr/include/stdc-predef.h \
@@ -7188,7 +7186,7 @@ CMakeFiles/interface.dir/registration.cpp.o: ../registration.cpp \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtabwidget.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qicon.h \
   /home/sofia/Algo/Messenger/Client/Client.h \
-  /home/sofia/Algo/Messenger/Client/net_client.h \
+  /home/sofia/Algo/Messenger/include.h \
   /home/sofia/Algo/Messenger/NetWork/net_message.h \
   /usr/include/c++/11/thread \
   /usr/include/c++/11/stop_token \
@@ -8169,7 +8167,6 @@ CMakeFiles/interface.dir/registration.cpp.o: ../registration.cpp \
   /home/sofia/Algo/Messenger/NetWork/net_connection.h \
   /home/sofia/Algo/Messenger/NetWork/net_queue.h \
   /home/sofia/Algo/Messenger/NetWork/net_message.h \
-  /home/sofia/Algo/Messenger/include.h \
   ../mainwindow.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
@@ -8317,8 +8314,6 @@ interface_autogen/include/ui_autorization.h:
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton:
-
-/home/sofia/Algo/Messenger/include.h:
 
 /usr/include/boost/asio/write_at.hpp:
 
@@ -8900,7 +8895,7 @@ interface_autogen/include/ui_autorization.h:
 
 /usr/include/boost/asio/detail/std_fenced_block.hpp:
 
-/home/sofia/Algo/Messenger/Client/net_client.h:
+/home/sofia/Algo/Messenger/include.h:
 
 ../mainwindow.h:
 
@@ -9081,6 +9076,8 @@ interface_autogen/include/ui_autorization.h:
 /usr/include/c++/11/bits/stl_numeric.h:
 
 /usr/include/linux/close_range.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/QGridLayout:
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qalgorithms.h:
 
@@ -9281,6 +9278,12 @@ interface_autogen/include/ui_autorization.h:
 /usr/include/boost/asio/traits/bulk_execute_member.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qmenu.h:
+
+/usr/include/boost/asio/detail/concurrency_hint.hpp:
+
+/usr/include/c++/11/bits/functexcept.h:
 
 /usr/include/x86_64-linux-gnu/bits/getopt_core.h:
 
@@ -9599,6 +9602,10 @@ interface_autogen/include/ui_autorization.h:
 /usr/include/c++/11/istream:
 
 /usr/include/boost/date_time/time_resolution_traits.hpp:
+
+/usr/include/boost/asio/detail/posix_signal_blocker.hpp:
+
+/usr/include/boost/asio/basic_streambuf.hpp:
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qsystemdetection.h:
 
@@ -10170,16 +10177,6 @@ interface_autogen/include/ui_registration.h:
 
 /usr/include/boost/asio/detail/impl/strand_service.ipp:
 
-/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qmenu.h:
-
-/usr/include/c++/11/bits/functexcept.h:
-
-/usr/include/boost/asio/detail/concurrency_hint.hpp:
-
-/usr/include/boost/asio/basic_streambuf.hpp:
-
-/usr/include/boost/asio/detail/posix_signal_blocker.hpp:
-
 /usr/include/boost/asio/detail/limits.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/sigcontext.h:
@@ -10343,10 +10340,6 @@ interface_autogen/include/ui_registration.h:
 /usr/include/c++/11/clocale:
 
 /usr/include/boost/asio/awaitable.hpp:
-
-/usr/include/c++/11/tr1/special_function_util.h:
-
-/usr/include/boost/asio/any_io_executor.hpp:
 
 /usr/include/boost/asio/executor_work_guard.hpp:
 
@@ -10561,6 +10554,10 @@ interface_autogen/include/ui_registration.h:
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
 
 /usr/include/c++/11/bits/specfun.h:
+
+/usr/include/boost/asio/any_io_executor.hpp:
+
+/usr/include/c++/11/tr1/special_function_util.h:
 
 /usr/include/boost/asio/ip/detail/socket_option.hpp:
 

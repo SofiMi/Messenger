@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Registration_t {
     QByteArrayData data[4];
-    char stringdata0[63];
+    char stringdata0[65];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,13 +33,13 @@ struct qt_meta_stringdata_Registration_t {
 static const qt_meta_stringdata_Registration_t qt_meta_stringdata_Registration = {
     {
 QT_MOC_LITERAL(0, 0, 12), // "Registration"
-QT_MOC_LITERAL(1, 13, 21), // "on_pushButton_clicked"
-QT_MOC_LITERAL(2, 35, 0), // ""
-QT_MOC_LITERAL(3, 36, 26) // "on_to_autorization_clicked"
+QT_MOC_LITERAL(1, 13, 26), // "on_to_autorization_clicked"
+QT_MOC_LITERAL(2, 40, 0), // ""
+QT_MOC_LITERAL(3, 41, 23) // "on_registration_clicked"
 
     },
-    "Registration\0on_pushButton_clicked\0\0"
-    "on_to_autorization_clicked"
+    "Registration\0on_to_autorization_clicked\0"
+    "\0on_registration_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -73,8 +73,8 @@ void Registration::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         auto *_t = static_cast<Registration *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->on_pushButton_clicked(); break;
-        case 1: _t->on_to_autorization_clicked(); break;
+        case 0: _t->on_to_autorization_clicked(); break;
+        case 1: _t->on_registration_clicked(); break;
         default: ;
         }
     }

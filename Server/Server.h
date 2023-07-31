@@ -31,6 +31,7 @@ private:
   void CheckTetAtTetChat(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& message);
   void GetDataUpdate(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& input_message);
   void GetLastMsgId(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& input_message);
+  void GetName(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& input_message);
 
   void SendManyMsg(std::shared_ptr<net::connection<msg_type>> connection_cl, uint32_t send_more, uint32_t finish, pqxx::result& texts);
 

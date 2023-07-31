@@ -97,12 +97,6 @@
 			null
 		],
 		[
-			"/home/sofia/Algo/Messenger/Client/net_client.h",
-			"MU",
-			"BSZGSBFSIX/moc_net_client.cpp",
-			null
-		],
-		[
 			"/home/sofia/Algo/Messenger/NetWork/net_connection.h",
 			"MU",
 			"L7VPMARC3M/moc_net_connection.cpp",

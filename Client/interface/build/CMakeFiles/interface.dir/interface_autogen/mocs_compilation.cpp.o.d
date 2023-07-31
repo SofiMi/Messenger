@@ -313,7 +313,7 @@ CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt5/QtGui/qicon.h \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../mainwindow.h \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../Client.h \
- /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../net_client.h \
+ /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../../include.h \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../../NetWork/net_message.h \
  /usr/include/c++/11/thread /usr/include/c++/11/stop_token \
  /usr/include/c++/11/bits/std_thread.h /usr/include/c++/11/semaphore \
@@ -1234,7 +1234,6 @@ CMakeFiles/interface.dir/interface_autogen/mocs_compilation.cpp.o: \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../../NetWork/net_connection.h \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../../NetWork/net_queue.h \
  /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../../NetWork/net_message.h \
- /home/sofia/Algo/Messenger/Client/interface/build/interface_autogen/EWIEGA46WW/../../../../../include.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h \

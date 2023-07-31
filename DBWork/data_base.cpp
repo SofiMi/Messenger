@@ -91,18 +91,18 @@ pqxx::result WorkDB::GetChat(int id, int count_before) {
 		                         "left join server.chatname\n"
 		                         "on  server.chatname.chatid = chat_id.chatid\n)\n"
                              "select chatid, chatname from res\n"
-                             "where chatid is not NULL and chatname is not NULL and rank < " + std::to_string(count_before + 30) + " and rank >= " + std::to_string(count_before) + " and rank > 0";
+                             "where chatid is not NULL and chatid > 0 and chatname is not NULL and rank < " + std::to_string(count_before + 30) + " and rank >= " + std::to_string(count_before) + " and rank > 0";
   pqxx::nontransaction N(*connection);
   return N.exec((char*)req.c_str());
 }
 
 pqxx::result WorkDB::GetMessages(int chatid, int count_before) {
   std::string req = "with mess as (\n"
-			              "select index_in_char, text from server.message\n"
+			              "select * from server.message\n"
 			              "where chatid = ";
   req += std::to_string(chatid) + ")\n"
-                                  "select index_in_char, text from mess\n"
-                                  "where index_in_char is not NULL and text is not NULL and index_in_char >= " + std::to_string(count_before  - 100) + " and index_in_char < " + std::to_string(count_before);
+                                  "select userid, text from mess\n"
+                                  "where index_in_char is not NULL and index_in_char > 0 and text is not NULL and index_in_char >= " + std::to_string(count_before  - 100) + " and index_in_char < " + std::to_string(count_before);
   
   pqxx::nontransaction N(*connection);
   return N.exec((char*)req.c_str());
@@ -191,7 +191,8 @@ int WorkDB::ChatIdByNameAndUserid(int userid, const std::string& name) {
 							      "on server.chat.chatid = server.chatname.chatid\n"
 					          ")\n"
                     "select chatid from all_about_chat\n"
-                    "where chatname = '" + name + "' and userid = " + std::to_string(userid);
+                    "where chatname = '";
+  req += name + "' and userid = " + std::to_string(userid);
   pqxx::result res = W.exec((char*)req.c_str());
   if (res.size() > 0) {
     return res.begin()[0].as<int>();
@@ -262,7 +263,7 @@ int WorkDB::CheckTetAtTetChat(int userid, const std::string& name) {
 }
 
 pqxx::result WorkDB::GetDataUpdate(int userid, int chatid, int last_index_in_chat) {
-  std::string req = "select index_in_char, text from server.message\n"
+  std::string req = "select userid, text from server.message\n"
                     "where chatid = ";
   req += std::to_string(chatid) + " and index_in_char > " + std::to_string(last_index_in_chat);
   pqxx::work W(*connection);
@@ -276,4 +277,14 @@ int WorkDB::GetLastMsgId(int chatid) {
   pqxx::work W(*connection);
   auto res =  W.exec((char*)req.c_str());
   return res.begin()[0].as<int>();
+}
+
+std::string WorkDB::GetName(int userid) {
+  std::string req = "select name from server.user\n"
+                    "where userid = ";
+  req += std::to_string(userid);
+  pqxx::work W(*connection);
+  auto res =  W.exec((char*)req.c_str());
+  std::cout << res.begin()[0].as<std::string>() << std::endl;
+  return res.begin()[0].as<std::string>();
 }

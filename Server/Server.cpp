@@ -27,6 +27,7 @@ void Server::__on_message(std::shared_ptr<net::connection<msg_type>> connection_
     }
 
     case msg_type::GetMessages: {
+      std::cout << "GetMessages:" << std::endl;
       GetMessages(connection_cl, message);
       break;
     }
@@ -78,6 +79,11 @@ void Server::__on_message(std::shared_ptr<net::connection<msg_type>> connection_
     
     case msg_type::GetLastMsgId: {
       GetLastMsgId(connection_cl, message);
+      break;
+    }
+
+    case msg_type::GetName: {
+      GetName(connection_cl, message);
       break;
     }
   }
@@ -151,6 +157,7 @@ void Server::GetChat(std::shared_ptr<net::connection<msg_type>> connection_cl, n
   }
   message.header.id = msg_type::SendImgFinish;
   connection_cl->send(message);
+  std::cout << "msg_type::SendImgFinish" << std::endl;
 }
 
 void Server::GetMessages(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& input_message) {
@@ -379,11 +386,21 @@ void Server::GetDataUpdate(std::shared_ptr<net::connection<msg_type>> connection
   SendManyMsg(connection_cl, static_cast<uint32_t>(msg_type::SendUnpdateMore), static_cast<uint32_t>(msg_type::SendUnpdateFinish), texts);
 }
 
-
 void Server::GetLastMsgId(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& input_message) {
   int chatid;
   std::copy(&input_message.data[0], &input_message.data[4], reinterpret_cast<char*>(&chatid));
   int last_index_in_chat = db.GetLastMsgId(chatid);
   std::copy(reinterpret_cast<char*>(&last_index_in_chat), reinterpret_cast<char*>(&last_index_in_chat) + 4, &input_message.data[0]);
+  connection_cl->send(input_message);
+}
+
+void Server::GetName(std::shared_ptr<net::connection<msg_type>> connection_cl, net::message<msg_type>& input_message) {
+  std::cout << "GetName" << std::endl;
+  int userid;
+  std::copy(&input_message.data[0], &input_message.data[4], reinterpret_cast<char*>(&userid));
+  std::string name = db.GetName(userid);
+  int size = name.size();
+  std::copy(reinterpret_cast<char*>(&size), reinterpret_cast<char*>(&size) + 4, &input_message.data[0]);
+  std::copy(&name[0], &name[size], &input_message.data[4]);
   connection_cl->send(input_message);
 }
