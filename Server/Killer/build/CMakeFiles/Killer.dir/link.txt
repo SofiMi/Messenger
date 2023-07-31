@@ -1,1 +1,0 @@
-/usr/bin/g++  -std=c++20 -lpqxx -lpq CMakeFiles/Killer.dir/Killer.cpp.o -o Killer  /usr/lib/x86_64-linux-gnu/libpqxx.so /usr/lib/x86_64-linux-gnu/libpq.so 
