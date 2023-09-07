@@ -1,0 +1,10 @@
+build
+Client/.vscode
+Client/interface/build
+Client/build
+Client/build-interface-Desktop-Debug
+Client/CMakeFiles
+
+Server/.vscode
+Server/build
+Server/Killer/build
