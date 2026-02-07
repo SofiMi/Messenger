@@ -9,5 +9,4 @@
 ![Иллюстрация к проекту](https://github.com/SofiHaku/Messenger/blob/network/Asserts/img1.png)
 
 ![Иллюстрация к проекту](https://github.com/SofiHaku/Messenger/blob/network/Asserts/img2.png)
-![Иллюстрация к проекту](https://github.com/SofiHaku/Messenger/blob/network/Asserts/chat.png)
 
